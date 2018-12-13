@@ -9,6 +9,7 @@
   <title>测试设计 | Msxie&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="好的测试设计基础为了对需求进行完备的测试设计，最重要的一点是深入理解被测试软件的架构。比如：  在 Java web 系统中，需要清楚 配置文件的配置、缓存策略、数据库的连接方式等 在 Android 系统中，需要清楚 缓存、数据库存储、权限设置、四大组件及其生命周期等 在 iOS 系统中，需要清楚  本地存储、数据库存储 等  除此之外，测试活动较早的介入项目流程 也是设计好的测试设计的基础：">
+<meta name="keywords" content="测试基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="测试设计">
 <meta property="og:url" content="https://msxie.github.io/2018/12/11/测试设计/index.html">
@@ -16,7 +17,7 @@
 <meta property="og:description" content="好的测试设计基础为了对需求进行完备的测试设计，最重要的一点是深入理解被测试软件的架构。比如：  在 Java web 系统中，需要清楚 配置文件的配置、缓存策略、数据库的连接方式等 在 Android 系统中，需要清楚 缓存、数据库存储、权限设置、四大组件及其生命周期等 在 iOS 系统中，需要清楚  本地存储、数据库存储 等  除此之外，测试活动较早的介入项目流程 也是设计好的测试设计的基础：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://msxie.github.io/2018/12/11/测试设计/用户登录.png">
-<meta property="og:updated_time" content="2018-12-11T14:43:28.810Z">
+<meta property="og:updated_time" content="2018-12-13T13:23:46.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="测试设计">
 <meta name="twitter:description" content="好的测试设计基础为了对需求进行完备的测试设计，最重要的一点是深入理解被测试软件的架构。比如：  在 Java web 系统中，需要清楚 配置文件的配置、缓存策略、数据库的连接方式等 在 Android 系统中，需要清楚 缓存、数据库存储、权限设置、四大组件及其生命周期等 在 iOS 系统中，需要清楚  本地存储、数据库存储 等  除此之外，测试活动较早的介入项目流程 也是设计好的测试设计的基础：">
@@ -60,6 +61,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -111,6 +114,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -127,7 +132,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 100%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -268,6 +275,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -331,6 +349,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/12/13/测试用例/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          测试用例
+        
+      </div>
+    </a>
   
   
     <a href="/2018/12/08/测试工程师定位/" id="article-nav-older" class="article-nav-link-wrap">
@@ -458,6 +485,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">测试基础</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

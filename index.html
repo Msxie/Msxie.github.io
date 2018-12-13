@@ -55,6 +55,8 @@
 			
 				<li><a href="/">主页</a></li>
 	        
+				<li><a href="/tags/随笔/">随笔</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -105,6 +107,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -121,7 +125,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 100%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -137,6 +143,176 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-测试用例" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/13/测试用例/">测试用例</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/13/测试用例/" class="archive-article-date">
+  	<time datetime="2018-12-13T13:20:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一个好的测试设计完成后，针对测试点进行数据的构造，场景的归并就成了测试用例。</p>
+<p>在此过程中，测试数据的构造通常使用两种方法：等价类划分法和边界值法。</p>
+<h3 id="等价类划分"><a href="#等价类划分" class="headerlink" title="等价类划分"></a>等价类划分</h3><p>以上文的登录测试设计 - 用户名的数据构造为例，假定用户名的有效长度为6~30位，区分大小写；可以分为 五个等价类：</p>
+<ul>
+<li>有效用户名「test001」</li>
+<li>大小写错误的用户名「tEst001」</li>
+<li>长度错误的用户名「test」</li>
+<li>有sql注入的用户名「’ or 1=1 –」</li>
+<li>有xss攻击的用户名「<code>&lt;script&gt;alert(1)&lt;/script&gt;</code>」</li>
+</ul>
+<h3 id="边界值"><a href="#边界值" class="headerlink" title="边界值"></a>边界值</h3><p>有效长度为6~30位，此处即可使用边界值法来分析：用户名长度依次取5/6/30/31</p>
+<h3 id="什么是好的测试用例"><a href="#什么是好的测试用例" class="headerlink" title="什么是好的测试用例"></a>什么是好的测试用例</h3><p>此处引用 <a href="https://time.geekbang.org/column/article/10150" target="_blank" rel="noopener">如何设计一个“好的”测试用例</a> 中的话：</p>
+<blockquote>
+<p>一个“好的”测试用例，必须具备以下三个特征。</p>
+<p>整体完备性：  “好的”测试用例一定是一个完备的整体，是有效测试用例组成的集合，能够完全覆盖测试需求。</p>
+<p>等价类划分的准确性：指的是对于每个等价类都能保证只要其中一个输入测试通过，其他输入也一定测试通过。</p>
+<p>等价类集合的完备性： 需要保证所有可能的边界值和边界条件都已经正确识别。</p>
+</blockquote>
+<h3 id="错误推断法-探索性测试"><a href="#错误推断法-探索性测试" class="headerlink" title="错误推断法/探索性测试"></a>错误推断法/探索性测试</h3><p>除了通过等价类划分法和边界值法来设计用例，还可以使用错误推断法来设计用例。其基本思想是基于测试者对被测系统的了解及以往经验，推测哪些地方容易出现bug。</p>
+<p>错误推断法一般使用 checklist 来辅助。以手机银行转账为例，转账账户 – 转账 –&gt;被转账账户，需要拓展思维的有：</p>
+<ul>
+<li>用户多次更换/修改 被转账账户和金额，进行转账</li>
+<li>用户转账后，在指定时间内未收到对方的转账结果</li>
+<li>有多个用户同时在操作转账账户/被转账账户</li>
+<li>用户在转账过程中被中断，比如退出手机银行、无网络、有电话接入</li>
+<li>用户手机是否设置了代理</li>
+</ul>
+<p>探索性测试一般是指 依据当前语境与上下文选择最合适的测试技术，快速的进行测试设计、测试执行、测试结果解读的过程。</p>
+<p>常用的探索性测试有地图漫游法。  地图漫游法将产品划分为几个区，比如：商业区，历史区，娱乐区，旅游区，旅馆区，破旧区等。 对此的解读可参考 <a href="http://www.cnblogs.com/Ming8006/p/4498071.html#b" target="_blank" rel="noopener">Ming的博客</a>。</p>
+<p>其中，比较常用的有 地标测试法、极限测试法、反叛测试法。</p>
+<ul>
+<li>地标测试法：罗列软件产品最关键的功能和特性，按顺序或打乱顺序 依次使用它们。</li>
+<li>极限测试法：不停提供大量的数据给软件产品，长时间的运行软件，挑战软件产品的正常功能。<ul>
+<li>请求高并发执行</li>
+<li>数据库里的数据为空或极多，数据操作冲突</li>
+<li>进行大量的长时间的计算</li>
+<li>硬盘和内存都不足</li>
+</ul>
+</li>
+<li>反叛测试法：输入最不可能/恶意的数据，按照最不可能的步骤来运行，挑战软件产品的正常功能。</li>
+</ul>
+<h3 id="投资列表的测试用例"><a href="#投资列表的测试用例" class="headerlink" title="投资列表的测试用例"></a>投资列表的测试用例</h3><p>比如，在APP上 查看一个列表，不考虑筛选和排序组件，可分析出的测试用例如下：</p>
+<img src="/2018/12/13/测试用例/投资列表.png" title="投资列表测试用例">
+<blockquote>
+<p>列表数据的展示</p>
+<ul>
+<li>直接展示由服务端返回的字段有：商品名称、年华利率、项目期限、起投金额、项目特点、项目推荐语</li>
+<li>将服务端返回的字段处理后展示的有：可转让标签、支付方式标签、活动标签、进度条及进度，活动标签是从服务端拉取的图片</li>
+</ul>
+</blockquote>
+<ol>
+<li>年化利率展示 0.01 / 9.99 / 19.99 </li>
+<li>项目期限展示 1 天 / 99 天 / 299 天 / 1099 天</li>
+<li>起投金额展示 1千元 / 1万元 / 100万元</li>
+<li>项目特点、项目推荐语：考虑 0 / 2 / 32个字的展示，根据产品要求换行或省略展示</li>
+<li>考虑字段未返回时，app 的展示逻辑 </li>
+<li>项目进度条分别为 0 / 20 / 100 的展示</li>
+<li>检查进度百分比是否符合规则，比如四舍五入或是舍尾</li>
+<li>检查 可转让/不可转让、不同支付渠道 时标签展示的正确性</li>
+<li>考虑有字段未返回时，app的 展示和计算逻辑 </li>
+<li>检查有多个标签时，标签的排列顺序</li>
+<li>检查无标签时，列表项的展示</li>
+<li>检查活动标签是否被缓存及缓存的时间，若有缓存，服务端更换图片，则 app 无法展示更换后的图片 </li>
+<li>检查从服务端找不到对应的标签图片，app 的展示逻辑 </li>
+</ol>
+<blockquote>
+<p>列表的操作</p>
+<p>下拉刷新、上拉加载更多</p>
+<p>点击列表可查看详情</p>
+</blockquote>
+<ol>
+<li>列表数据量分别在 0 / 9 / 10 / 11 条情况下，列表的展示</li>
+<li>断网情况下进入列表，app应展示无标的页面，给用户正常的提示。</li>
+<li>通过下拉刷新，查看列表数量在改变时的展示。比如，从 0 到 1，从 1 到 0。</li>
+<li>通过下拉刷新，查看列表数据源改变时的展示。比如，原来第一个标的有可转让标签，下拉刷新后，第一个标的有了新的数据源，新数据源时没有可转让属性的，应不展示可转让标签。</li>
+<li>通过下拉刷新，查看在断网情况下的展示。比如，在当前列表下拉刷新，此时网络断开，应保留原数据源进行展示。</li>
+<li>通过上拉加载更多，列表数据新增展示；列表的排序应依旧正确，没有缺失和重复的数据项。</li>
+<li>上拉更多是否符合策略。比如，当新增的数据源小于分页个数，无需提供上拉更多功能；当新增的数据源大于等于分页个数时，需要有上拉更多功能。</li>
+<li>在数据源充分的前提下，不停地上拉加载/下拉刷新 并滑动列表，应没有内存泄漏/绘制超时等问题。</li>
+<li>在进行数据请求且尚未收到回应时，应有 loading 提示用户，且 loading 下方的页面应不能点击；根据产品需求决定返回键点击后是否可取消 loading；若服务端长时间未给出回应，应 loading 固定时间后自动取消 loading 并给用户合理的提示。</li>
+<li>列表的整个区域应都能点击，点击后进入详情，而非只有某几个展示的文字可点击。</li>
+<li>多次并快速进行列表点击时，应只进入一次详情页，点击返回应返回到列表页。</li>
+<li>列表在横屏和竖屏下的展示正常。多次在横竖屏之间切换，应无内存泄漏的问题。</li>
+</ol>
+<blockquote>
+<p>tab区域</p>
+<p>左右滑动或点击均可切换列表</p>
+<p>tab上的小红点文字为当前可投资标的 的数量，从服务端返回</p>
+</blockquote>
+<ol>
+<li>tab上的小红点文字为 0/ 1/ 10 / 999的展示</li>
+<li>tab上的小红点文字包含非数字的展示，比如 99+</li>
+<li>服务端未返回tab上的小红点文字或返回超时</li>
+<li>依次交替使用左右滑动和tab点击事件，查看列表展示内容是否正确，tab的文字颜色是否正确</li>
+<li>刷新列表时，小红点文字也应对应刷新</li>
+<li>切换tab时，对应列表数据也应刷新</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/13/测试用例/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-测试设计" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
@@ -238,6 +414,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -295,9 +482,8 @@
         <blockquote>
 <p>梳理这个定位是为了理一下自己目前在什么阶段，以后的发展方向是什么</p>
 <p>梳理完自认为在中级刚起步阶段，对于高级的定义是通过阅读他人文章得来:smile:</p>
-<p>PS：序号为什么不对，实在是搞不定了</p>
 </blockquote>
-<h3 id="0x01-初级-：尽可能多的发现-bug"><a href="#0x01-初级-：尽可能多的发现-bug" class="headerlink" title="0x01 初级 ：尽可能多的发现 bug"></a>0x01 初级 ：尽可能多的发现 bug</h3><h4 id="0x011-测试基础方面"><a href="#0x011-测试基础方面" class="headerlink" title="0x011 测试基础方面"></a>0x011 测试基础方面</h4><ol>
+<h2 id="初级-：尽可能多的发现-bug"><a href="#初级-：尽可能多的发现-bug" class="headerlink" title="初级 ：尽可能多的发现 bug"></a>初级 ：尽可能多的发现 bug</h2><h3 id="测试基础方面"><a href="#测试基础方面" class="headerlink" title="测试基础方面"></a>测试基础方面</h3><ol>
 <li><strong>理解产品需求文档，掌握业务功能</strong></li>
 <li><strong>能读懂开发设计文档</strong></li>
 <li><strong>使用各种测试方法来分析产品功能并发现 Bug</strong><ul>
@@ -307,9 +493,7 @@
 </ul>
 </li>
 </ol>
-<h4 id="0x012-知识体系方面"><a href="#0x012-知识体系方面" class="headerlink" title="0x012 知识体系方面"></a>0x012 知识体系方面</h4><ol>
-<li><p><strong>基础的互联网基础架构知识（协议/安全/数据库）、用户体验、软件性能及稳定性</strong></p>
-<ul>
+<h3 id="知识体系方面"><a href="#知识体系方面" class="headerlink" title="知识体系方面"></a>知识体系方面</h3><h4 id="互联网基础架构知识、用户体验、软件性能及稳定性"><a href="#互联网基础架构知识、用户体验、软件性能及稳定性" class="headerlink" title="互联网基础架构知识、用户体验、软件性能及稳定性"></a>互联网基础架构知识、用户体验、软件性能及稳定性</h4><ul>
 <li><p>APP 与服务端是通过 HTTP/HTTPS 协议来进行网络通讯的，可以使用 Fiddler/Charles 来进行通讯报文的截获，验证正确性</p>
 </li>
 <li><p>APP 使用的是 Hybird 模式，即部分页面是 native 页面、部分页面是 H5 页面，在用户体验上：</p>
@@ -349,57 +533,39 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p><strong>会使用常用的测试工具</strong></p>
-<ul>
+<h4 id="会使用常用的测试工具"><a href="#会使用常用的测试工具" class="headerlink" title="会使用常用的测试工具"></a>会使用常用的测试工具</h4><ul>
 <li>Fiddler/Charles</li>
 <li>Xcode 提供的测试常用工具集</li>
 <li>Android SDK/Studio 提供的常用测试工具集</li>
 <li>Chrome 的 Devtools</li>
 <li>GT</li>
 </ul>
-</li>
-<li><p><strong>有基础的自动化测试脚本编写能力来替代重复操作，节省时间</strong></p>
-<ul>
-<li>编写接口自动化和UI自动化代码来代替回归操作</li>
+<h4 id="有基础的代码编写能力"><a href="#有基础的代码编写能力" class="headerlink" title="有基础的代码编写能力"></a>有基础的代码编写能力</h4><ul>
+<li>通过编写自动化测试脚本，如接口自动化和UI自动化代码，来代替回归操作</li>
 </ul>
-</li>
-</ol>
-<h3 id="0x02-中级-：整体软件质量的交付"><a href="#0x02-中级-：整体软件质量的交付" class="headerlink" title="0x02 中级 ：整体软件质量的交付"></a>0x02 中级 ：整体软件质量的交付</h3><p>在此阶段，主要需要从整体上来控制项目测试的时间和成本</p>
-<h4 id="0x021-测试基础方面"><a href="#0x021-测试基础方面" class="headerlink" title="0x021 测试基础方面"></a>0x021 测试基础方面</h4><ol>
-<li><p><strong>识别项目风险点</strong></p>
-<ul>
+<h2 id="中级-：整体软件质量的交付"><a href="#中级-：整体软件质量的交付" class="headerlink" title="中级 ：整体软件质量的交付"></a>中级 ：整体软件质量的交付</h2><p>在此阶段，主要需要从整体上来控制项目测试的时间和成本</p>
+<h3 id="测试基础方面-1"><a href="#测试基础方面-1" class="headerlink" title="测试基础方面"></a>测试基础方面</h3><h4 id="识别项目风险点"><a href="#识别项目风险点" class="headerlink" title="识别项目风险点"></a>识别项目风险点</h4><ul>
 <li>开发和测试及产品的理解是否一致</li>
 <li>基础架构是否有改动</li>
 <li>对于历史功能的影响</li>
 <li>开发文档是否全面并准确</li>
 <li>哪些因素可能导致项目延期交付</li>
 </ul>
-</li>
-<li><p><strong>制定合理的测试策略</strong></p>
-<ul>
+<h4 id="制定合理的测试策略"><a href="#制定合理的测试策略" class="headerlink" title="制定合理的测试策略"></a>制定合理的测试策略</h4><ul>
 <li>哪些测试项是重点和难点</li>
 <li>要几轮测试，用什么方法来测</li>
 <li>测试前需要什么数据准备</li>
 <li>根据测试进度及时调整策略</li>
 </ul>
-</li>
-<li><p><strong>针对项目进行测试框架和工具的选型 及 二次开发</strong></p>
-<ul>
+<h4 id="针对项目进行测试框架和工具的选型-及-二次开发"><a href="#针对项目进行测试框架和工具的选型-及-二次开发" class="headerlink" title="针对项目进行测试框架和工具的选型 及 二次开发"></a>针对项目进行测试框架和工具的选型 及 二次开发</h4><ul>
 <li>能熟练运用测试中需要的工具，并了解工具背后的原理及优缺点</li>
 <li>基于项目的具体情况，选择合适的测试工具或框架，若无合适框架，考虑进行二次开发</li>
 <li>重构自动化代码，降低其维护成本，使用分层设计、页面对象模型、业务流程模型等思想 优化代码架构</li>
 </ul>
-</li>
-</ol>
-<h4 id="0x022-知识体系方面"><a href="#0x022-知识体系方面" class="headerlink" title="0x022 知识体系方面"></a>0x022 知识体系方面</h4><ol>
-<li><p><strong>项目源码的阅读能力和基础编写能力</strong></p>
-<ul>
+<h3 id="知识体系方面-1"><a href="#知识体系方面-1" class="headerlink" title="知识体系方面"></a>知识体系方面</h3><h4 id="项目源码的阅读能力和基础编写能力"><a href="#项目源码的阅读能力和基础编写能力" class="headerlink" title="项目源码的阅读能力和基础编写能力"></a>项目源码的阅读能力和基础编写能力</h4><ul>
 <li>Android/iOS/Java 的框架结构、运行机制</li>
 </ul>
-</li>
-<li><p><strong>了解系统中基础组件和项目使用的框架、设计模式</strong></p>
-<ul>
+<h4 id="了解系统中基础组件和项目使用的框架、设计模式"><a href="#了解系统中基础组件和项目使用的框架、设计模式" class="headerlink" title="了解系统中基础组件和项目使用的框架、设计模式"></a>了解系统中基础组件和项目使用的框架、设计模式</h4><ul>
 <li>redis/mongo</li>
 <li>dubbo</li>
 <li>kafka/zoomkeeper</li>
@@ -407,19 +573,12 @@
 <li>MVC/MVP/MVVM</li>
 <li>docker</li>
 </ul>
-</li>
-<li><p><strong>测试工具的运行原理</strong></p>
-<ul>
+<h4 id="测试工具的运行原理"><a href="#测试工具的运行原理" class="headerlink" title="测试工具的运行原理"></a>测试工具的运行原理</h4><ul>
 <li>客户端/服务端 的 UI自动化工具的运行原理</li>
 <li>Fiddler/Charles 的运行原理</li>
 <li>GT/ Xposed 的运行原理</li>
 </ul>
-</li>
-<li><p><strong>设计模式的掌握</strong></p>
-</li>
-<li><strong>了解持续集成、持续发布</strong></li>
-</ol>
-<h3 id="0x03-高级-：可实践的基础架构"><a href="#0x03-高级-：可实践的基础架构" class="headerlink" title="0x03 高级 ：可实践的基础架构"></a>0x03 高级 ：可实践的基础架构</h3><p>在此阶段，需要从全局上来将基础通用的东西落地，成为可实践的架构。初级和中级是为了完成 0 到 1 ，根据测试者的经验及知识从无到有的来保证软件产品的质量。那么高级就是为了完了 1 到 n。</p>
+<h4 id="设计模式的掌握"><a href="#设计模式的掌握" class="headerlink" title="设计模式的掌握"></a>设计模式的掌握</h4><h4 id="了解持续集成、持续发布"><a href="#了解持续集成、持续发布" class="headerlink" title="了解持续集成、持续发布"></a>了解持续集成、持续发布</h4><h2 id="高级-：可实践的基础架构"><a href="#高级-：可实践的基础架构" class="headerlink" title="高级 ：可实践的基础架构"></a>高级 ：可实践的基础架构</h2><p>在此阶段，需要从全局上来将基础通用的东西落地，成为可实践的架构。初级和中级是为了完成 0 到 1 ，根据测试者的经验及知识从无到有的来保证软件产品的质量。那么高级就是为了完了 1 到 n。</p>
 <p>测试项目之间总有些东西是通用的，把这些通用的东西落下来，成为最基础的测试架构。</p>
 <p>比如，</p>
 <p>为了达到 UI 和 API 测试的大量并发执行，需要一套 支持高并发的测试执行基础架构；</p>
@@ -434,6 +593,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -630,6 +800,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">测试基础</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
