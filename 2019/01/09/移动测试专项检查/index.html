@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Msxie&#39;s Blog">
 <meta property="og:description" content="在完成功能测试后，需要对移动测试的专项进行测试，全方位保证 APP 的质量。 兼容性安装升级和卸载首次安装应用首次安装在真机上，检查 安装版本号、渠道号、数字签名 安装过程中遇到异常情况（取消、内存不足、断电）的处理 覆盖安装逐步升级：使用相邻版本覆盖安装，安装后应能正常打开 跳级升级：使用隔开的版本覆盖安装，比如，使用 2.6.4 的版本覆盖安装 2.2.1 的版本 降级：安装比当前版本低的 a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-09T14:15:21.967Z">
+<meta property="og:updated_time" content="2019-02-05T13:28:42.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动测试专项检查">
 <meta name="twitter:description" content="在完成功能测试后，需要对移动测试的专项进行测试，全方位保证 APP 的质量。 兼容性安装升级和卸载首次安装应用首次安装在真机上，检查 安装版本号、渠道号、数字签名 安装过程中遇到异常情况（取消、内存不足、断电）的处理 覆盖安装逐步升级：使用相邻版本覆盖安装，安装后应能正常打开 跳级升级：使用隔开的版本覆盖安装，比如，使用 2.6.4 的版本覆盖安装 2.2.1 的版本 降级：安装比当前版本低的 a">
@@ -200,10 +200,11 @@
 <p>手动停止服务：系统设置中停止应用的多个服务</p>
 <p>被第三方助手杀死：被第三方清理助手杀死进程并清理软件数据</p>
 <h4 id="软件兼容"><a href="#软件兼容" class="headerlink" title="软件兼容"></a>软件兼容</h4><p>友商兼容：自己的APP是否和其他友商的APP兼容，比如，淘宝 app 和京东 app 能安装在一个手机上</p>
-<p>通用软件兼容：比如第三方输入法</p>
+<p>通用软件兼容：比如第三方输入法、热门软件 app</p>
 <p>安全性兼容：比如，使用某些 app 的某些功能需要root权限 </p>
 <h4 id="机型与ROM"><a href="#机型与ROM" class="headerlink" title="机型与ROM"></a>机型与ROM</h4><p>不同的分辨率及屏幕尺寸（全面屏）</p>
 <p>不同的 OS/ROM 版本</p>
+<p>同一操作系统中，设置不同的语言</p>
 <p>不同的硬件配置：比如 CPU</p>
 <h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><p>展示：列表数目为空、列表数目从 0 到 1，从 1 到 0、</p>
 <p>下拉刷新/上拉加载更多：手势操作、加载更多后，原数据排序，展示正常</p>
@@ -286,34 +287,43 @@
 <li>Monkey</li>
 </ul>
 <h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h4 id="网络和流量"><a href="#网络和流量" class="headerlink" title="网络和流量"></a>网络和流量</h4><ul>
+<li>安装包的大小</li>
 <li>无网络/弱网络 下 app 功能应符合预期</li>
 <li>wifi/ 4G 网络下，应使用不同的网络策略：比如下载音乐，wifi下自动下载，4G下提示用户</li>
-<li>图片的大小应有最大限制值</li>
-<li>网络请求使用压缩技术。比如，gzip</li>
+<li>app 在后台运行时，使用的流量应符合预期</li>
+<li>图片的大小应有最大限制值，合理使用缓存</li>
+<li>网络请求使用压缩技术。比如，gzip；若需要加密传输，则先压缩后加密的体积必然比较小</li>
+<li>使用优化的数据格式：如 json 比 xml 的体积小</li>
 <li>首次打开和再次打开的流量值应合理</li>
 </ul>
 <h4 id="硬盘-内存-CPU-GPU"><a href="#硬盘-内存-CPU-GPU" class="headerlink" title="硬盘/内存/CPU/GPU"></a>硬盘/内存/CPU/GPU</h4><ul>
 <li>在硬盘资源不足的情况下，运行 app，应能正常工作</li>
-<li><p>检查是否有不必要的文件写入/读出</p>
-</li>
-<li><p>检查空闲状态、中等规格、满规格状态下的每个检查项。空闲指应用在后台运行、中等规格和满规格指的是对应用的操作时间的间隔长短不一</p>
-</li>
-<li><p>内存：检查空闲/中/满规格状态下的内存使用，内存峰值及压力测试后内存使用情况。比如，打开图库上传图片的功能，多次打开有大量图片的图库并选择图片上传，检查是否有如下现象：</p>
-<ul>
+<li>检查是否有不必要的文件写入/读出</li>
+<li>检查空闲状态、中等规格、满规格状态下的每个检查项。空闲指应用在后台运行、中等规格和满规格指的是对应用的操作时间的间隔长短不一</li>
+<li>内存：检查空闲/中/满规格状态下的内存使用，内存峰值及压力测试后内存使用情况。比如，打开图库上传图片的功能，多次打开有大量图片的图库并选择图片上传，检查是否有如下现象：<ul>
 <li>内存抖动</li>
 <li>大内存对象被分配</li>
 <li>内存持续增长</li>
 <li>频繁GC</li>
 </ul>
 </li>
-<li><p>检查FPS，尽量每秒 60 帧：列表的滑动是否有卡顿</p>
-</li>
+<li>检查FPS，尽量每秒 60 帧：列表的滑动是否有卡顿</li>
 <li>是否有耗电代码，比如 Timer 比 AlarmManager 耗电</li>
+</ul>
+<h4 id="电量"><a href="#电量" class="headerlink" title="电量"></a>电量</h4><p>主要是视频、游戏、导航等软件需要密切关注此项检查。主要检查在下列三种情况下，软件的电量消耗符合预期：</p>
+<ul>
+<li>后台运行</li>
+<li>前台运行但未进行业务操作</li>
+<li>前台运行且进行频繁的业务操作</li>
 </ul>
 <h4 id="工具-1"><a href="#工具-1" class="headerlink" title="工具"></a>工具</h4><ul>
 <li>GT</li>
 <li>Android Tools</li>
 <li>XCode</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>时区切换</li>
+<li>手机时间和标准时间不一致</li>
 </ul>
 
       
@@ -423,6 +433,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/03/18/robotium-native的顺序遍历/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          robotium native的顺序遍历
+        
+      </div>
+    </a>
   
   
     <a href="/2018/12/22/消息推送/" id="article-nav-older" class="article-nav-link-wrap">
