@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://msxie.github.io">
-  <title>Archives: 2018/12 | Msxie&#39;s Blog</title>
+  <title>缓存学习小记 | Msxie&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Msxie&#39;s Blog">
-<meta property="og:url" content="https://msxie.github.io/archives/2018/12/index.html">
+  <meta name="description" content="缓存的目的（为什么要缓存）提高系统运行性能。  将数据存储在访问速度相对较快的介质上，加快访问速度。例如，a 用户查看的新闻内容需要从数据库中读取，系统在读出新闻内容后缓存到内存里，b用户再来查看相同的新闻内容时，系统只需要返回缓存里的新闻内容，而不需要再查询一次数据库，缩短了响应时间。 减少计算量。  减少数据库压力。使用上面的例子，可以看出数据库访问次数从 2 次变为 1 次，减少了压力。 缓">
+<meta name="keywords" content="分布式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="缓存学习小记">
+<meta property="og:url" content="https://msxie.github.io/2019/06/24/缓存学习小记/index.html">
 <meta property="og:site_name" content="Msxie&#39;s Blog">
+<meta property="og:description" content="缓存的目的（为什么要缓存）提高系统运行性能。  将数据存储在访问速度相对较快的介质上，加快访问速度。例如，a 用户查看的新闻内容需要从数据库中读取，系统在读出新闻内容后缓存到内存里，b用户再来查看相同的新闻内容时，系统只需要返回缓存里的新闻内容，而不需要再查询一次数据库，缩短了响应时间。 减少计算量。  减少数据库压力。使用上面的例子，可以看出数据库访问次数从 2 次变为 1 次，减少了压力。 缓">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/缓存路径.webp">
+<meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/update1.png">
+<meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/update2.png">
+<meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/update3.png">
+<meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/bl.png">
+<meta property="og:updated_time" content="2019-06-24T13:51:31.681Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Msxie&#39;s Blog">
+<meta name="twitter:title" content="缓存学习小记">
+<meta name="twitter:description" content="缓存的目的（为什么要缓存）提高系统运行性能。  将数据存储在访问速度相对较快的介质上，加快访问速度。例如，a 用户查看的新闻内容需要从数据库中读取，系统在读出新闻内容后缓存到内存里，b用户再来查看相同的新闻内容时，系统只需要返回缓存里的新闻内容，而不需要再查询一次数据库，缩短了响应时间。 减少计算量。  减少数据库压力。使用上面的例子，可以看出数据库访问次数从 2 次变为 1 次，减少了压力。 缓">
+<meta name="twitter:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/缓存路径.webp">
   
     <link rel="alternative" href="/atom.xml" title="Msxie&#39;s Blog" type="application/atom+xml">
   
@@ -142,228 +153,282 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-缓存学习小记" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      缓存学习小记
+    </h1>
+  
+
+        
+        <a href="/2019/06/24/缓存学习小记/" class="archive-article-date">
+  	<time datetime="2019-06-24T13:45:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-24</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="缓存的目的（为什么要缓存）"><a href="#缓存的目的（为什么要缓存）" class="headerlink" title="缓存的目的（为什么要缓存）"></a>缓存的目的（为什么要缓存）</h2><p>提高系统运行性能。</p>
+<ul>
+<li>将数据存储在访问速度相对较快的介质上，加快访问速度。例如，a 用户查看的新闻内容需要从数据库中读取，系统在读出新闻内容后缓存到内存里，b用户再来查看相同的新闻内容时，系统只需要返回缓存里的新闻内容，而不需要再查询一次数据库，缩短了响应时间。</li>
+<li>减少计算量。</li>
+</ul>
+<p>减少数据库压力。使用上面的例子，可以看出数据库访问次数从 2 次变为 1 次，减少了压力。</p>
+<h2 id="缓存的内容（缓存什么）"><a href="#缓存的内容（缓存什么）" class="headerlink" title="缓存的内容（缓存什么）"></a>缓存的内容（缓存什么）</h2><blockquote>
+<p>缓存主要用来存储那些相对变化较少，并且遵从“二八原则”的数据。这里的“二八原则”指的是 80% 的数据访问会集中在 20% 的数据上</p>
+</blockquote>
+<p>静态文件。一般经常被访问但很少被修改的数据，如 js、css、图片等</p>
+<p>热点数据。访问频率极高，如 热门微博</p>
+<h2 id="缓存的位置（谁来缓存）"><a href="#缓存的位置（谁来缓存）" class="headerlink" title="缓存的位置（谁来缓存）"></a>缓存的位置（谁来缓存）</h2><img src="/2019/06/24/缓存学习小记/缓存路径.webp" title="缓存路径">
+<h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><p>当我们第一次去请求某个资源，比如一张图片，response 里 http头返回：</p>
+<blockquote>
+<p> Date: Wed, 19 Jun 2019 07:20:53 GMT  //报文创建的日期和时间，即服务器格林尼治标准时间<br> ETag: “1404ab-4b38-58ba467a02840”  // 指示资源的状态唯一标识<br> Expires: Thu, 20 Jun 2019 07:20:53 GMT   // 指示资源在浏览器缓存中的过期时间<br> Last-Modified: Wed, 19 Jun 2019 02:58:33 GMT  // 指示最后修改的时间</p>
+</blockquote>
+<p>浏览器将这张图片存进 Cache 目录下，下次再次请求该张图片，浏览器检查 Cache 目录下是否有该文件，有的话是否还在有效期内（小于 Expires 时间），若是，则浏览器直接读取 Cache 目录的文件，不再发送请求。</p>
+<p>用户很快的查看到图片，和服务器没有任何交互。服务器无法强制更新用户的浏览器缓存。</p>
+<h3 id="CDN-缓存"><a href="#CDN-缓存" class="headerlink" title="CDN 缓存"></a>CDN 缓存</h3><p>CDN，中文名称是内容分发网络，可以用来分发直播、网页静态文件、小文件等等，其目的是使用户可就近取得所需内容。缓存场景如下：</p>
+<ol>
+<li>A 用户请求服务器的一张图片，请求到达距离最近 CDN 节点（边缘节点），边缘节点检查自己缓存里是否有这张图片，没有则向源站请求这张图片返回给 A 用户并缓存起来。</li>
+<li>B 用户请求同一张图片，也落到这个 CDN 节点上，边缘节点检查到有这张图片的缓存，检查后发现没有过期，CDN 节点就直接将该图片返回给 B 用户。</li>
+<li>若过期，则该节点该需要向源站发出回源请求，来拉取最新的图片。将新图片返回给 B 用户并缓存起来。</li>
+</ol>
+<p>CDN 节点众多，一方面可以缓解访问压力，另一方面更新缓存数据比较缓慢，一般至少是分钟级别</p>
+<h3 id="代理缓存"><a href="#代理缓存" class="headerlink" title="代理缓存"></a>代理缓存</h3><p>走到这里，可以使用我们的反向代理服务器来缓存一些数据甚至是 http 请求。比如 Nginx、Varnish。</p>
+<ul>
+<li><p>页面缓存：通过配置 Nginx 的 proxy_cache_path、proxy_cache 等指令可以实现页面的缓存</p>
+</li>
+<li><p>http 连接缓存：通过配置 Varnish，可以做到缓存 http 请求。即当下一个 http 请求到达后，发现该 url 已被缓存，根据 url 直接取缓存中的 response 返回给客户端。</p>
+</li>
+</ul>
+<h3 id="进程内缓存"><a href="#进程内缓存" class="headerlink" title="进程内缓存"></a>进程内缓存</h3><p>能走到这里，说明是真正需要来进行业务计算了，需要程序员们开始编代码来用缓存了。从这里开始，数据一致性 的要求会被提高。在这里可以使用很多方法来实现缓存，比如：全局变量，ConcurrentHashMap，Ehcache，将数据缓存在内存或者文件中。</p>
+<p>进程内缓存一般速度快，效率高，但是会占用一定的内存资源。当服务器构成集群时，每台服务器内都会缓存很多相同的数据，有一定的浪费。</p>
+<h3 id="进程外缓存"><a href="#进程外缓存" class="headerlink" title="进程外缓存"></a>进程外缓存</h3><p>就是在我们的程序进程之外，单独找一块地方来存放我们的缓存数据，所有需要缓存的程序都可以远程调用这个地方来存取数据。一般也叫分布式缓存。比较经典的是redis、memcached。</p>
+<p>memcached 适合存储简单的字符串键/值对</p>
+<p>redis 适合场景有如下：</p>
+<ul>
+<li>pub-sub 模式可用于向多个订阅者广播消息</li>
+<li>可用作消息队列</li>
+<li>会话存储</li>
+<li>排序集可用于管理一些数据的排行榜</li>
+<li>可以存储，递增，递减整数，可用来生成全局ID</li>
+</ul>
+<h3 id="数据库缓存"><a href="#数据库缓存" class="headerlink" title="数据库缓存"></a>数据库缓存</h3><p>数据库是有缓存机制的。以oracle为例：</p>
+<blockquote>
+<p>当SELECT语句先从数据库文件中读取数据后，会把取得的数据放入到这个命中缓存块中。也就是说，当我们利用查询语句从数据库查询处员工信息后，这个信息就会被保存在高速缓存中。直道高速缓存消耗完毕等原因，这个空间才会被释放。如此的话，下次用户在查询员工信息的时候，就不需要从数据库文件中再次查询相关信息，而直接从数据高速缓存中提取数据，从而提高数据库的访问效率。</p>
+</blockquote>
+<h2 id="缓存更新设计模式"><a href="#缓存更新设计模式" class="headerlink" title="缓存更新设计模式"></a>缓存更新设计模式</h2><h3 id="Cache-Aside"><a href="#Cache-Aside" class="headerlink" title="Cache Aside"></a>Cache Aside</h3><p>先更新数据库，再删除缓存，其具体逻辑如下：</p>
+<ul>
+<li>失效：应用程序先从 Cache 取数据，没有得到，则从数据库中取数据，成功后，放到缓存中。</li>
+<li>命中：应用程序从 Cache 中取数据，取到后返回。</li>
+<li>更新：先把数据存到数据库中，成功后，再让缓存<strong>失效</strong>。</li>
+</ul>
+<p>在这种模式下，数据库和缓存之间没有任何联系。数据库和缓存的更新都是我们的应用程序来完成，一般逻辑如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#读取</span><br><span class="line">v = cache.get(k)</span><br><span class="line"><span class="keyword">if</span> (v == <span class="keyword">null</span>) &#123;</span><br><span class="line">  v = db.get(k)</span><br><span class="line">  cache.put(k, v)</span><br><span class="line">&#125;</span><br><span class="line">#更新</span><br><span class="line">v = newV</span><br><span class="line">db.put(k, v)</span><br><span class="line">cache.delete(k)</span><br></pre></td></tr></table></figure>
+<p>这里之所以采用让缓存失效，而不是更新，是因为在多线程操作下，数据库的更新和缓存的更新顺序不是一致的，在这种情况下，就会造成缓存和数据库不一致。</p>
+<img src="/2019/06/24/缓存学习小记/update1.png" title="Cache_Aside">
+<p>虽然使用失效策略，但在一个读操作和一个写操作并发的情况下也会产生数据不一致的问题，但由于概率极低，在此就不详细描述，可以<a href="https://mp.weixin.qq.com/s/mcsyvqyu_re5EwoPpEY3Qw" target="_blank" rel="noopener">参考</a></p>
+<h3 id="Read-Write-Through"><a href="#Read-Write-Through" class="headerlink" title="Read/Write Through"></a>Read/Write Through</h3><p>在这种模式下，应用程序只需要关注缓存就可以了，所有读数据和更新数据由缓存（相当于数据库的代理）来执行。</p>
+<p>Read Through：应用程序只查询缓存。缓存服务发现取不到数据，缓存服务自己去数据库中加载数据并返回给应用程序。</p>
+<p>Write Through ：只写数据到缓存中。缓存服务负责将数据<strong>同步</strong>写入数据库。缓存服务在实现上应将 cache 和 db 更新放在一个事务中，用来保证数据的一致性。</p>
+<img src="/2019/06/24/缓存学习小记/update2.png" title="Read_Write_Through">
+<h3 id="Write-Behind（Write-Back）"><a href="#Write-Behind（Write-Back）" class="headerlink" title="Write Behind（Write Back）"></a>Write Behind（Write Back）</h3><p>和 Write Through 不同的是，缓存服务将数据写入到数据库中的过程是<strong>异步</strong>的。当 缓存中的被修改的数据要被替换时才一次写入数据库中。这种实现方式速度很快，但数据的一致性比较差，还可能会有数据的丢失情况。适合对写入速度有极致要求，而对数据准确性没那么高要求的场景。</p>
+<img src="/2019/06/24/缓存学习小记/update3.png" title="Write_Behind">
+<p>Ehcache 实现了上面三种设计模式，可以<a href="https://www.ehcache.org/documentation/2.8/get-started/getting-started.html" target="_blank" rel="noopener">参考</a></p>
+<p>三种设计模式从上到下复杂度依次上升。还是要具体问题具体对待。</p>
+<h2 id="缓存经典问题"><a href="#缓存经典问题" class="headerlink" title="缓存经典问题"></a>缓存经典问题</h2><h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><p>当请求不存在数据时（比如在一个图书管理系统中查询一本不存在的书），缓存未命中，到数据库中去查询，然后返回不存在。一个请求没什么，当高并发的来请求不存在的数据时，所有的流量就都到了数据库，然后数据库就gg 了。</p>
+<p>解决方法：</p>
+<ul>
+<li><p>缓存数据库返回的空对象。这样下一个请求到来时，缓存就能直接返回空。占用一定内存。</p>
+</li>
+<li><p>使用布隆过滤器。布隆过滤器是由一个很长的 bit 数组和一系列 hash 函数组成。在数据库查到结果后，将结果由几个hash函数映射到数组上，例如 f1(aaa)=1,f2(aaa)=4，将bit数组的第二位和第五位置为1，代表 aaa 存在。将所有可能存在的数据映射到布隆过滤器里，当用户访问了一个不存在的值[ f1(noexist)=1,f2(noexist)=6]，布隆过滤器可以迅速返回不存在，避免再到数据库中查询。布隆过滤器无法保证 100% 的正确率。</p>
+<img src="/2019/06/24/缓存学习小记/bl.png" title="布隆过滤器">
+</li>
+</ul>
+<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><p>当缓存失效（过期）后，大量请求被转移到数据库，造成数据库压力过重，然后 gg。在高并发的场景下比较容易出现该问题。</p>
+<p>解决方法：</p>
+<ul>
+<li>加锁等待。只允许一个线程来读数据库更新缓存，其他线程等待或直接返回默认值/空值。</li>
+<li>后台更新。不通过业务线程来更新缓存，而通过后台线程定时更新。</li>
+</ul>
+<h2 id="缓存的取舍"><a href="#缓存的取舍" class="headerlink" title="缓存的取舍"></a>缓存的取舍</h2><h3 id="缓存-高可用数据库"><a href="#缓存-高可用数据库" class="headerlink" title="缓存+高可用数据库"></a>缓存+高可用数据库</h3><p>问题：若缓存更新采用 Cache Aside， 数据库做了读写分离，写数据库已是最新数据，读数据库还未同步，那么在这段时间内，读取缓存可能读取的是从库中的老数据。</p>
+<p>解决思路一：看系统对于数据不一致的忍受度如何，能接受那就不管它。</p>
+<p>解决思路二：缓存更新采用 Write Through，同时更新缓存和写数据库里的值，只要在缓存失效前，读数据库能同步完成即可；需要确认当前的缓存服务是否支持  Write Through 模式，若不支持，还需要改造…</p>
+<p>解决思路三：从数据库订阅主数据库数据变动发出的事件，修改从库数据的同时，主动 set 或者 delete 缓存中的数据（看着就感觉很难搞）</p>
+<h3 id="缓存的失效时间"><a href="#缓存的失效时间" class="headerlink" title="缓存的失效时间"></a>缓存的失效时间</h3><ul>
+<li>过长 –&gt; 很久未被访问的数据还在内存中，浪费内存</li>
+<li>过短 –&gt; 应用不断访问数据库拿数据，增大数据库压力</li>
+<li>分布式缓存数据的过期时间尽量错开来（加个随机数），避免缓存中很多数据同时失效然后一起去查询数据库，增大数据库压力（缓存雪崩）</li>
+</ul>
+<h3 id="进程内缓存-进程外缓存"><a href="#进程内缓存-进程外缓存" class="headerlink" title="进程内缓存+进程外缓存"></a>进程内缓存+进程外缓存</h3><p>应用进程内有缓存，比如缓存一下登录的 session，这样会导致应用很难达到「无限扩展」。所以我们会考虑把进程内的缓存丢到进程外去缓存，也就是分布式缓存。</p>
+<p>这样在某些情况下也会有问题，考虑极端情况，某条热门微博按照一定的哈希算法缓存在某一台缓存服务器上，然后大家都来看，然后这台缓存服务器被很多应用服务器发过来请求搞挂了，然后流量涌向数据库，然后 gg 了。</p>
+<p>在这种情况下，为了缓解那一台缓存服务器的压力，要么将这种热点数据在应用进程内缓存，要么将那台缓存服务器的缓存复制多份，让应用服务器随机选一台访问（听起来还要改造）。</p>
+<h2 id="缓存相关测试"><a href="#缓存相关测试" class="headerlink" title="缓存相关测试"></a>缓存相关测试</h2><p>对于一个引入了缓存的系统，我们要从哪些角度来进行测试？</p>
+<ul>
+<li>验证缓存命中率是一个比较高的值</li>
+<li>验证缓存的过期策略，验证缓存过期后是否能取到数据库中新的值</li>
+<li>对于进程内的缓存，验证系统正常运行时，分配的缓存空间大小</li>
+<li>对于进程外的缓存，验证 添加/减少 缓存服务器，缓存服务正常</li>
+<li>对于缓存更新方法，验证数据库与缓存数据的一致性</li>
+<li>对于大量的缓存失效，高并发的请求，验证系统能否正常处理</li>
+<li>对于大量的缓存穿透，验证系统能否正常处理</li>
+<li>对于大量的热点数据访问，验证系统能否正常处理</li>
+<li>对于有缓存的系统，验证缓存预热时产生的数据库压力应小于数据库可承受的压力</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先我们了解了缓存的必要性，根据「二八原则」将访问次数多的、变化少的数据放进缓存，存在用户的浏览器、CDN、服务器代理、应用服务器、缓存服务器等位置。</p>
+<p>对于缓存什么时候生成/更新，我们了解了三种设计模式：Cache Aside、Read/Write Through、Write Behind。</p>
+<p>任何技术在使用过程中，随着场景的复杂度提高，都会出现一些问题，缓存也不例外，缓存中两个经典问题：「缓存穿透」和「缓存雪崩」。</p>
+<p>缓存的设计要针对每个系统一一定制，没有一个大而全的方案，但是只要是好用的方案就是好方案。针对这些缓存的设计，提出了一些验证方案。</p>
+<p>关于缓存，还有一些本文没有涉及，比如缓存监控、各种缓存技术的实现等等。道阻且长，好好学习。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/dashang.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/22/消息推送/" class="archive-article-date">
-  	<time datetime="2018-12-22T07:57:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/22/消息推送/">消息推送</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/19/缺陷测试报告/" class="archive-article-date">
-  	<time datetime="2018-12-19T13:15:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/19/缺陷测试报告/">缺陷测试报告</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://msxie.github.io/2019/06/24/缓存学习小记/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/13/测试用例/" class="archive-article-date">
-  	<time datetime="2018-12-13T13:20:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-13</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/24/oracle知识点整理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">oracle知识点整理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/13/测试用例/">测试用例</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/11/测试设计/" class="archive-article-date">
-  	<time datetime="2018-12-11T14:28:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/11/测试设计/">测试设计</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/08/测试工程师定位/" class="archive-article-date">
-  	<time datetime="2018-12-08T08:13:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/08/测试工程师定位/">测试工程师定位</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/08/hello-world/" class="archive-article-date">
-  	<time datetime="2018-12-08T07:39:42.742Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/08/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -386,8 +451,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
