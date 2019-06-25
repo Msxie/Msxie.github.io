@@ -21,7 +21,8 @@
 <meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/update2.png">
 <meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/update3.png">
 <meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/bl.png">
-<meta property="og:updated_time" content="2019-06-24T13:53:57.640Z">
+<meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/bulong.png">
+<meta property="og:updated_time" content="2019-06-25T13:40:45.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="缓存学习小记">
 <meta name="twitter:description" content="缓存的目的（为什么要缓存）提高系统运行性能。  将数据存储在访问速度相对较快的介质上，加快访问速度。例如，a 用户查看的新闻内容需要从数据库中读取，系统在读出新闻内容后缓存到内存里，b用户再来查看相同的新闻内容时，系统只需要返回缓存里的新闻内容，而不需要再查询一次数据库，缩短了响应时间。 减少计算量。  减少数据库压力。使用上面的例子，可以看出数据库访问次数从 2 次变为 1 次，减少了压力。 缓">
@@ -248,6 +249,8 @@
 </li>
 <li><p>使用布隆过滤器。布隆过滤器是由一个很长的 bit 数组和一系列 hash 函数组成。在数据库查到结果后，将结果由几个hash函数映射到数组上，例如 f1(aaa)=1,f2(aaa)=4，将bit数组的第二位和第五位置为1，代表 aaa 存在。将所有可能存在的数据映射到布隆过滤器里，当用户访问了一个不存在的值[ f1(noexist)=1,f2(noexist)=6]，布隆过滤器可以迅速返回不存在，避免再到数据库中查询。布隆过滤器无法保证 100% 的正确率。</p>
 <img src="/2019/06/24/缓存学习小记/bl.png" title="布隆过滤器">
+<img src="/2019/06/24/缓存学习小记/bulong.png" title="布隆过滤器效果对比">
+<p>k 为哈希函数个数，m 为布隆过滤器长度，n 为插入的元素个数，p 为误报率。</p>
 </li>
 </ul>
 <h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><p>当缓存失效（过期）后，大量请求被转移到数据库，造成数据库压力过重，然后 gg。在高并发的场景下比较容易出现该问题。</p>
@@ -393,6 +396,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/06/25/python-super/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          python super()
+        
+      </div>
+    </a>
   
   
     <a href="/2019/06/24/oracle知识点整理/" id="article-nav-older" class="article-nav-link-wrap">
@@ -554,11 +566,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color5">移动测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">移动测试</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
             
             <div class="clearfix"></div>
