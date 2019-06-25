@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/update2.png">
 <meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/update3.png">
 <meta property="og:image" content="https://msxie.github.io/2019/06/24/缓存学习小记/bl.png">
-<meta property="og:updated_time" content="2019-06-24T13:51:31.681Z">
+<meta property="og:updated_time" content="2019-06-24T13:53:57.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="缓存学习小记">
 <meta name="twitter:description" content="缓存的目的（为什么要缓存）提高系统运行性能。  将数据存储在访问速度相对较快的介质上，加快访问速度。例如，a 用户查看的新闻内容需要从数据库中读取，系统在读出新闻内容后缓存到内存里，b用户再来查看相同的新闻内容时，系统只需要返回缓存里的新闻内容，而不需要再查询一次数据库，缩短了响应时间。 减少计算量。  减少数据库压力。使用上面的例子，可以看出数据库访问次数从 2 次变为 1 次，减少了压力。 缓">
@@ -184,7 +184,8 @@
 </blockquote>
 <p>静态文件。一般经常被访问但很少被修改的数据，如 js、css、图片等</p>
 <p>热点数据。访问频率极高，如 热门微博</p>
-<h2 id="缓存的位置（谁来缓存）"><a href="#缓存的位置（谁来缓存）" class="headerlink" title="缓存的位置（谁来缓存）"></a>缓存的位置（谁来缓存）</h2><img src="/2019/06/24/缓存学习小记/缓存路径.webp" title="缓存路径">
+<h2 id="缓存的位置（谁来缓存）"><a href="#缓存的位置（谁来缓存）" class="headerlink" title="缓存的位置（谁来缓存）"></a>缓存的位置（谁来缓存）</h2><p>引用别人文章的一张图片（版权归原作者所有）：</p>
+<img src="/2019/06/24/缓存学习小记/缓存路径.webp" title="缓存路径">
 <h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><p>当我们第一次去请求某个资源，比如一张图片，response 里 http头返回：</p>
 <blockquote>
 <p> Date: Wed, 19 Jun 2019 07:20:53 GMT  //报文创建的日期和时间，即服务器格林尼治标准时间<br> ETag: “1404ab-4b38-58ba467a02840”  // 指示资源的状态唯一标识<br> Expires: Thu, 20 Jun 2019 07:20:53 GMT   // 指示资源在浏览器缓存中的过期时间<br> Last-Modified: Wed, 19 Jun 2019 02:58:33 GMT  // 指示最后修改的时间</p>
@@ -420,6 +421,26 @@
 
 
 
+    
+      <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NDkwNS8yMTQyNw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+    
   
   
   
@@ -533,11 +554,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">移动测试</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color5">移动测试</a>
               </li>
             
             <div class="clearfix"></div>
