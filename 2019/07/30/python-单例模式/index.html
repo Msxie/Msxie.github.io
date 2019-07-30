@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://msxie.github.io">
-  <title>Archives: 2018 | Msxie&#39;s Blog</title>
+  <title>python 单例模式 | Msxie&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Msxie&#39;s Blog">
-<meta property="og:url" content="https://msxie.github.io/archives/2018/index.html">
+  <meta name="description" content="目的对于一些控制资源的类，比如创建数据库连接的类，我们希望在整个系统中，这个类只能出现一个实例，减少资源的浪费。 实现方式使用__new__()python 初始化时的顺序为 __new__() –&amp;gt; __init__()，__new__()方法会返回当前类的实例，__init__()则是对该实例进行其他参数的初始化。通过对 __new__()函数的改造，可以实现单例模式。 12345678">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 单例模式">
+<meta property="og:url" content="https://msxie.github.io/2019/07/30/python-单例模式/index.html">
 <meta property="og:site_name" content="Msxie&#39;s Blog">
+<meta property="og:description" content="目的对于一些控制资源的类，比如创建数据库连接的类，我们希望在整个系统中，这个类只能出现一个实例，减少资源的浪费。 实现方式使用__new__()python 初始化时的顺序为 __new__() –&amp;gt; __init__()，__new__()方法会返回当前类的实例，__init__()则是对该实例进行其他参数的初始化。通过对 __new__()函数的改造，可以实现单例模式。 12345678">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-30T14:50:10.413Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Msxie&#39;s Blog">
+<meta name="twitter:title" content="python 单例模式">
+<meta name="twitter:description" content="目的对于一些控制资源的类，比如创建数据库连接的类，我们希望在整个系统中，这个类只能出现一个实例，减少资源的浪费。 实现方式使用__new__()python 初始化时的顺序为 __new__() –&amp;gt; __init__()，__new__()方法会返回当前类的实例，__init__()则是对该实例进行其他参数的初始化。通过对 __new__()函数的改造，可以实现单例模式。 12345678">
   
     <link rel="alternative" href="/atom.xml" title="Msxie&#39;s Blog" type="application/atom+xml">
   
@@ -142,228 +147,217 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-python-单例模式" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python 单例模式
+    </h1>
+  
+
+        
+        <a href="/2019/07/30/python-单例模式/" class="archive-article-date">
+  	<time datetime="2019-07-30T14:48:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>对于一些控制资源的类，比如创建数据库连接的类，我们希望在整个系统中，这个类只能出现一个实例，减少资源的浪费。</p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><h3 id="使用-new"><a href="#使用-new" class="headerlink" title="使用__new__()"></a>使用<code>__new__()</code></h3><p>python 初始化时的顺序为 <code>__new__()</code> –&gt; <code>__init__()</code>，<code>__new__()</code>方法会返回当前类的实例，<code>__init__()</code>则是对该实例进行其他参数的初始化。通过对 <code>__new__()</code>函数的改造，可以实现单例模式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single1</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, *args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> hasattr(cls, <span class="string">'_instance'</span>):</span><br><span class="line">            cls._instance = object.__new__(cls, *args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> cls._instance</span><br><span class="line"></span><br><span class="line">s1 = Single1()</span><br><span class="line">s2 = Single1()</span><br><span class="line"><span class="keyword">print</span> s1,s2  <span class="comment">#&lt;__main__.Single1 object at 0x0233D7F0&gt; &lt;__main__.Single1 object at 0x0233D7F0&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以看出 s1，s2 的内存地址是一样的，指向的是同一个对象</p>
+<h3 id="使用装饰器"><a href="#使用装饰器" class="headerlink" title="使用装饰器"></a>使用装饰器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleton</span><span class="params">(cls)</span>:</span></span><br><span class="line">    instances = &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> cls <span class="keyword">not</span> <span class="keyword">in</span> instances:</span><br><span class="line">            instances[cls] = cls(*args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> instances[cls]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@singleton</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single2</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line">t1 = Single2()</span><br><span class="line">t2 = Single2()</span><br><span class="line"><span class="keyword">print</span> t1,t2 <span class="comment">#&lt;__main__.Single2 object at 0x02150B70&gt; &lt;__main__.Single2 object at 0x02150B70&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用模块导入"><a href="#使用模块导入" class="headerlink" title="使用模块导入"></a>使用模块导入</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#test.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single3</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">s3 = Single3()</span><br><span class="line"><span class="comment">#test1.py</span></span><br><span class="line"><span class="keyword">from</span> test <span class="keyword">import</span> s3</span><br></pre></td></tr></table></figure>
+<h2 id="多线程下的单例"><a href="#多线程下的单例" class="headerlink" title="多线程下的单例"></a>多线程下的单例</h2><p>以使用装饰器来实现的单例模式为例，当我们在初始化模块中有比较耗时的代码，在多线程下我们的单例可能会失效：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@singleton</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Single2</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        sleep(<span class="number">3</span>)  <span class="comment">#实例化中的耗时操作</span></span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">runtask</span><span class="params">()</span>:</span></span><br><span class="line">    sa = Single2()</span><br><span class="line">    <span class="keyword">print</span> sa</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    tlist = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        t = Thread(target=runtask)</span><br><span class="line">        tlist.append(t)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> tlist:</span><br><span class="line">        t.start()</span><br><span class="line"><span class="comment">#output：        </span></span><br><span class="line"><span class="comment">#&lt;__main__.Single2 object at 0x023B8C30&gt;</span></span><br><span class="line"><span class="comment">#&lt;__main__.Single2 object at 0x023D1690&gt;</span></span><br><span class="line"><span class="comment">#&lt;__main__.Single2 object at 0x023D16B0&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以发现，三个线程获取到的 Single2 实例是不一样的。</p>
+<p>为了解决这个问题，一种比较通用的方式就是加锁，将我们的装饰器代码修改为如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#加了锁的装饰器</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleton2</span><span class="params">(cls)</span>:</span></span><br><span class="line">    instances = &#123;&#125;</span><br><span class="line">    instances_lock = threading.Lock()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">with</span> instances_lock:  <span class="comment">#在进入实例化代码之前加锁，保证只有一个线程能进行类的实例化；使用with语句，模块内代码执行完成后会自动进行锁的释放</span></span><br><span class="line">            <span class="keyword">if</span> cls <span class="keyword">not</span> <span class="keyword">in</span> instances:</span><br><span class="line">                instances[cls] = cls(*args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> instances[cls]</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+<p>给 Single2 类用上 singleton2 装饰器，再运行一遍：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;__main__.Single2 object at 0x02101710&gt;</span><br><span class="line">&lt;__main__.Single2 object at 0x02101710&gt;</span><br><span class="line">&lt;__main__.Single2 object at 0x02101710&gt;</span><br></pre></td></tr></table></figure>
+<p>可以发现这次三个线程获得的实例是一样的。</p>
+<p>当然，我们还可以进行改进，当许多线程都来获取 Single2 的实例时，他们需要排队等待，然而在大多数情况下，Single2 的实例已经被初始化好了，使用赋值上方的 if 语句能够拦得住大多数线程，采用现在的加锁方式会降低我们的性能。那么，有没有什么解决办法？当然是有的，在 java 中，有一种实现单例的方式叫 双重锁判断，我们这里也可以使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#双重锁的装饰器</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleton2</span><span class="params">(cls)</span>:</span></span><br><span class="line">    instances = &#123;&#125;</span><br><span class="line">    instances_lock = threading.Lock()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> cls <span class="keyword">not</span> <span class="keyword">in</span> instances:  <span class="comment">#用 if 过滤掉大部分的获取实例的请求</span></span><br><span class="line">            <span class="keyword">with</span> instances_lock: <span class="comment">#对于最开始的初始化进行加锁处理</span></span><br><span class="line">                <span class="keyword">if</span> cls <span class="keyword">not</span> <span class="keyword">in</span> instances:  <span class="comment">#再次判断实例是否已经被构造</span></span><br><span class="line">                    instances[cls] = cls(*args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> instances[cls]</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>实现 python 的单例模式，上面共提供了三种方法，分别是使用<code>__new__()</code>，装饰器、模块导入。当然还有更黑科技的方法，比如使用 metaclass，在此就不做介绍</li>
+<li>在上面的基础上，我们又讨论了在多线程下要实现单例模式，需要额外进行加锁才能保证单例。基于加锁后的代码性能考虑，我们又引入的双重锁来稍稍改善了下性能。</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/dashang.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/22/消息推送/" class="archive-article-date">
-  	<time datetime="2018-12-22T07:57:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/22/消息推送/">消息推送</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/19/缺陷测试报告/" class="archive-article-date">
-  	<time datetime="2018-12-19T13:15:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/19/缺陷测试报告/">缺陷测试报告</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试基础</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://msxie.github.io/2019/07/30/python-单例模式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/13/测试用例/" class="archive-article-date">
-  	<time datetime="2018-12-13T13:20:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-13</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/05/python-内存管理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python 内存管理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/13/测试用例/">测试用例</a>
-    </h1>
+  <section id="comments" class="comments">
+    <style>
+      .comments{margin:30px;padding:10px;background:#fff}
+      @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+    </style>
+    <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "5KrGWaUAHxhyR3uoML7mxwsL-gzGzoHsz",
+            app_key: "YCezedbgfu5VpND6jYSnzOU7",
+            placeholder: "what do you think",
+            avatar:"mm"
+        });
+    }
+</script>
+    </section>
+  
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/11/测试设计/" class="archive-article-date">
-  	<time datetime="2018-12-11T14:28:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/11/测试设计/">测试设计</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/08/测试工程师定位/" class="archive-article-date">
-  	<time datetime="2018-12-08T08:13:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/08/测试工程师定位/">测试工程师定位</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/08/hello-world/" class="archive-article-date">
-  	<time datetime="2018-12-08T07:39:42.742Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/08/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -386,8 +380,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
