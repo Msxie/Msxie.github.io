@@ -144,6 +144,105 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-消息推送" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/22/消息推送/">消息推送</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/22/消息推送/" class="archive-article-date">
+  	<time datetime="2018-12-22T07:57:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="推送场景"><a href="#推送场景" class="headerlink" title="推送场景"></a>推送场景</h3><p>客户端和服务端通信，基本可以分为两种：</p>
+<p>PULL：客户端主动发请求给服务端，服务端处理后返回客户端想要的数据。大部分客户端和服务端的通信都采用这种方式。</p>
+<p>PUSH：服务端主动发请求给客户端，客户端展示给用户。常见的场景有，京东发推送告诉你购物车里某件商品降价啦。</p>
+<h3 id="推送实现"><a href="#推送实现" class="headerlink" title="推送实现"></a>推送实现</h3><h4 id="系统实现"><a href="#系统实现" class="headerlink" title="系统实现"></a>系统实现</h4><h5 id="Android：C2DM推送"><a href="#Android：C2DM推送" class="headerlink" title="Android：C2DM推送"></a>Android：C2DM推送</h5><img src="/2018/12/22/消息推送/Android推送.gif" title="android推送">
+<p>Google 提供的推送解决方案，是原生框架, 无需在应用中添加第三方代码和部署服务器端。</p>
+<ol>
+<li>用户 app 向 C2DM 服务器注册</li>
+<li>C2DM 服务器返回用户注册的 ID [简称 C2DM ID]</li>
+<li>应用服务器保存当前的用户的 应用账号（user account） 和 C2DM ID（registrationID）</li>
+<li>应用服务器 要向某个用户的应用账号发送消息（data）</li>
+<li>应用服务器将 发送人（registrationID）和 消息（data）发送给 C2DM 服务器</li>
+<li>C2DM 服务器根据 registrationID 来向指定 Android 设备发送消息，设备展示通知</li>
+</ol>
+<p>系统自带当然好，然而此方案却很难被使用：</p>
+<ol>
+<li>该推送依赖 Google 服务器, 然后懂的</li>
+<li>许多手机厂商定制 ROM 时去掉了该模块</li>
+</ol>
+<h5 id="iOS：APNs（Apple-Push-Notification-service）"><a href="#iOS：APNs（Apple-Push-Notification-service）" class="headerlink" title="iOS：APNs（Apple Push Notification service）"></a>iOS：APNs（Apple Push Notification service）</h5><img src="/2018/12/22/消息推送/ios推送.png" title="ios推送">
+<p>整体的推送框架和 C2DM 差不多，不再多说。</p>
+<h4 id="第三方实现"><a href="#第三方实现" class="headerlink" title="第三方实现"></a>第三方实现</h4><h5 id="极光推送"><a href="#极光推送" class="headerlink" title="极光推送"></a>极光推送</h5><img src="/2018/12/22/消息推送/jpush.gif" title="jpush推送">
+<p>极光推动的整体框架和 C2DM 也差不多，这里再补充下 Android 平台的细节：</p>
+<ol>
+<li><p>使用 TCP 长链接 来进行推送</p>
+<p>极光服务器和 APP 之间使用 TCP 长链接来进行推送消息，为了保持长链接，需要保证手机的外网 ip 地址不变，为了达到目的，需要需要定时的发心跳，以刷新 NAT 表项，避免被淘汰。</p>
+<p>在 Android 平台上，想进行定时操作，常用的方法有两种：Timer 和 AlarmManager，第一种方法会让 CPU 保持唤醒状态，这样会大量消耗手机电量，所以不常被采用。通常使用第二种方法来发送心跳包。</p>
+</li>
+<li><p>Android SDK</p>
+<p>APP 引入 jpush 的 sdk 包后，启动 APP，可以发现我们的 APP 进程中多了一个 Service（服务）运行在后台，当我们的 App 被关闭后，Service 还会运行在后台，保持 APP  的“在线”状态，发送心跳包及接受 Push 消息。</p>
+</li>
+<li><p>离线推送</p>
+<p>极光服务器会将要发的消息存储在后台，当设备离线时（比如，断网），消息不会被发送。当设备再次联网后，App 上运行的极光 Service 会自动和极光服务器建立长链接，极光服务器再进行消息的发送。</p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/22/消息推送/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-缺陷测试报告" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -958,11 +1057,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">移动测试</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color5">移动测试</a>
               </li>
              
               <li class="article-tag-list-item">

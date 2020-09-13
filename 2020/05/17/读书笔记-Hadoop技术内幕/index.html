@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://msxie.github.io">
   <title>读书笔记-Hadoop技术内幕 | Msxie&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="toc: true MapReduce的适用范围任务可以被分解为多个子问题，且这些子问题相对独立，彼此之间不会有牵制，待并行处理完这些子问题后，任务便被解决。 可编程组件InputFormat数据切分按照某个策略将输入数据切分成若干个 split，以便确定 Map Task 个数以及对应的 split。split，一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。s">
+  <meta name="description" content="MapReduce的适用范围任务可以被分解为多个子问题，且这些子问题相对独立，彼此之间不会有牵制，待并行处理完这些子问题后，任务便被解决。 可编程组件InputFormat数据切分按照某个策略将输入数据切分成若干个 split，以便确定 Map Task 个数以及对应的 split。split，一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。split 的多少决定">
 <meta name="keywords" content="大数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读书笔记-Hadoop技术内幕">
 <meta property="og:url" content="https://msxie.github.io/2020/05/17/读书笔记-Hadoop技术内幕/index.html">
 <meta property="og:site_name" content="Msxie&#39;s Blog">
-<meta property="og:description" content="toc: true MapReduce的适用范围任务可以被分解为多个子问题，且这些子问题相对独立，彼此之间不会有牵制，待并行处理完这些子问题后，任务便被解决。 可编程组件InputFormat数据切分按照某个策略将输入数据切分成若干个 split，以便确定 Map Task 个数以及对应的 split。split，一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。s">
+<meta property="og:description" content="MapReduce的适用范围任务可以被分解为多个子问题，且这些子问题相对独立，彼此之间不会有牵制，待并行处理完这些子问题后，任务便被解决。 可编程组件InputFormat数据切分按照某个策略将输入数据切分成若干个 split，以便确定 Map Task 个数以及对应的 split。split，一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。split 的多少决定">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://msxie.github.io/2020/05/17/读书笔记-Hadoop技术内幕/1586961045760.png">
 <meta property="og:image" content="https://msxie.github.io/2020/05/17/读书笔记-Hadoop技术内幕/1589076666240.png">
@@ -25,10 +25,10 @@
 <meta property="og:image" content="https://msxie.github.io/2020/05/17/读书笔记-Hadoop技术内幕/1588081756814.png">
 <meta property="og:image" content="https://msxie.github.io/2020/05/17/读书笔记-Hadoop技术内幕/1589208434938.png">
 <meta property="og:image" content="https://msxie.github.io/2020/05/17/读书笔记-Hadoop技术内幕/1589295516023.png">
-<meta property="og:updated_time" content="2020-05-17T13:50:22.426Z">
+<meta property="og:updated_time" content="2020-05-17T13:51:19.676Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读书笔记-Hadoop技术内幕">
-<meta name="twitter:description" content="toc: true MapReduce的适用范围任务可以被分解为多个子问题，且这些子问题相对独立，彼此之间不会有牵制，待并行处理完这些子问题后，任务便被解决。 可编程组件InputFormat数据切分按照某个策略将输入数据切分成若干个 split，以便确定 Map Task 个数以及对应的 split。split，一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。s">
+<meta name="twitter:description" content="MapReduce的适用范围任务可以被分解为多个子问题，且这些子问题相对独立，彼此之间不会有牵制，待并行处理完这些子问题后，任务便被解决。 可编程组件InputFormat数据切分按照某个策略将输入数据切分成若干个 split，以便确定 Map Task 个数以及对应的 split。split，一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。split 的多少决定">
 <meta name="twitter:image" content="https://msxie.github.io/2020/05/17/读书笔记-Hadoop技术内幕/1586961045760.png">
   
     <link rel="alternative" href="/atom.xml" title="Msxie&#39;s Blog" type="application/atom+xml">
@@ -177,11 +177,34 @@
     
     <!-- 目录内容 -->
 
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+    <div id="toc-article" class="toc-article">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MapReduce的适用范围"><span class="toc-number">1.</span> <span class="toc-text">MapReduce的适用范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可编程组件"><span class="toc-number">2.</span> <span class="toc-text">可编程组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InputFormat"><span class="toc-number">2.1.</span> <span class="toc-text">InputFormat</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据切分"><span class="toc-number">2.1.1.</span> <span class="toc-text">数据切分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为Mapper提供输入数据"><span class="toc-number">2.1.2.</span> <span class="toc-text">为Mapper提供输入数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mapper"><span class="toc-number">2.2.</span> <span class="toc-text">Mapper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Partitioner"><span class="toc-number">2.3.</span> <span class="toc-text">Partitioner</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reducer"><span class="toc-number">2.4.</span> <span class="toc-text">Reducer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OutputFormat"><span class="toc-number">2.5.</span> <span class="toc-text">OutputFormat</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构组成"><span class="toc-number">3.</span> <span class="toc-text">架构组成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RPC协议"><span class="toc-number">3.1.</span> <span class="toc-text">RPC协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JobTracker"><span class="toc-number">3.2.</span> <span class="toc-text">JobTracker</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#功能"><span class="toc-number">3.2.1.</span> <span class="toc-text">功能</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#资源管理模块"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">资源管理模块</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#作业控制模块"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">作业控制模块</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#后台线程功能"><span class="toc-number">3.2.1.3.</span> <span class="toc-text">后台线程功能</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#稳定性"><span class="toc-number">3.2.2.</span> <span class="toc-text">稳定性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#JobTracker-场景：jobTracker-挂掉"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">JobTracker - 场景：jobTracker 挂掉</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#TaskTracker-场景：TaskTracker-挂掉或者任务总是运行失败"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">TaskTracker - 场景：TaskTracker 挂掉或者任务总是运行失败</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#JOB-场景：部分task运行失败"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">JOB - 场景：部分task运行失败</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#TASK-场景：运行失败"><span class="toc-number">3.2.2.4.</span> <span class="toc-text">TASK - 场景：运行失败</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#RECORD-场景：由于部分数据的原因导致task挂掉"><span class="toc-number">3.2.2.5.</span> <span class="toc-text">RECORD - 场景：由于部分数据的原因导致task挂掉</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#磁盘-场景：磁盘、目录挂掉或者剩余空间不足"><span class="toc-number">3.2.2.6.</span> <span class="toc-text">磁盘 - 场景：磁盘、目录挂掉或者剩余空间不足</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#性能"><span class="toc-number">3.2.3.</span> <span class="toc-text">性能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调度器"><span class="toc-number">3.3.</span> <span class="toc-text">调度器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#监听器"><span class="toc-number">3.3.1.</span> <span class="toc-text">监听器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#调度机制"><span class="toc-number">3.3.2.</span> <span class="toc-text">调度机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TaskTracker"><span class="toc-number">3.4.</span> <span class="toc-text">TaskTracker</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一次心跳"><span class="toc-number">3.4.1.</span> <span class="toc-text">一次心跳</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行命令"><span class="toc-number">3.4.2.</span> <span class="toc-text">执行命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LaunchTaskAction"><span class="toc-number">3.4.2.1.</span> <span class="toc-text">LaunchTaskAction</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#作业本地化"><span class="toc-number">3.4.2.1.1.</span> <span class="toc-text">作业本地化</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#任务本地化"><span class="toc-number">3.4.2.1.2.</span> <span class="toc-text">任务本地化</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#启动-Task"><span class="toc-number">3.4.2.1.3.</span> <span class="toc-text">启动 Task</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CommitTaskAction"><span class="toc-number">3.4.2.2.</span> <span class="toc-text">CommitTaskAction</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#KillTaskAction"><span class="toc-number">3.4.2.3.</span> <span class="toc-text">KillTaskAction</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#KillJobAction"><span class="toc-number">3.4.2.4.</span> <span class="toc-text">KillJobAction</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ReinitTrackerAction"><span class="toc-number">3.4.2.5.</span> <span class="toc-text">ReinitTrackerAction</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生命周期"><span class="toc-number">4.</span> <span class="toc-text">生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一次任务提交"><span class="toc-number">4.1.</span> <span class="toc-text">一次任务提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Job状态转换"><span class="toc-number">4.2.</span> <span class="toc-text">Job状态转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Task-状态转换"><span class="toc-number">4.3.</span> <span class="toc-text">Task 状态转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map-Task"><span class="toc-number">4.4.</span> <span class="toc-text">Map Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reduce-task"><span class="toc-number">4.5.</span> <span class="toc-text">Reduce task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reporter"><span class="toc-number">4.6.</span> <span class="toc-text">Reporter</span></a></li></ol></li></ol>
+         </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+      
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
-        <p>toc: true</p>
-<h2 id="MapReduce的适用范围"><a href="#MapReduce的适用范围" class="headerlink" title="MapReduce的适用范围"></a>MapReduce的适用范围</h2><p>任务可以被分解为多个子问题，且这些子问题相对独立，彼此之间不会有牵制，待并行处理完这些子问题后，任务便被解决。</p>
+        <h2 id="MapReduce的适用范围"><a href="#MapReduce的适用范围" class="headerlink" title="MapReduce的适用范围"></a>MapReduce的适用范围</h2><p>任务可以被分解为多个子问题，且这些子问题相对独立，彼此之间不会有牵制，待并行处理完这些子问题后，任务便被解决。</p>
 <h2 id="可编程组件"><a href="#可编程组件" class="headerlink" title="可编程组件"></a>可编程组件</h2><h3 id="InputFormat"><a href="#InputFormat" class="headerlink" title="InputFormat"></a>InputFormat</h3><h4 id="数据切分"><a href="#数据切分" class="headerlink" title="数据切分"></a>数据切分</h4><p>按照某个策略将输入数据切分成若干个 split，以便确定 Map Task 个数以及对应的 split。<br>split，一个逻辑概念，它只包含一些元数据信息，比如数据起始位置、数据长度、数据所在节点等。split 的多少决定了 Map Task 的数目，因为每个 split 会交由一个 Map Task 处理。</p>
 <p>client 调用作业 InputFormat 中的 getSplits 函数，将一个文件切分为一个或多个 InputSplit对象， 序列化到文件 job.split 中，InputSplit 的元信息写入到 job.splitmetainfo 文件中。</p>
 <p>getSplits 函数：</p>
@@ -617,6 +640,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/09/13/spark读书笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Spark读书笔记
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/07/30/python-单例模式/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">python 单例模式</div>
@@ -638,6 +670,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MapReduce的适用范围"><span class="toc-number">1.</span> <span class="toc-text">MapReduce的适用范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可编程组件"><span class="toc-number">2.</span> <span class="toc-text">可编程组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InputFormat"><span class="toc-number">2.1.</span> <span class="toc-text">InputFormat</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据切分"><span class="toc-number">2.1.1.</span> <span class="toc-text">数据切分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为Mapper提供输入数据"><span class="toc-number">2.1.2.</span> <span class="toc-text">为Mapper提供输入数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mapper"><span class="toc-number">2.2.</span> <span class="toc-text">Mapper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Partitioner"><span class="toc-number">2.3.</span> <span class="toc-text">Partitioner</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reducer"><span class="toc-number">2.4.</span> <span class="toc-text">Reducer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OutputFormat"><span class="toc-number">2.5.</span> <span class="toc-text">OutputFormat</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构组成"><span class="toc-number">3.</span> <span class="toc-text">架构组成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RPC协议"><span class="toc-number">3.1.</span> <span class="toc-text">RPC协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JobTracker"><span class="toc-number">3.2.</span> <span class="toc-text">JobTracker</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#功能"><span class="toc-number">3.2.1.</span> <span class="toc-text">功能</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#资源管理模块"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">资源管理模块</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#作业控制模块"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">作业控制模块</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#后台线程功能"><span class="toc-number">3.2.1.3.</span> <span class="toc-text">后台线程功能</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#稳定性"><span class="toc-number">3.2.2.</span> <span class="toc-text">稳定性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#JobTracker-场景：jobTracker-挂掉"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">JobTracker - 场景：jobTracker 挂掉</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#TaskTracker-场景：TaskTracker-挂掉或者任务总是运行失败"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">TaskTracker - 场景：TaskTracker 挂掉或者任务总是运行失败</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#JOB-场景：部分task运行失败"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">JOB - 场景：部分task运行失败</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#TASK-场景：运行失败"><span class="toc-number">3.2.2.4.</span> <span class="toc-text">TASK - 场景：运行失败</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#RECORD-场景：由于部分数据的原因导致task挂掉"><span class="toc-number">3.2.2.5.</span> <span class="toc-text">RECORD - 场景：由于部分数据的原因导致task挂掉</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#磁盘-场景：磁盘、目录挂掉或者剩余空间不足"><span class="toc-number">3.2.2.6.</span> <span class="toc-text">磁盘 - 场景：磁盘、目录挂掉或者剩余空间不足</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#性能"><span class="toc-number">3.2.3.</span> <span class="toc-text">性能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调度器"><span class="toc-number">3.3.</span> <span class="toc-text">调度器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#监听器"><span class="toc-number">3.3.1.</span> <span class="toc-text">监听器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#调度机制"><span class="toc-number">3.3.2.</span> <span class="toc-text">调度机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TaskTracker"><span class="toc-number">3.4.</span> <span class="toc-text">TaskTracker</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一次心跳"><span class="toc-number">3.4.1.</span> <span class="toc-text">一次心跳</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行命令"><span class="toc-number">3.4.2.</span> <span class="toc-text">执行命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LaunchTaskAction"><span class="toc-number">3.4.2.1.</span> <span class="toc-text">LaunchTaskAction</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#作业本地化"><span class="toc-number">3.4.2.1.1.</span> <span class="toc-text">作业本地化</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#任务本地化"><span class="toc-number">3.4.2.1.2.</span> <span class="toc-text">任务本地化</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#启动-Task"><span class="toc-number">3.4.2.1.3.</span> <span class="toc-text">启动 Task</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CommitTaskAction"><span class="toc-number">3.4.2.2.</span> <span class="toc-text">CommitTaskAction</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#KillTaskAction"><span class="toc-number">3.4.2.3.</span> <span class="toc-text">KillTaskAction</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#KillJobAction"><span class="toc-number">3.4.2.4.</span> <span class="toc-text">KillJobAction</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ReinitTrackerAction"><span class="toc-number">3.4.2.5.</span> <span class="toc-text">ReinitTrackerAction</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生命周期"><span class="toc-number">4.</span> <span class="toc-text">生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一次任务提交"><span class="toc-number">4.1.</span> <span class="toc-text">一次任务提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Job状态转换"><span class="toc-number">4.2.</span> <span class="toc-text">Job状态转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Task-状态转换"><span class="toc-number">4.3.</span> <span class="toc-text">Task 状态转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map-Task"><span class="toc-number">4.4.</span> <span class="toc-text">Map Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reduce-task"><span class="toc-number">4.5.</span> <span class="toc-text">Reduce task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reporter"><span class="toc-number">4.6.</span> <span class="toc-text">Reporter</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -783,11 +828,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">移动测试</a>
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+                <a href="javascript:void(0)" class="js-tag color5">移动测试</a>
               </li>
              
               <li class="article-tag-list-item">

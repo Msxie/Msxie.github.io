@@ -6,15 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://msxie.github.io">
-  <title>Archives: 2020/5 | Msxie&#39;s Blog</title>
+  <title>Spark读书笔记 | Msxie&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Msxie&#39;s Blog">
-<meta property="og:url" content="https://msxie.github.io/archives/2020/05/index.html">
+  <meta name="description" content="RDD弹性分布式数据集 (Resilient Distributed Dataset)：是一种分布式的内存抽象，是一种高度受限的共享内存模型，是只读记录分区的集合，只能通过在其他RDD执行确定的转换操作（如 map、join 和 groupBy ）而创建。RDD 没有存储真正的数据，而是含有如何从其他RDD 衍生（即计算）出本 RDD 的相关信息（即Lineage），因此在 RDD 部分分区数据丢">
+<meta name="keywords" content="大数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark读书笔记">
+<meta property="og:url" content="https://msxie.github.io/2020/09/13/spark读书笔记/index.html">
 <meta property="og:site_name" content="Msxie&#39;s Blog">
+<meta property="og:description" content="RDD弹性分布式数据集 (Resilient Distributed Dataset)：是一种分布式的内存抽象，是一种高度受限的共享内存模型，是只读记录分区的集合，只能通过在其他RDD执行确定的转换操作（如 map、join 和 groupBy ）而创建。RDD 没有存储真正的数据，而是含有如何从其他RDD 衍生（即计算）出本 RDD 的相关信息（即Lineage），因此在 RDD 部分分区数据丢">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200714224814362.png">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200901223517247.png">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200817225350279.png">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200817231844328.png">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200907224600759.png">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200907224941432.png">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200817233210276.png">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200715224155886.png">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200912152508769.png">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200902000415505.png">
+<meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200806232810429.png">
+<meta property="og:updated_time" content="2020-09-13T06:43:42.401Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Msxie&#39;s Blog">
+<meta name="twitter:title" content="Spark读书笔记">
+<meta name="twitter:description" content="RDD弹性分布式数据集 (Resilient Distributed Dataset)：是一种分布式的内存抽象，是一种高度受限的共享内存模型，是只读记录分区的集合，只能通过在其他RDD执行确定的转换操作（如 map、join 和 groupBy ）而创建。RDD 没有存储真正的数据，而是含有如何从其他RDD 衍生（即计算）出本 RDD 的相关信息（即Lineage），因此在 RDD 部分分区数据丢">
+<meta name="twitter:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200714224814362.png">
   
     <link rel="alternative" href="/atom.xml" title="Msxie&#39;s Blog" type="application/atom+xml">
   
@@ -142,36 +159,412 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-spark读书笔记" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/17/读书笔记-Hadoop技术内幕/" class="archive-article-date">
-  	<time datetime="2020-05-17T13:11:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/17/读书笔记-Hadoop技术内幕/">读书笔记-Hadoop技术内幕</a>
+    <h1 class="article-title" itemprop="name">
+      Spark读书笔记
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/09/13/spark读书笔记/" class="archive-article-date">
+  	<time datetime="2020-09-13T06:29:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-13</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h2><p>弹性分布式数据集 (Resilient Distributed Dataset)：是一种分布式的内存抽象，是一种高度受限的共享内存模型，是只读记录分区的集合，只能通过在其他RDD执行确定的转换操作（如 map、join 和 groupBy ）而创建。RDD 没有存储真正的数据，而是含有如何从其他RDD 衍生（即计算）出本 RDD 的相关信息（即Lineage），因此在 RDD 部分分区数据丢失的时候可以从物理存储的数据计算出相应的RDD分区。</p>
+<h3 id="RDD-的属性"><a href="#RDD-的属性" class="headerlink" title="RDD 的属性"></a>RDD 的属性</h3><ul>
+<li>一组分片（Partition），一个RDD由多个 Partition 组成，每个 Partition 会被一个 task 处理。Partition 是一个逻辑概念，变换前后的新旧分区在物理上可能是同一块内存。创建 RDD 时可指定分片个数，若未指定，则默认值是该程序所分配的 cpu 核数，若是从hdfs 文件创建，则默认为文件的数据块数</li>
+<li>一个计算每个分区的函数（Iterator）。RDD的计算是以分片为单位，计算函数都是在对迭代器的复合，不需要保存每次计算的结果。每个RDD都会实现compute函数来计算分区数据</li>
+<li>RDD 之间的依赖关系。RDD 的每次转换都会生成一个新的 RDD，所以 RDD 之间就会形成类似于流水线一样的前后依赖关系。在部分分区数据丢失时，Spark 可以通过这个依赖关系重新计算丢失的分区数据，而不是对 RDD 的所有分区进行重新计算</li>
+<li>一个 Partitioner，即 RDD 的分片函数。决定了父 RDD 和子 RDD 之间的依赖类型。比如 join 操作，若采用协同划分（指定Partitioner 后产生前后一致的分区），两个父RDD与子RDD之间，一个key保证被映射到同一个分区，这样就能形成窄依赖。默认提供两种：HashPartitioner 和 RangePartitioner。Partitioner 值存在于（k,v）类型 RDD 中，否则为none。</li>
+<li>一个存储 存取每个 Partition 的优先位置的列表（preferred location）。对于一个 HDFS 文件来说，这个列表保存的就是每个Partition 所在的块的位置。按照“移动数据不如移动计算”的理念，Spark 在进行任务调度的时候，会尽可能地将计算任务分配到其所要处理数据块的存储位置；当 RDD 被缓存，则计算应发送到缓存节点上运行；父 RDD 的优先位置也会决定子 RDD 的位置</li>
+</ul>
+<h3 id="RDD-的操作"><a href="#RDD-的操作" class="headerlink" title="RDD 的操作"></a>RDD 的操作</h3><ol>
+<li><p>创建</p>
+<ul>
+<li>从一个已经存在的Scala集合创建</li>
+<li>由外部存储系统的数据集创建，比如本地文件系统，HDFS 等</li>
+</ul>
+</li>
+<li><p>转换：从现有的数据集创建一个新的数据集，例如：map,distinct,union,partitionBy,reduceByKey,cogroup,join</p>
+</li>
+<li>控制：将 RDD 持久化到内存或磁盘文件系统中，例如：cache, persist</li>
+<li>动作：在数据集上进行计算后，返回一个值给Driver程序，例如：first,count,reduce,sortBy,saveAsTextFile</li>
+</ol>
+<p>RDD 中的所有转换都是惰性的，也就是说，它们并不会直接计算结果。它们只是记住这些应用到基础数据集（例如一个文件）上的转换动作。只有当发生一个动作时，这些转换才会真正运行。</p>
+<h3 id="RDD之间的关系"><a href="#RDD之间的关系" class="headerlink" title="RDD之间的关系"></a>RDD之间的关系</h3><p>RDD 和它依赖的 parent RDD（s）的关系有两种不同的类型：窄依赖（narrow dependency）和宽依赖（wide dependency）。</p>
+<ol>
+<li>窄依赖指的是每一个 parent RDD 的 Partition 最多被子 RDD 的一个 Partition 使用</li>
+</ol>
+<p>由于 RDD 每个 Partition依赖固定数量的 parent RDD（s）的 Partition（s），可以通过一个计算任务来处理窄依赖中一条线上的Partition，Partition 之间（窄依赖中的多条线）相互独立，这些计算任务可以并行执行</p>
+<p>在窄依赖中，节点丢失后的恢复更加高效，因为只有丢失的父分区需要重新计算，并且可以并行在不同节点上计算。</p>
+<p>窄依赖有两种实现：OneToOneDependency、RangeDependency（只被org.apache.spark.rdd.UnionRDD使用）</p>
+<ol start="2">
+<li>宽依赖指的是多个子 RDD 的 Partition 会依赖同一个 parent RDD 的 Partition。</li>
+</ol>
+<p>子 RDD 的 Partition 是 parent RDD 的所有 Partition Shuffle 的结果，因此这两个 RDD 是不能通过一个计算任务来完成的</p>
+<p>宽依赖的实现只有一种：ShuffleDependency</p>
+<p>对应宽依赖的操作，spark 会将中间结果物化到父分区的节点上，以简化数据的故障恢复。</p>
+<img src="/2020/09/13/spark读书笔记/image-20200714224814362.png" title="dependency">
+<h3 id="RDD-的存储级别"><a href="#RDD-的存储级别" class="headerlink" title="RDD 的存储级别"></a>RDD 的存储级别</h3><img src="/2020/09/13/spark读书笔记/image-20200901223517247.png" title="storageLevel">
+<p>根据 useDisk(使用磁盘),useMemory(使用内存),useOffHeap(使用其他文件系统),deserialized(反序列化),replication(副本数) 5个参数组合，成为12种存储级别。</p>
+<p>spark 默认的存储级别是 不进行序列化直接存储在内存 中，具体的 RDD 数据的存取，请参照 Storage 一节</p>
+<h3 id="RDD-的缓存"><a href="#RDD-的缓存" class="headerlink" title="RDD 的缓存"></a>RDD 的缓存</h3><p>默认情况下，每一个转换过的 RDD 都会在它执行一个动作时被重新计算。不过也可以使用 persist（或者cache）方法，在内存中持久化一个 RDD，下次计算 RDD 之前，若结果被缓存，则可直接使用结果，避免了重复计算。</p>
+<p>RDD的每个 Partition 对应 Storage 模块的一个 Block，只不过 Block 是 Partition 经过处理后的数据。cacheManager 会通过 RDD的ID 和当前计算的 Partition 的ID 向 Storage 模块的 BlockManager 发起查询请求，如果能够获得 Block 的信息，会直接返回 Block 的信息。否则，代表该 RDD 是需要计算的。在计算结束后，计算结果会根据用户定义的存储级别，写入 BlockManager 中。这样，下次就可以不经过计算而直接读取该 RDD 的计算结果。</p>
+<p>缓存有可能丢失（存储于内存的数据由于内存不足而被删除、节点宕机），RDD 的缓存的容错机制保证了即使缓存丢失也能保证计算的正确执行。RDD实现了基于 Lineage 的容错机制。RDD 的转换关系，构成了compute chain，可以把这个 compute chain 认为是RDD之间演化的 Lineage。在部分计算结果丢失时，只需要根据这个 Lineage 重算即可。RDD 的各个 Partition 是相对独立的，因此只需要计算丢失的部分即可，并不需要重算全部 Partition。</p>
+<h3 id="RDD-的检查点"><a href="#RDD-的检查点" class="headerlink" title="RDD 的检查点"></a>RDD 的检查点</h3><p>为了避免缓存丢失重新计算带来的开销，Spark 引入了检查点（checkpoint）机制。缓存是在计算结束后，直接将计算结果通过用户定义的存储级别写入不同的介质。而检查点不同，它是在计算完成后，重新建立一个 Job来计算。</p>
+<p>在 Job 结束后，会判断是否需要 checkpoint（在 runjob 方法里，最后有一个doCheckpoint方法）。如果需要，就调用 doCheckpoint 方法首先为数据创建一个目录；然后启动一个新的 Job 来计算该 RDD，并且将计算结果写入新创建的目录；接着创建一个 CheckpointRDD；最后，原始 RDD 的所有依赖被清除，这就意味着 RDD 的转换的计算链（compute chain）等信息都被清除。</p>
+<p>由于 checkpoint 操作会对一个RDD 计算两次，所以一般推荐先将 RDD cache 后再进行 checkpoint。</p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h3 id="物理架构"><a href="#物理架构" class="headerlink" title="物理架构"></a>物理架构</h3><img src="/2020/09/13/spark读书笔记/image-20200817225350279.png" title="arch1">
+<p>Application：用户编写的spark应用程序，包含driver和分布在集群多个节点上运行的executor代码。一个application在执行过程中，会由一个或多个job组成</p>
+<p>SparkContext：负责与ClusterManager通信，进行资源申请、任务的分配和监控等</p>
+<p>Cluster Manager：集群上获取资源的外部服务，对应于Standalone模式下的Master</p>
+<p>worker：集群中任何可以运行 application 代码的节点。主要作用是 向 Master 注册自己，根据 Master 发送的 Application 配置进程环境，启动 ExecutorBackend。</p>
+<p>Master：总控进程，Standalone 模式下的主节点，负责管理和分配集群资源（管理所有的Worker，接收 Client 提交的Application，FIFO 调度等待的 Application）。</p>
+<p>Executor：执行进程，application运行在worker上的进程，该进程负责运行task</p>
+<h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><p>Job: RDD 中由行动操作所生成的一个或多个 stage 的组合。</p>
+<p>Stage：执行阶段，根据 RDD 之间的依赖关系拆分为多组任务集合。stage 由 DAGScheduler 划分，有 Shuffle Map Stage 和 Result Stage 两种</p>
+<p>Task：一个 Stage 是一个任务集（Taskset），task 是分发到 executor 上的工作任务，是执行应用的最小单元</p>
+<p>DAGScheduler：面向 Stage 的任务调度器，根据 RDD 的依赖关系划分 Stage 和 taskset，将 taskset 提交给 TaskScheduler</p>
+<p>TaskScheduler：面向 task 的调度器，负责 task 的调度执行，高层调度器 DAGScheduler 和任务执行 SchedulerBackend 的桥梁。接收DAGScheduler生成的taskset，把task分发给worker的executor运行。TaskScheduler定义了任务调度相关的实现方法，TaskSchedulerImpl实现了TaskScheduler所有的接口方法。后续的YarnScheduler只需要重写一两个方法即可</p>
+<p>SchedulerBackend：负责 application 运行期间和底层资源调度系统的交互，子类根据不同运行模式分为本地 LocalBackend、粗粒度 CoarseGrainedSchedulerBackend、细粒度 MesosSchedulerBackend等</p>
+<h3 id="集群启动"><a href="#集群启动" class="headerlink" title="集群启动"></a>集群启动</h3><h4 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h4><p>Worker向Master发送的消息主要包含三类：</p>
+<ul>
+<li>注册：Worker启动时需要向Master注册，注册时需要汇报自身的信息。</li>
+<li>状态汇报：汇报Executor和Driver的运行状态；在Master故障恢复时，需要汇报Worker上当前运行的Executor和Driver的信息。</li>
+<li>报活心跳：Worker每隔指定周期会向Master发送报活的心跳。</li>
+</ul>
+<p>Master向Worker发送的消息</p>
+<ul>
+<li>响应Worker的注册(RegisteredWorker/RegisterWorkerFailed)</li>
+<li>控制命令，包括让Worker重新注册、让Worker启动Executor或者Driver、停止Executor和Driver等。</li>
+</ul>
+<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><img src="/2020/09/13/spark读书笔记/image-20200817231844328.png" title="cluster_start">
+<ol>
+<li>master 启动后，随之启动各 worker。worker 启动时会向所有 master 发送给注册 worker 的消息（RegisterWorker），还要启动一个定时器，在超时的时候进行重新注册。</li>
+<li>master 在接到 worker 的注册请求后，如果 master 是 Active 的并且 worker没有注册过，那么 master 会回复 worker消息RegisterWorker，表示 worker注册成功；若注册失败，master 会回复消息 RegisterWorkerFailed，worker接到该消息后打印出错日志并结束启动（由于 worker 会重复多次发送请求，因此退出前需要判断是否注册成功了，如果没有注册成功才会退出；如果已经注册成功了，那么忽略这个消息）。</li>
+<li>worker 接收到注册成功后，就可以对外服务了（接收 master 指令等），同时会定时发送心跳信息 heartbeat 给 master，以便master 了解 worker 的实时状态。</li>
+</ol>
+<h3 id="应用执行"><a href="#应用执行" class="headerlink" title="应用执行"></a>应用执行</h3><h4 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h4><p>每个 Spark 的 Application 都是从 SparkContext 开始的，它通过 Cluster Manager 和 Worker上的Executor建立联系，由每个 Executor完成 Application 的部分计算任务。</p>
+<img src="/2020/09/13/spark读书笔记/image-20200907224600759.png" title="arch2">
+<h4 id="模块调用"><a href="#模块调用" class="headerlink" title="模块调用"></a>模块调用</h4><p>SparkContext 启动后，启动 TaskScheduler 调度器。当 DAGScheduler 将 stage 和 taskset 拆分完毕后，调用TaskScheduler.submitTasks 方法来提交任务，SchedulerBackend 收到 task 后，通过 reviveOffers 方法和 Cluster Manager 交互，取得该 Application 分配到的资源，分配运行资源并启动 worker 上的 executor；最后，由 TaskScheduler 接收任务运行状态，如果task运行完毕，则继续分配，直到 application运行完毕；如果task执行失败，则启动重试机制，并且为执行速度慢的Task启动备份的任务。</p>
+<img src="/2020/09/13/spark读书笔记/image-20200907224941432.png" title="arch3">
+<p>不同的 Cluster Master，即资源调度框架的实现模式会有区别，但是 task 的划分和调度都是 DAGScheduler 完成的，资源调度框架在为Application 分配资源后，将 Task 分配到计算的物理单元 Executor 去处理。</p>
+<h4 id="RPC-角度"><a href="#RPC-角度" class="headerlink" title="RPC 角度"></a>RPC 角度</h4><img src="/2020/09/13/spark读书笔记/image-20200817233210276.png" title="arch4">
+<ol>
+<li>Application 启动，创建 sparkContext，sparkContext 启动过程实例化 SchedulerBackend 对象，该对象启动会创建DriverEndPoint（driver）和 ClientEndPoint（AppClient）。AppClient 启动注册线程向所有 Master 发送 RegisterApplication（注册应用）消息，如果超过20s没有接收到注册成功的消息，那么会重新注册；如果重试超过3次仍未成功，那么本次注册就失败了</li>
+<li>Master 收到注册消息后，记录应用信息并将应用加入等待运行列表，后期会根据调度算法（参见应用调度一节）来决定运行哪个应用，发送注册成功（RegisteredApplication）消息给 AppClient；AppClient 收到该消息后，将注册标志置为 true，Master 检测到该标识位变化，完成注册 Application。</li>
+<li>Master 找到符合条件的 worker 后，比如，剩余内存、核数符合 task 执行条件，发送 launchExecutor 消息给 worker，通知 worker启动 executor。worker 收到消息后，按照 ExecutorRunner–&gt;CoarseGrainedExecutorBackend 顺序来创建对象，CoarseGrainedExecutorBackend 是executor运行的容器（此时无executor运行）。Worker上的资源信息并不是Worker主动上报到Master的，而是Master主动维护的，因为所有的资源分配都是由Master来完成的，如果Worker启动Executor失败，那么它会发送FAILED的消息给Master，Master收到该消息时再次更新Worker的信息即可</li>
+<li>worker发送 ExecutorStateChanged 消息给 Master，通知 Master Executor 容器已创建；Master 收到消息后，向 AppClient 发送 ExecutorAdded 消息</li>
+<li>CoarseGrainedExecutorBackend 启动时，发送 RegisterExecutor 消息给 driver</li>
+<li>driver 根据 executor 是否已注册，返回 RegisterExecutorFailed/RegisteredExecutor 消息。CoarseGrainedExecutorBackend 收到 RegisteredExecutor 消息后，开始实例化 executor 对象，executor 对象启动完毕后，会定时向 driver 发送心跳，等待接受从driver 发送来的 task</li>
+<li>driver 发送 launchTask 给Executor，通知 executor 启动一个 task。executor 会先创建一个 TaskRunner 进程，由该进程执行 task。</li>
+<li>TaskRunner 处理 task 完成后，调用 CoarseGrainedExecutorBackend 的 statusUpdate() 方法发送 StatusUpdate 消息给driver；driver 收到消息后，调用 TaskSchedulerImpl 的 statusUpdate 方法，根据任务执行不同结果进行处理，处理完毕后再分配 task 给 executor。</li>
+</ol>
+<p>下面主要解析 Job 提交后各组件的处理逻辑。</p>
+<h2 id="DAG-Scheduler-driver"><a href="#DAG-Scheduler-driver" class="headerlink" title="DAG Scheduler [driver]"></a>DAG Scheduler [driver]</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>SparkContext 在创建时，先创建了 TaskScheduler，后创建了 DAGScheduler，DAGScheduler 保存了TaskScheduler 和 SparkContext 的引用。</p>
+<p>DAGScheduler 还包含 MapOutputTrackerMaster（运行在 driver端，管理 Shuffle Map Task 的输出，下游的 Task 可以通过MapOutputTrackerMaster 来获取 Shuffle 输出的位置信息）、BlockManagerMaster（运行在 driver端，管理整个 Job 的 Block 的信息）等对象。</p>
+<h3 id="Job-提交"><a href="#Job-提交" class="headerlink" title="Job 提交"></a>Job 提交</h3><p>用户提交的 Job（比如 RDD 中的 count方法）最终会调用 DAGScheduler 的 runJob，为这个 Job 生成一个Job ID，并且生成一个JobWaiter 实例来监听 Job 的执行情况：Job 由多个 Task 组成的，只有 Job 的所有 Task 都成功完成，Job 才标记为成功；任意一个 Task 失败都会标记该 Job 失败。</p>
+<h3 id="Stage-划分"><a href="#Stage-划分" class="headerlink" title="Stage 划分"></a>Stage 划分</h3><p>DAG，Directed Acyclic Graph，有向无环图</p>
+<p>根据依赖关系的不同将 DAG 划分为不同的阶段（Stage）：</p>
+<ul>
+<li>对于窄依赖，由于 Partition 依赖关系的确定性，Partition 的转换处理就可以在同一个线程里完成，窄依赖被 Spark 划分到同一个Stage</li>
+<li>对于宽依赖，由于 Shuffle 的存在，只能在parent RDD（s）Shuffle 处理完成后，才能开始接下来的计算，因此宽依赖就是 Spark 划分 Stage 的依据，即 Spark 根据宽依赖将 DAG 划分为不同的 Stage。</li>
+</ul>
+<p>在一个 Stage 内部，每个Partition都会被分配一个计算任务（Task），这些 Task 是可以并行执行的，这些 Task 的执行逻辑完全相同，只是作用于不同的数据。</p>
+<p>Stage 之间根据依赖关系变成了一个大粒度的 DAG，DAG 的执行顺序是从前向后的。也就是说，Stage 只有在它没有 parent Stage 或者parent Stage 都已经执行完成后，才可以执行。</p>
+<img src="/2020/09/13/spark读书笔记/image-20200715224155886.png" title="dag">
+<p>Stage 的划分从最后一个 RDD 开始，使用广度优先遍历处理整棵树。从触发 Action 的那个RDD（RDD G）开始，RDD G 依赖于两个RDD，一个是 RDD B，一个是 RDD F。其中先处理 RDD B 还是 RDD F 是随机的。这里假设先处理 RDD B，由于和 RDD B 的依赖是窄依赖，因此 RDD G 和 RDD B 可以划分到一个 Stage（即Stage 3）。再处理 RDD F，由于这个依赖是宽依赖，RDD F 和 RDD G 被划分到不同的 Stage（即 Stage 2 和 Stage 3），其中 RDD F 所在的 Stage 2 是 RDD G 所在的 Stage 3 的 parent Stage。</p>
+<p>接下来处理 RDD B 的依赖，由于它依赖的 RDD A 是宽依赖，因此它们属于不同的 Stage（即Stage 1和Stage 3）。这样，RDD B 和 RDD G 同属于Stage 3，而这个 Stage 直接的 parent Stage 有两个，就是 RDD A 和 RDD F 分别属于的两个 Stage（即Stage 1和Stage 2）。接下来的划分采用相同的逻辑，递归进行。</p>
+<p>最后，这个 DAG 被划分为三个 Stage，即 RDD A 所在的 Stage 1，RDD C、RDD D、RDD E、RDD F 所在的 Stage 2 和 RDD B 及 RDD G 所在的 Stage 3。其中 Stage 1 和 Stage 2 是相互独立的，可以并发执行；Stage 3 依赖于 Stage 1 和 Stage 2，只有 Stage 1 和 Stage 2 完成计算，它才可以开始计算。</p>
+<p>包含最后一个 RDD 的 Stage 就是 Result Stage，其父 Stage 均为 Shuffle Map Stage。</p>
+<h3 id="Stage-提交"><a href="#Stage-提交" class="headerlink" title="Stage 提交"></a>Stage 提交</h3><p>在 Stage 划分阶段，生成 finalStage 后就会为该 Job 生成一个 ActiveJob，并准备计算这个 finalStage，除了本地运行的 Job，finalStage将被提交，如果它的某些 parent Stage 没有提交，那么递归提交那些未提交（或者叫未计算）的 parent Stage。只有所有的 parent Stage 都计算完成后，才能提交它。</p>
+<blockquote>
+<p>本地运行的条件：</p>
+<ul>
+<li>spark.localExecution.enabled 设置为true</li>
+<li>用户程序显式指定可以本地运行</li>
+<li>finalStage 没有parent Stage</li>
+<li>仅有一个 Partition</li>
+</ul>
+</blockquote>
+<p>当入口的 Stage 运行完成后相继提交后续 Stage，在调度前会先判断该 Stage 所依赖的所有父 Stage 结果是否可用：当一个ShuffleMapStage（父Stage）执行完成，DAGScheduler 会检查该 Stage 的所有 Task 是否都完成了（Executor 执行完 Task 后会发 statusUpdate 消息通知 DAGScheduler 等调度器更新状态），如果存在执行失败的 Task，则重新提交该 Stage；如果父 Stage 结果均可用，则提交该 Stage。</p>
+<p>上图的三个 Stage 中，Stage1 和 Stage2 是可以并行的，因此在有计算资源的情况下会首先被提交，并且在这两个 Stage 都计算完成的情况下，提交 Stage 3。</p>
+<p>一个 Stage 被提交运行后，DAGScheduler 会根据 Stage 的 Partition 的个数拆分为对应个数 task，这些 task 组成一个 taskset，被提交到 TaskScheduler 上进行处理。对于 Result Stage，它对应的 Task 是 ResultTask，Shuffle Map Stage 对应的 Task 是 ShuffleMapTask。一个 taskset 包含了一个 stage 里所有的 task，这些 task 处理逻辑是一样的，不同的是对应处理的数据。</p>
+<ul>
+<li><p>ResultTask：对于最后一个Stage，会根据生成结果的Partition来生成与Partition数量相同的ResultTask。然后，ResultTask会将计算的结果汇报到Driver端</p>
+</li>
+<li><p>ShuffleMapTask：对于非最后的Stage，会根据每个Stage的Partition数量来生成ShuffleMapTask。ShuffleMapTask会根据下游Task的Partition数量和Shuffle的策略来生成一系列文件。</p>
+</li>
+</ul>
+<h2 id="TaskScheduler-driver"><a href="#TaskScheduler-driver" class="headerlink" title="TaskScheduler [driver]"></a>TaskScheduler [driver]</h2><p>根据不同的部署方式（Standalone、Mesos、YARN或者是Local），会生成不同的 TaskScheduler 和 SchedulerBackend。</p>
+<p>以下场景，TaskScheduler 会将 task 分配到 executor 上启动并计算：</p>
+<ul>
+<li>有新 task 提交时</li>
+<li>有 task 执行失败时</li>
+<li>Executor 不可用时</li>
+<li>某些 task 执行过慢而需要为它重新分配资源时</li>
+</ul>
+<h3 id="Task-提交"><a href="#Task-提交" class="headerlink" title="Task 提交"></a>Task 提交</h3><p>TaskScheduler 收到 taskset 后，会构建一个 TaskSetManager 对象用来管理 taskset 的生命周期，TaskSetManager 会被放入系统调度池（TaskScheduler 创建的根调度池 rootPool），根据调度算法进行调度，有两种调度策略：</p>
+<ul>
+<li><p>FIFO</p>
+<p>rootPool 直接包含了一组 TaskSetManager，根据 Job 优先级（Job 编号越小优先级越高）&gt; Stage 优先级（Stage 编号越小优先级越高）进行调度</p>
+</li>
+<li><p>FAIR</p>
+<p>rootPool 包含了多个下级调度池 Pool，每个 Pool 包含了一组 TaskSetManager，Pool 有如下属性：</p>
+<ul>
+<li>minShare：最小任务数</li>
+<li>weight：任务权重</li>
+<li>SchedulingMode：FAIR或FIFO，Pool中的调度算法</li>
+</ul>
+<p>按照如下顺序来获取哪个 Pool 的哪个 TaskSetManager 会被运行：</p>
+<ul>
+<li>某个 TaskSetManager 处于饥饿状态（正在运行的任务数是否小于最小任务），另一个非饥饿，先满足饥饿状态的调度</li>
+<li>两个都处于饥饿状态，比较资源比（正在运行的任务数/最小任务数），先满足资源比小的调度</li>
+<li>两个都处于非饥饿状态，比较权重比（正在运行的任务数/任务权重），先满足权重比小的调度</li>
+<li>以上情况均相同，根据 TaskSetManager 的名称排序</li>
+</ul>
+</li>
+</ul>
+<p>TaskScheduler 会先向 driver 发消息，获取集群中可用的 executor，按照上面算法给 TaskSetManager 按照排序，获取到要调度的 TaskSetManager 后，对 TaskSetManager 中的 task 按照数据本地性分配任务运行节点。</p>
+<p><del>然后给taskset中的task分配运行资源：对排好序的TaskSetManager按照就近原则分配资源，顺序为PROCESS_LOCAL,NODE_LOCAL,NO_PREF,RACK_LOCAL,ANY，分配好资源的task会通过LaunchTask消息被发送到worker节点上的CoarseGrainedExecutorBackend。//调度b</del></p>
+<p>TaskSetManager 的 Locality Levels（数据本地性），按就近原则排序：</p>
+<ul>
+<li><code>PROCESS_LOCAL</code>: 数据在同一个 JVM 中，即同一个 executor 上（active 状态的 executors 内存里缓存了 TaskSetManager 的所有 partition 数据）。这是最佳数据 locality。</li>
+<li><code>NODE_LOCAL</code>: 数据在同一个节点上。（TaskSetManager 有 task 的优先位置[RDD 的 preferred location]是该节点，且该节点上有 active executor）比如数据在同一个节点的另一个 executor上；或在 HDFS 上，恰好有 block 在同一个节点上。速度比 PROCESS_LOCAL 稍慢，因为数据需要在不同进程之间传递或从文件中读取</li>
+<li><code>NO_PREF</code>: 数据从哪里访问都一样快，不需要位置优先（一个 RDD 的某些 partitions 没有优先位置，比如以内存集合作为数据源）</li>
+<li><code>RACK_LOCAL</code>: 数据在同一机架的不同节点上。（TaskSetManager 有 task 的优先位置[RDD 的 preferred location]是该机架，且该机架上有 active executor）需要通过网络传输数据及文件 IO，比 NODE_LOCAL 慢</li>
+<li><code>ANY</code>: 数据在非同一机架的网络上，速度最慢</li>
+</ul>
+<p>通过  computeValidLocalityLevels 方法来计算一个taskSetManager 中的 tasks 都有哪些 locality levels（通过上面括号里的判定方法来计算）。一个 TaskSetManager 的最佳本地性比如是 NODE_LOCAL，则它的可用性集合包括 NODE_LOCAL 及比 NODE_LOCAL 差的级别，即 NODE_LOCAL, NO_PREF, RACK_LOCAL, ANY</p>
+<p>对于每一个TaskSetManager，从数据本地性高的 task 开始，遍历所有worker，在符合数据本地性条件的 worker 上尝试给 task分配资源：</p>
+<ul>
+<li>分配成功，在 worker 上找到了 executor 可以运行该 task。则更新 taskset 相关记录信息、任务对应 executor 列表等，序列化 task 相关信息并将该 task 放入运行列表中，后续将分发到该 executor 执行</li>
+<li>分配失败（该节点没有足够资源运行该任务，比如 worker 上没有足够的 cpu），使用延时调度策略：task 等待一定时间，若在等待时间内，该节点能释放出足够资源，则该 task 会继续在该节点运行，如果还是不足，则 locality level 降低一级，再次进行分配</li>
+</ul>
+<p>通过延时调度，让任务运行在有更高级别数据本地性的节点，从而减少磁盘 io 和网络传输。</p>
+<h2 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h2><h3 id="Task-执行"><a href="#Task-执行" class="headerlink" title="Task 执行"></a>Task 执行</h3><p>CoarseGrainedExecutorBackend 收到 LaunchTask 消息，调用 Executor 的 launchTask 方法进行处理：</p>
+<ol>
+<li>初始化一个 TaskRunner，用于管理 task 运行，将 TaskRunner 放入线程池中去执行</li>
+<li>TaskRunner 的 run 方法，向 driver 发送 statusUpdated 消息，通知 driver 任务开始运行，对发送（通过广播变量）过来的 task 本身及依赖 jar 包进行反序列化，调用 Task 的 runtask 方法</li>
+<li><p>根据 Task 种类分别处理：</p>
+<ul>
+<li>ShuffleMapTask：若 RDD 已被 cache 或 checkpoint，则直接读取结果。否则进行计算，计算结果保存在本地的 BlockManager 中。最终返回包含数据 location、size 等元数据信息的 MapStatus 对象。</li>
+<li>ResultTask：进行计算，并返回计算结果</li>
+</ul>
+</li>
+<li><p>获得 runtask 方法返回值后，TaskRunner 的 run方法里，将返回值（计算结果）放入 DirectTaskResult 中并序列化，将结果回传到driver 时，会根据结果的大小使用不同的策略：</p>
+<ul>
+<li>结果大于 1GB，那么直接丢弃这个结果</li>
+<li>结果大小在 [128M-200KB,1GB] 之间，用 taskId 获取一个 blockId，将结果存入 BlockManager 中，返回 driver一个 IndirectTaskResult 对象，该对象包含blockId</li>
+<li>结果大小在 [0,128M-200KB) 之间，直接返回序列化后的 DirectTaskResult</li>
+</ul>
+</li>
+<li><p>TaskRunner.run 方法向 driver 发送 statusUpdated 消息，通知 driver 任务运行结束。driver 收到该消息后，会转给TaskSchedulerImpl 的 statusUpdate 方法根据不同任务状态进行处理：</p>
+<ul>
+<li>任务状态是 TaskState.FINISHED，那么调用 enqueueSuccessfulTask 进行处理：若计算结果是 IndirectTaskResult，需要通过blockId 来获取结果，若是 DirectTaskResult，就无需远程获取了</li>
+<li>任务状态是 TaskState.FAILED、TaskState.KILLED、TaskState.LOST，调用 enqueueFailedTask 进行处理：</li>
+<li>TaskState.FAILED，据失败的原因来采取不同的动作，比如如果是因为Task的结果反序列化失败，那么说明task的执行是有问题的，这种task即使重试也不会成功，因此这个 TaskSetManager 会直接失败。如果这些 task 需要重试，且失败次数没有超过阈值（默认4），则会重新提交并调度 task<ul>
+<li>对于TaskState.LOST，还需要将其所在的 Executor 标记为 FAILED，并且根据更新后的 Executor 重新调度。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>最终任务结束会调用到 DAGScheduler 的 handleTaskCompletion 方法，根据 Task 种类分别处理：</p>
+<ul>
+<li>ShuffleMapTask：通过 DirectTaskResult/IndirectTaskResult 获取到 MapStatus。<ul>
+<li>如果该Stage的所有Task都结束了，那么需要将整体结果以 shuffleId 为 key 将 MapStatus 注册到MapOutputTrackerMaster 中。下一个Stage的Task可以提交了，可以通过MapOutputTrackerMaster来获取Shuffle结果的元数据信息，进而从Shuffle数据所在的节点获取数据。</li>
+<li>在所有任务都返回的情况下，Stage还有部分数据是空的，则说明部分Task执行失败，需要重新提交这个Stage，重新计算丢失的部分</li>
+</ul>
+</li>
+<li>ResultTask：判断 job 是否完成，若完成，则标记改作业已完成，清除 job 依赖的资源并发消息给系统监听总线告知 job 执行完毕</li>
+</ul>
+</li>
+</ol>
+<img src="/2020/09/13/spark读书笔记/image-20200912152508769.png" title="taskExecute">
+<h2 id="应用调度"><a href="#应用调度" class="headerlink" title="应用调度"></a>应用调度</h2><p>当有多个应用程序时，Master 会尽可能将 driver 分散在集群的 worker 节点上启动，采用 FIFO 对 application 进行资源分配，可以通过以下参数来限制 application 使用的 CPU：</p>
+<ul>
+<li>spark.deploy.defaultCores（每个application能分配到的cpu核数，默认不限制）</li>
+<li>spark.cores.max（每个application能申请到最大cpu核数）</li>
+<li>spark.executor.cores（每个executor上启动的cpu核数） 等配置</li>
+</ul>
+<p>应用程序的 executor 分布，由 worker 分配策略(spark.deploy.spreadOut 参数)决定:</p>
+<ul>
+<li>尽量打散，即将一个 Application 尽可能多地分配到不同的节点。spark.deploy.spreadOut=true，比如，1个 application 有 3个executor，4 个worker，三个 executor 在 3 个 worker 上运行。</li>
+<li>尽量集中，即一个 Application 尽量分配到尽可能少的节点。CPU密集型而内存占用比较少的 Application 适合使用这种策略。比如，1个 application 有 3 个 executor，4个worker，三个executor在1个worker上运行。</li>
+</ul>
+<p>给某一个应用程序分配资源时，判断worker节点是否能够启动executor：</p>
+<ul>
+<li>worker上cpu、mem大于executor需要的cpu和mem，executor所需的CPU核数，若没设置则默认为1</li>
+<li>该worker上是否允许启动多个executor，若不设置，默认为1</li>
+</ul>
+<p>若没有 worker 可以启动 executor，则需要等待其他应用程序释放资源后，再次分配。</p>
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p>Storage 模块采用的是 Master/Slave 的架构，master（BlockManagerMaster）和 slave（BlockManager）之间使用 rpc 通信。Master负责整个 Application 的 Block 的元数据信息的管理和维护；而 Slave 需要将 Block 的更新等状态上报到 Master，同时接收 Master 的命令，比如删除一个 RDD、Shuffle 相关的数据或者是广播变量；Slave 之间也存在数据传输通道，进行远程的读取和写入。</p>
+<p>BlockManager 是 Storage 模块与其他模块交互最主要的类，它提供了读和写 Block 的接口。这里的 Block，实际上就对应了 RDD 中提到的 Partition，每一个 Partition 都会对应一个 Block。每个 Bloc k由唯一的 Block ID 标识，格式是rdd_+rddId+_+partitionId</p>
+<p>Master 持有整个 Application 的 Block 的元数据信息，包括Block所在的位置，Block所占的存储空间大小，主要的元数据结构为：</p>
+<ul>
+<li>blockManagerInfo：保存了BlockManagerId到BlockManagerInfo的映射。BlockManagerInfo保存了executor的内存、数据块使用情况、executor endpoint 的引用</li>
+<li>blockManagerIdByExecutor：保存了Executor ID到BlockManagerId的映射</li>
+<li>blockLocations：保存Block是在哪些BlockManager上的Hash Map；由于Block可能在多个executor上都有备份，因此Value是一个HashSet。通过查询blockLocations就可以找到某个Block所在的物理位置</li>
+</ul>
+<p>插入、更新数据块：在blockManagerInfo里增加、更新数据块信息；根据blockId在blockLocations里查找该块是否存在，在则更新；若不存在，则进行数据插入</p>
+<p>移除数据块：在blockManagerInfo里删除该块信息并更新executor内存使用信息；判断数据块对应的executor是否为空，为空则代表集群中删除了该数据块，在blockLocations中也需要删除该数据块信息</p>
+<h3 id="存储交互"><a href="#存储交互" class="headerlink" title="存储交互"></a>存储交互</h3><p>Driver中会实例化BlockManagerMaster和BlockManager；executor启动时会实例化BlockManager和BlockTransferService（负责网络数据的传输），BlockManager 负责管理该Executor上的Block，并且向Driver的BlockManager汇报Block的信息和接收来自它的命令</p>
+<p>BlockManager会向driver发送RegisterBlockManager消息来把自己的信息注册到BlockManagerMaster中，注册的信息包括blockManagerId（标识了Slave的Executor ID、Hostname和Port），节点的最大可用内存数。BlockManagerMaster接到注册请求后，会将Slave的信息保存到Master端。</p>
+<p>应用执行过程中要根据数据块的编号来查询数据块的位置，用getLocations/getLocationsMultipleBlockIds向BlockManagerMaster查询</p>
+<p>当数据需要删除时，提交删除消息给slave（BlockManager），slave发起删除，删除driver端元数据信息，还要发消息通知executor删除对应的物理数据</p>
+<h3 id="写数据"><a href="#写数据" class="headerlink" title="写数据"></a>写数据</h3><img src="/2020/09/13/spark读书笔记/image-20200902000415505.png" title="blockManager_write">
+<p>写入数据完成时，需要将 block 的元数据发送给 BlockManagerMaster，请求更新元数据；若需要进行副本操作，则需要通过netty将数据写入到远程节点上。</p>
+<h4 id="写入内存"><a href="#写入内存" class="headerlink" title="写入内存"></a>写入内存</h4><p>使用了一个linkedHashMap来保存Block的数据，写入Block数据前会检查当前的内存是否可以容下当前的请求，如果可以，则放入这个Hash Map，期间可能会使用类似FIFO的策略淘汰老的缓存；如果内存超过了当前的最大内存，那么就会返回调用者，如果存储级别还有Disk，那么会将当前的数据通过DiskStore写入Disk，否则缓存将不会被持久化，下次用的话还需要重新计算。</p>
+<h4 id="写入磁盘"><a href="#写入磁盘" class="headerlink" title="写入磁盘"></a>写入磁盘</h4><p>一般来说，一个逻辑的Block会根据它的BlockId生成的名字映射到一个物理上的文件。这些物理文件会被hash到由spark.local.dir（或者通过SPARK_LOCAL_DIRS）设置的目录中</p>
+<p>spark.local.dir 可以设置多个目录。DiskBlockManager 会在spark.local.dir的每个目录下创建一级目录，命名方式是“spark-local-yyyyMMddHHmmss-xxxx”，其中，最后的xxxx是一个随机数，每个一级目录下，会根据需要生成个数至多为spark.diskStore.subDirectories（默认值为64）的子目录，子目录以数字命名（从00到3f，默认）。</p>
+<p>DiskBlockManager 根据BlockId文件名的hash值取得其应该存放的一级目录和二级目录，然后将数据写入</p>
+<h3 id="读数据"><a href="#读数据" class="headerlink" title="读数据"></a>读数据</h3><h4 id="本地读取"><a href="#本地读取" class="headerlink" title="本地读取"></a>本地读取</h4><p>内存读取：通过blockId来获取内存中存储的block</p>
+<p>磁盘读取：通过文件名（blockId.name）的hash分别确定一级目录和二级目录，找到文件后进行读取，读取后会把这些数据缓存到内存中</p>
+<h4 id="远程节点读取"><a href="#远程节点读取" class="headerlink" title="远程节点读取"></a>远程节点读取</h4><p>向BlockManagerMaster发送getLocations查询block的位置列表，driver根据blockId获得该列表</p>
+<p>BlockManager根据列表向有block的host上的executor通过netty发送rpc请求获取</p>
+<p>远程节点收到rpc请求后，读取本地数据，使用netty提供的传输通道，将数据传输到请求节点上</p>
+<h2 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h2><p>在Spark 0.6和0.7时，Shuffle的结果都需要先存储到内存中（有可能要写入磁盘），因此在大数据量的情况下，发生GC和OOM的概率非常大。因此在Spark 0.8的时候，Shuffle的每个结果都会直接写入磁盘，并且为下游的每个Task都生成一个单独的文件、</p>
+<h3 id="WRITE"><a href="#WRITE" class="headerlink" title="WRITE"></a>WRITE</h3><h4 id="HashShuffleManager（基于Hash的Shuffle机制）"><a href="#HashShuffleManager（基于Hash的Shuffle机制）" class="headerlink" title="HashShuffleManager（基于Hash的Shuffle机制）"></a>HashShuffleManager（基于Hash的Shuffle机制）</h4><p>为了避免hadoop中多余的排序，提供了基于hash的shuffle写。</p>
+<p>Map task中，ShuffleWriter 将原始结果或者聚合后（取决于shuffleDependency是否定义了Aggregator）的结果通过写入n个partition，n 是reduce task的数目，一个partition对应于一个文件， 写入完成后，会将元数据信息写入MapStatus。然后下游的Task可以通过这个MapStatus取得需要处理的数据。</p>
+<p>由于每个Shuffle Map Task需要为每个下游的Task创建一个单独的文件，因此文件的数量就是number（shuffle_map_task）*number（reduce_task）。如果Shuffle Map Task是1000，下游的Task是500，那么理论上会产生500000个文件</p>
+<blockquote>
+<p>基于hash的 shuffle 为了解决shuffle 文件数量过多的问题，提出了一个 File Consolidation 的解决方案：</p>
+<p>对于运行在同一个Core的Shuffle Map Task，第一个Shuffle Map Task会创建一个文件；之后的就会将数据追加到这个文件上而不是新建一个文件。</p>
+<p>因此文件数量就从number（shuffle_map_task）*number（following_task）变成了number（cores）*number（following_task）。当然，如果每个Core都只运行一个Shuffle Map Task，那么就和原来的机制一样了。但是Shuffle Map Task明显多于Core数量或者说每个Core都会运行多个Shuffle Map Task，所以这个实现能够显著减少文件的数量。</p>
+</blockquote>
+<h4 id="SortShuffleManager（基于排序的Shuffle机制）"><a href="#SortShuffleManager（基于排序的Shuffle机制）" class="headerlink" title="SortShuffleManager（基于排序的Shuffle机制）"></a>SortShuffleManager（基于排序的Shuffle机制）</h4><p>每个Shuffle Map Task不会为每个Reducer生成一个单独的文件，而是将所有结果写入同一个文件，对应生成一个index文件进行索引：</p>
+<ul>
+<li>Shuffle Map Task会按照key相对应的Partition ID进行Sort，其中属于同一个Partition的key不会Sort。</li>
+<li>如果这个过程内存不够用了，那么这些已经排序的内容会被写入到外部存储，然后在结束的时候将这些不同的文件以及可能存在内存的数据进行归并排序，整合到一个文件里。</li>
+<li>为了便于下游的Task获取到其需要的Partition，会生成一个Index文件，去记录不同的Partition的位置信息。</li>
+<li>写完数据文件后，将元数据信息写入到MapStatus中</li>
+</ul>
+<img src="/2020/09/13/spark读书笔记/image-20200806232810429.png" title="shufflewrite">
+<h3 id="READ"><a href="#READ" class="headerlink" title="READ"></a>READ</h3><ol>
+<li><p>通过MapOutputTracker.getMapSizesByExecutorId方法来获取shuffleMapTask输出数据的元数据，会先尝试在本地的mapStatuses里根据shuffleId来获取，如果获取不到，则通过rpc发送请求给MapOutputTrackerMaster，请求获取shuffleMapTask输出数据的元数据</p>
+</li>
+<li><p>MapOutputTrackerMaster返回数据所在的executor、blockId、数据的大小。MapOutputTracker对数据的位置进行筛选：</p>
+<ul>
+<li><p>数据在本地，则直接通过BlockManager读取本地数据：</p>
+<ul>
+<li><p>Hash Based Shuffle的ShuffleBlockManager是org.apache.spark.shuffle.FileShuffleBlockManager：</p>
+<p>consolidateFile：需要根据Map ID和Reduce ID首先获得FileGroup的一个文件，然后根据在文件中的offset和size来获取需要的数据；</p>
+<p>不是consolidateFile：那么根据Shuffle Block ID直接读取整个文件就可以。</p>
+</li>
+<li><p>Sort Based Shuffle的ShuffleBlockManager是org.apache.spark.shuffle.IndexShuffleBlockManager，需要通过索引文件来获得数据块在数据文件中的具体位置信息，从而读取这个数据。</p>
+</li>
+</ul>
+</li>
+<li><p>数据在远程节点，则通过netty网络方式读取数据，由于Shuffle的数据量可能会很大，因此这里的网络读取分为以下几种策略：</p>
+<ul>
+<li>每次最多启动5个线程到最多5个节点上读取数据。</li>
+<li>每次请求的数据大小不会超过spark.reducer.maxMbInFlight（默认值为48MB）的五分之一。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>读取数据后，判断shuffleDependency是否定义了Aggregator，若有，则根据键值进行聚合，处理完后，使用externalSorter 对数据进行排序并放入存储中</p>
+</li>
+</ol>
+<h2 id="容错及HA"><a href="#容错及HA" class="headerlink" title="容错及HA"></a>容错及HA</h2><h3 id="Executor-异常"><a href="#Executor-异常" class="headerlink" title="Executor 异常"></a>Executor 异常</h3><p>Worker接收到来自Master的LaunchExecutor的消息后，会创建ExecutorRunner。ExecutorRunner会负责启动CoarseGrainedExecutorBackend。CoarseGrainedExecutorBackend会和Driver通信，启动后，会首先向Driver注册Executor（RegisterExecutor）。</p>
+<ol>
+<li>当executor出现异常，比如CoarseGrainedExecutorBackend进程异常退出，ExecutorRunner会捕捉异常并发送ExecutorStateChanged消息给worker</li>
+<li>worker收到消息后，更新本地记录的executor状态，同时发送ExecutorStateChanged消息给master</li>
+<li>master收到消息后，若发现是executor异常退出，则尝试获取可用的worker节点并启动executor。会尝试10次，超过10次则标记该应用运行失败并在集群中移除该应用</li>
+</ol>
+<h3 id="Worker-异常"><a href="#Worker-异常" class="headerlink" title="Worker 异常"></a>Worker 异常</h3><p>Worker在运行时会周期性地向Master发送心跳消息。这个周期就默认15s。Master有检测worker超时的线程，当worker进程异常时：</p>
+<ol>
+<li>Worker在退出前，会将所有运行在它上面的Executor和Driver Client删除。</li>
+<li>Master检测到Worker异常后，根据worker上运行的是Executor和Driver分别进行处理：<ul>
+<li>Executor：将Executor的状态标记为丢失（ExecutorState.LOST），发送ExecutorUpdated消息通知AppClient该executor已lost；把这些executor从对应应用程序的运行列表里删除；处理executor的异常，即上一节的3</li>
+<li>Driver Client：如果它设置了需要重启，那么需要重新调度来重新启动这个Driver Client，否则直接将它删除，并且将状态设置为DriverState.ERROR。</li>
+</ul>
+</li>
+</ol>
+<h3 id="Master-异常"><a href="#Master-异常" class="headerlink" title="Master 异常"></a>Master 异常</h3><p>Master 保存了整个集群的元数据，包含Worker、Application和Driver Client。支持以下几种方式的元数据持久化方式和选举机制：</p>
+<ol>
+<li>ZooKeeper</li>
+</ol>
+<p>实现了基于ZooKeeper的选举机制，元数据信息会持久化到ZooKeeper中。因此在Master故障后，ZooKeeper会在备份的Master中选举出新的Master，新的Master在启动后会从ZooKeeper中获取元数据信息并且恢复这些数据。</p>
+<ol start="2">
+<li>FILESYSTEM</li>
+</ol>
+<p>集群的元数据信息会保存在本地文件系统。而Master启动后则会立即成为Active的Master。如果不考虑机器本身的故障和在设置了Master进程退出后能自动重启的前提下，这种方式也是可以接受的。</p>
+<ol start="3">
+<li>CUSTOM</li>
+</ol>
+<p>用户自定义，需要实现两个接口：持久化元数据和恢复元数据、选举机制，即从几个Standby的Master中选举出一个Master作为集群的管理者</p>
+<ol start="4">
+<li>NONE</li>
+</ol>
+<p>不会持久化集群的元数据，Master在启动后会立即接管集群的管理工作。</p>
+<p>可以通过 spark.deploy.recoveryMode进行设 置。如果不设置，那么就默认是 NONE，即没有备份的Master，集群所有历史的元数据信息在Master重启后都会丢失。</p>
+<p>在Master的进程启动后，ZooKeeper方式的选举机制会根据自身策略来选举出Leader；对于FILESYSTEM和NONE方式，进程启动后会立即成为Leader。</p>
+<p>被选举为Leader的Master，会首先读取集群的元数据信息，如果有读到的数据，那么Master的状态就会变为RecoveryState.RECOVERING，然后开始恢复数据和通知Worker、AppClient和Driver Client，Master已经更改，恢复结束后Master的状态会变成RecoveryState.ALIVE。对于没有读取任何数据的Master，状态会立即变成RecoveryState.ALIVE。</p>
+<p>Master只有在状态是RecoveryState.ALIVE时才可以对外服务，包括接受Worker、Application和Driver Client的注册和状态更新等</p>
+<p>对于已经有Application运行的集群来说，Master故障恢复的时候，是需要将Application、Worker和Driver Client的元数据恢复的：</p>
+<ul>
+<li>Application，Master会将它的状态设置为UNKNOWN后通知AppClient</li>
+<li>Worker，Master会将它的状态设置为UNKNOWN后通知Worker</li>
+<li>Driver Client，只有在分配给的Worker出现问题时才会重新调度这个Driver Client。因此这里的恢复只是将它加到Master在内存中维护的Driver Client列表中</li>
+</ul>
+<p>Master在接到AppClient和Worker的响应后，会将它们的状态从UNKNOWN设置为正常的状态</p>
+<p>Master在接到AppClient的响应（消息MasterChangeAcknowledged）和Worker的响应（消息WorkerSchedulerStateResponse）后，会查看是不是所有的Application和Worker的状态都不是UNKNOWN了。如果确认都不是，则代表恢复已经完成。若有部分AppClient或者Worker确实出了问题，长时间没有响应，Master会设置一个超时时间，如果超时之后仍有AppClient或者Worker未响应，那么Master还是会认为恢复已经结束。默认超时时间为60秒，超时后：</p>
+<ul>
+<li>将所有未响应的Worker和Application删除</li>
+<li>对于未分配Worker的Driver Client（有可能Worker已经死掉），如果 Driver Client 需要重新启动，则重启Driver Client（relaunchDriver）否则，直接删除Driver Client</li>
+<li>设置Master的状态为ALIVE</li>
+</ul>
+<h1 id="书"><a href="#书" class="headerlink" title="书"></a>书</h1><ul>
+<li>Spark技术内幕：深入解析Spark内核架构设计与实现原理 (大数据技术丛书)</li>
+<li>图解 Spark：核心技术与案例实战</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/dashang.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -183,19 +576,132 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://msxie.github.io/2020/09/13/spark读书笔记/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/05/17/读书笔记-Hadoop技术内幕/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">读书笔记-Hadoop技术内幕</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  <section id="comments" class="comments">
+    <style>
+      .comments{margin:30px;padding:10px;background:#fff}
+      @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+    </style>
+    <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "5KrGWaUAHxhyR3uoML7mxwsL-gzGzoHsz",
+            app_key: "YCezedbgfu5VpND6jYSnzOU7",
+            placeholder: "what do you think",
+            avatar:"mm"
+        });
+    }
+</script>
+    </section>
+  
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -218,8 +724,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
