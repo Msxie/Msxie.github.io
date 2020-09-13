@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200912152508769.png">
 <meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200902000415505.png">
 <meta property="og:image" content="https://msxie.github.io/2020/09/13/spark读书笔记/image-20200806232810429.png">
-<meta property="og:updated_time" content="2020-09-13T06:43:42.401Z">
+<meta property="og:updated_time" content="2020-09-13T07:07:42.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark读书笔记">
 <meta name="twitter:description" content="RDD弹性分布式数据集 (Resilient Distributed Dataset)：是一种分布式的内存抽象，是一种高度受限的共享内存模型，是只读记录分区的集合，只能通过在其他RDD执行确定的转换操作（如 map、join 和 groupBy ）而创建。RDD 没有存储真正的数据，而是含有如何从其他RDD 衍生（即计算）出本 RDD 的相关信息（即Lineage），因此在 RDD 部分分区数据丢">
@@ -179,6 +179,30 @@
     
     <!-- 目录内容 -->
 
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+    <div id="toc-article" class="toc-article">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RDD"><span class="toc-number">1.</span> <span class="toc-text">RDD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD-的属性"><span class="toc-number">1.1.</span> <span class="toc-text">RDD 的属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD-的操作"><span class="toc-number">1.2.</span> <span class="toc-text">RDD 的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD之间的关系"><span class="toc-number">1.3.</span> <span class="toc-text">RDD之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD-的存储级别"><span class="toc-number">1.4.</span> <span class="toc-text">RDD 的存储级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD-的缓存"><span class="toc-number">1.5.</span> <span class="toc-text">RDD 的缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD-的检查点"><span class="toc-number">1.6.</span> <span class="toc-text">RDD 的检查点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构"><span class="toc-number">2.</span> <span class="toc-text">架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#物理架构"><span class="toc-number">2.1.</span> <span class="toc-text">物理架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#名词解释"><span class="toc-number">2.2.</span> <span class="toc-text">名词解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群启动"><span class="toc-number">2.3.</span> <span class="toc-text">集群启动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RPC"><span class="toc-number">2.3.1.</span> <span class="toc-text">RPC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#流程"><span class="toc-number">2.3.2.</span> <span class="toc-text">流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用执行"><span class="toc-number">2.4.</span> <span class="toc-text">应用执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#总览"><span class="toc-number">2.4.1.</span> <span class="toc-text">总览</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模块调用"><span class="toc-number">2.4.2.</span> <span class="toc-text">模块调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RPC-角度"><span class="toc-number">2.4.3.</span> <span class="toc-text">RPC 角度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAG-Scheduler-driver"><span class="toc-number">3.</span> <span class="toc-text">DAG Scheduler [driver]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建"><span class="toc-number">3.1.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Job-提交"><span class="toc-number">3.2.</span> <span class="toc-text">Job 提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stage-划分"><span class="toc-number">3.3.</span> <span class="toc-text">Stage 划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stage-提交"><span class="toc-number">3.4.</span> <span class="toc-text">Stage 提交</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TaskScheduler-driver"><span class="toc-number">4.</span> <span class="toc-text">TaskScheduler [driver]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Task-提交"><span class="toc-number">4.1.</span> <span class="toc-text">Task 提交</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Executor"><span class="toc-number">5.</span> <span class="toc-text">Executor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Task-执行"><span class="toc-number">5.1.</span> <span class="toc-text">Task 执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用调度"><span class="toc-number">6.</span> <span class="toc-text">应用调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-number">7.</span> <span class="toc-text">Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#存储交互"><span class="toc-number">7.1.</span> <span class="toc-text">存储交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写数据"><span class="toc-number">7.2.</span> <span class="toc-text">写数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#写入内存"><span class="toc-number">7.2.1.</span> <span class="toc-text">写入内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写入磁盘"><span class="toc-number">7.2.2.</span> <span class="toc-text">写入磁盘</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读数据"><span class="toc-number">7.3.</span> <span class="toc-text">读数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本地读取"><span class="toc-number">7.3.1.</span> <span class="toc-text">本地读取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程节点读取"><span class="toc-number">7.3.2.</span> <span class="toc-text">远程节点读取</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shuffle"><span class="toc-number">8.</span> <span class="toc-text">Shuffle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WRITE"><span class="toc-number">8.1.</span> <span class="toc-text">WRITE</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashShuffleManager（基于Hash的Shuffle机制）"><span class="toc-number">8.1.1.</span> <span class="toc-text">HashShuffleManager（基于Hash的Shuffle机制）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SortShuffleManager（基于排序的Shuffle机制）"><span class="toc-number">8.1.2.</span> <span class="toc-text">SortShuffleManager（基于排序的Shuffle机制）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#READ"><span class="toc-number">8.2.</span> <span class="toc-text">READ</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容错及HA"><span class="toc-number">9.</span> <span class="toc-text">容错及HA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Executor-异常"><span class="toc-number">9.1.</span> <span class="toc-text">Executor 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Worker-异常"><span class="toc-number">9.2.</span> <span class="toc-text">Worker 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Master-异常"><span class="toc-number">9.3.</span> <span class="toc-text">Master 异常</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#书"><span class="toc-number"></span> <span class="toc-text">书</span></a>
+         </li></div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+      
 <!-- 目录内容结束 -->
     <div class="article-entry" itemprop="articleBody">
       
@@ -191,31 +215,21 @@
 <li>一个存储 存取每个 Partition 的优先位置的列表（preferred location）。对于一个 HDFS 文件来说，这个列表保存的就是每个Partition 所在的块的位置。按照“移动数据不如移动计算”的理念，Spark 在进行任务调度的时候，会尽可能地将计算任务分配到其所要处理数据块的存储位置；当 RDD 被缓存，则计算应发送到缓存节点上运行；父 RDD 的优先位置也会决定子 RDD 的位置</li>
 </ul>
 <h3 id="RDD-的操作"><a href="#RDD-的操作" class="headerlink" title="RDD 的操作"></a>RDD 的操作</h3><ol>
-<li><p>创建</p>
-<ul>
+<li>创建<ol>
 <li>从一个已经存在的Scala集合创建</li>
 <li>由外部存储系统的数据集创建，比如本地文件系统，HDFS 等</li>
-</ul>
+</ol>
 </li>
-<li><p>转换：从现有的数据集创建一个新的数据集，例如：map,distinct,union,partitionBy,reduceByKey,cogroup,join</p>
-</li>
+<li>转换：从现有的数据集创建一个新的数据集，例如：map,distinct,union,partitionBy,reduceByKey,cogroup,join</li>
 <li>控制：将 RDD 持久化到内存或磁盘文件系统中，例如：cache, persist</li>
 <li>动作：在数据集上进行计算后，返回一个值给Driver程序，例如：first,count,reduce,sortBy,saveAsTextFile</li>
 </ol>
 <p>RDD 中的所有转换都是惰性的，也就是说，它们并不会直接计算结果。它们只是记住这些应用到基础数据集（例如一个文件）上的转换动作。只有当发生一个动作时，这些转换才会真正运行。</p>
 <h3 id="RDD之间的关系"><a href="#RDD之间的关系" class="headerlink" title="RDD之间的关系"></a>RDD之间的关系</h3><p>RDD 和它依赖的 parent RDD（s）的关系有两种不同的类型：窄依赖（narrow dependency）和宽依赖（wide dependency）。</p>
 <ol>
-<li>窄依赖指的是每一个 parent RDD 的 Partition 最多被子 RDD 的一个 Partition 使用</li>
+<li>窄依赖指的是每一个 parent RDD 的 Partition 最多被子 RDD 的一个 Partition 使用<br>由于 RDD 每个 Partition依赖固定数量的 parent RDD（s）的 Partition（s），可以通过一个计算任务来处理窄依赖中一条线上的Partition，Partition 之间（窄依赖中的多条线）相互独立，这些计算任务可以并行执行<br>在窄依赖中，节点丢失后的恢复更加高效，因为只有丢失的父分区需要重新计算，并且可以并行在不同节点上计算。<br>窄依赖有两种实现：OneToOneDependency、RangeDependency（只被org.apache.spark.rdd.UnionRDD使用）</li>
+<li>宽依赖指的是多个子 RDD 的 Partition 会依赖同一个 parent RDD 的 Partition。<br>子 RDD 的 Partition 是 parent RDD 的所有 Partition Shuffle 的结果，因此这两个 RDD 是不能通过一个计算任务来完成的<br>宽依赖的实现只有一种：ShuffleDependency<br>对应宽依赖的操作，spark 会将中间结果物化到父分区的节点上，以简化数据的故障恢复。</li>
 </ol>
-<p>由于 RDD 每个 Partition依赖固定数量的 parent RDD（s）的 Partition（s），可以通过一个计算任务来处理窄依赖中一条线上的Partition，Partition 之间（窄依赖中的多条线）相互独立，这些计算任务可以并行执行</p>
-<p>在窄依赖中，节点丢失后的恢复更加高效，因为只有丢失的父分区需要重新计算，并且可以并行在不同节点上计算。</p>
-<p>窄依赖有两种实现：OneToOneDependency、RangeDependency（只被org.apache.spark.rdd.UnionRDD使用）</p>
-<ol start="2">
-<li>宽依赖指的是多个子 RDD 的 Partition 会依赖同一个 parent RDD 的 Partition。</li>
-</ol>
-<p>子 RDD 的 Partition 是 parent RDD 的所有 Partition Shuffle 的结果，因此这两个 RDD 是不能通过一个计算任务来完成的</p>
-<p>宽依赖的实现只有一种：ShuffleDependency</p>
-<p>对应宽依赖的操作，spark 会将中间结果物化到父分区的节点上，以简化数据的故障恢复。</p>
 <img src="/2020/09/13/spark读书笔记/image-20200714224814362.png" title="dependency">
 <h3 id="RDD-的存储级别"><a href="#RDD-的存储级别" class="headerlink" title="RDD 的存储级别"></a>RDD 的存储级别</h3><img src="/2020/09/13/spark读书笔记/image-20200901223517247.png" title="storageLevel">
 <p>根据 useDisk(使用磁盘),useMemory(使用内存),useOffHeap(使用其他文件系统),deserialized(反序列化),replication(副本数) 5个参数组合，成为12种存储级别。</p>
@@ -338,7 +352,6 @@
 </li>
 </ul>
 <p>TaskScheduler 会先向 driver 发消息，获取集群中可用的 executor，按照上面算法给 TaskSetManager 按照排序，获取到要调度的 TaskSetManager 后，对 TaskSetManager 中的 task 按照数据本地性分配任务运行节点。</p>
-<p><del>然后给taskset中的task分配运行资源：对排好序的TaskSetManager按照就近原则分配资源，顺序为PROCESS_LOCAL,NODE_LOCAL,NO_PREF,RACK_LOCAL,ANY，分配好资源的task会通过LaunchTask消息被发送到worker节点上的CoarseGrainedExecutorBackend。//调度b</del></p>
 <p>TaskSetManager 的 Locality Levels（数据本地性），按就近原则排序：</p>
 <ul>
 <li><code>PROCESS_LOCAL</code>: 数据在同一个 JVM 中，即同一个 executor 上（active 状态的 executors 内存里缓存了 TaskSetManager 的所有 partition 数据）。这是最佳数据 locality。</li>
@@ -358,21 +371,18 @@
 <ol>
 <li>初始化一个 TaskRunner，用于管理 task 运行，将 TaskRunner 放入线程池中去执行</li>
 <li>TaskRunner 的 run 方法，向 driver 发送 statusUpdated 消息，通知 driver 任务开始运行，对发送（通过广播变量）过来的 task 本身及依赖 jar 包进行反序列化，调用 Task 的 runtask 方法</li>
-<li><p>根据 Task 种类分别处理：</p>
-<ul>
+<li>根据 Task 种类分别处理：<ul>
 <li>ShuffleMapTask：若 RDD 已被 cache 或 checkpoint，则直接读取结果。否则进行计算，计算结果保存在本地的 BlockManager 中。最终返回包含数据 location、size 等元数据信息的 MapStatus 对象。</li>
 <li>ResultTask：进行计算，并返回计算结果</li>
 </ul>
 </li>
-<li><p>获得 runtask 方法返回值后，TaskRunner 的 run方法里，将返回值（计算结果）放入 DirectTaskResult 中并序列化，将结果回传到driver 时，会根据结果的大小使用不同的策略：</p>
-<ul>
+<li>获得 runtask 方法返回值后，TaskRunner 的 run方法里，将返回值（计算结果）放入 DirectTaskResult 中并序列化，将结果回传到driver 时，会根据结果的大小使用不同的策略：<ul>
 <li>结果大于 1GB，那么直接丢弃这个结果</li>
 <li>结果大小在 [128M-200KB,1GB] 之间，用 taskId 获取一个 blockId，将结果存入 BlockManager 中，返回 driver一个 IndirectTaskResult 对象，该对象包含blockId</li>
 <li>结果大小在 [0,128M-200KB) 之间，直接返回序列化后的 DirectTaskResult</li>
 </ul>
 </li>
-<li><p>TaskRunner.run 方法向 driver 发送 statusUpdated 消息，通知 driver 任务运行结束。driver 收到该消息后，会转给TaskSchedulerImpl 的 statusUpdate 方法根据不同任务状态进行处理：</p>
-<ul>
+<li>TaskRunner.run 方法向 driver 发送 statusUpdated 消息，通知 driver 任务运行结束。driver 收到该消息后，会转给TaskSchedulerImpl 的 statusUpdate 方法根据不同任务状态进行处理：<ul>
 <li>任务状态是 TaskState.FINISHED，那么调用 enqueueSuccessfulTask 进行处理：若计算结果是 IndirectTaskResult，需要通过blockId 来获取结果，若是 DirectTaskResult，就无需远程获取了</li>
 <li>任务状态是 TaskState.FAILED、TaskState.KILLED、TaskState.LOST，调用 enqueueFailedTask 进行处理：</li>
 <li>TaskState.FAILED，据失败的原因来采取不同的动作，比如如果是因为Task的结果反序列化失败，那么说明task的执行是有问题的，这种task即使重试也不会成功，因此这个 TaskSetManager 会直接失败。如果这些 task 需要重试，且失败次数没有超过阈值（默认4），则会重新提交并调度 task<ul>
@@ -381,8 +391,7 @@
 </li>
 </ul>
 </li>
-<li><p>最终任务结束会调用到 DAGScheduler 的 handleTaskCompletion 方法，根据 Task 种类分别处理：</p>
-<ul>
+<li>最终任务结束会调用到 DAGScheduler 的 handleTaskCompletion 方法，根据 Task 种类分别处理：<ul>
 <li>ShuffleMapTask：通过 DirectTaskResult/IndirectTaskResult 获取到 MapStatus。<ul>
 <li>如果该Stage的所有Task都结束了，那么需要将整体结果以 shuffleId 为 key 将 MapStatus 注册到MapOutputTrackerMaster 中。下一个Stage的Task可以提交了，可以通过MapOutputTrackerMaster来获取Shuffle结果的元数据信息，进而从Shuffle数据所在的节点获取数据。</li>
 <li>在所有任务都返回的情况下，Stage还有部分数据是空的，则说明部分Task执行失败，需要重新提交这个Stage，重新计算丢失的部分</li>
@@ -430,11 +439,15 @@
 <h4 id="写入磁盘"><a href="#写入磁盘" class="headerlink" title="写入磁盘"></a>写入磁盘</h4><p>一般来说，一个逻辑的Block会根据它的BlockId生成的名字映射到一个物理上的文件。这些物理文件会被hash到由spark.local.dir（或者通过SPARK_LOCAL_DIRS）设置的目录中</p>
 <p>spark.local.dir 可以设置多个目录。DiskBlockManager 会在spark.local.dir的每个目录下创建一级目录，命名方式是“spark-local-yyyyMMddHHmmss-xxxx”，其中，最后的xxxx是一个随机数，每个一级目录下，会根据需要生成个数至多为spark.diskStore.subDirectories（默认值为64）的子目录，子目录以数字命名（从00到3f，默认）。</p>
 <p>DiskBlockManager 根据BlockId文件名的hash值取得其应该存放的一级目录和二级目录，然后将数据写入</p>
-<h3 id="读数据"><a href="#读数据" class="headerlink" title="读数据"></a>读数据</h3><h4 id="本地读取"><a href="#本地读取" class="headerlink" title="本地读取"></a>本地读取</h4><p>内存读取：通过blockId来获取内存中存储的block</p>
-<p>磁盘读取：通过文件名（blockId.name）的hash分别确定一级目录和二级目录，找到文件后进行读取，读取后会把这些数据缓存到内存中</p>
-<h4 id="远程节点读取"><a href="#远程节点读取" class="headerlink" title="远程节点读取"></a>远程节点读取</h4><p>向BlockManagerMaster发送getLocations查询block的位置列表，driver根据blockId获得该列表</p>
-<p>BlockManager根据列表向有block的host上的executor通过netty发送rpc请求获取</p>
-<p>远程节点收到rpc请求后，读取本地数据，使用netty提供的传输通道，将数据传输到请求节点上</p>
+<h3 id="读数据"><a href="#读数据" class="headerlink" title="读数据"></a>读数据</h3><h4 id="本地读取"><a href="#本地读取" class="headerlink" title="本地读取"></a>本地读取</h4><ul>
+<li>内存读取：通过blockId来获取内存中存储的block</li>
+<li>磁盘读取：通过文件名（blockId.name）的hash分别确定一级目录和二级目录，找到文件后进行读取，读取后会把这些数据缓存到内存中</li>
+</ul>
+<h4 id="远程节点读取"><a href="#远程节点读取" class="headerlink" title="远程节点读取"></a>远程节点读取</h4><ol>
+<li>向BlockManagerMaster发送getLocations查询block的位置列表，driver根据blockId获得该列表</li>
+<li>BlockManager根据列表向有block的host上的executor通过netty发送rpc请求获取</li>
+<li>远程节点收到rpc请求后，读取本地数据，使用netty提供的传输通道，将数据传输到请求节点上</li>
+</ol>
 <h2 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h2><p>在Spark 0.6和0.7时，Shuffle的结果都需要先存储到内存中（有可能要写入磁盘），因此在大数据量的情况下，发生GC和OOM的概率非常大。因此在Spark 0.8的时候，Shuffle的每个结果都会直接写入磁盘，并且为下游的每个Task都生成一个单独的文件、</p>
 <h3 id="WRITE"><a href="#WRITE" class="headerlink" title="WRITE"></a>WRITE</h3><h4 id="HashShuffleManager（基于Hash的Shuffle机制）"><a href="#HashShuffleManager（基于Hash的Shuffle机制）" class="headerlink" title="HashShuffleManager（基于Hash的Shuffle机制）"></a>HashShuffleManager（基于Hash的Shuffle机制）</h4><p>为了避免hadoop中多余的排序，提供了基于hash的shuffle写。</p>
 <p>Map task中，ShuffleWriter 将原始结果或者聚合后（取决于shuffleDependency是否定义了Aggregator）的结果通过写入n个partition，n 是reduce task的数目，一个partition对应于一个文件， 写入完成后，会将元数据信息写入MapStatus。然后下游的Task可以通过这个MapStatus取得需要处理的数据。</p>
@@ -453,30 +466,21 @@
 </ul>
 <img src="/2020/09/13/spark读书笔记/image-20200806232810429.png" title="shufflewrite">
 <h3 id="READ"><a href="#READ" class="headerlink" title="READ"></a>READ</h3><ol>
-<li><p>通过MapOutputTracker.getMapSizesByExecutorId方法来获取shuffleMapTask输出数据的元数据，会先尝试在本地的mapStatuses里根据shuffleId来获取，如果获取不到，则通过rpc发送请求给MapOutputTrackerMaster，请求获取shuffleMapTask输出数据的元数据</p>
-</li>
-<li><p>MapOutputTrackerMaster返回数据所在的executor、blockId、数据的大小。MapOutputTracker对数据的位置进行筛选：</p>
-<ul>
-<li><p>数据在本地，则直接通过BlockManager读取本地数据：</p>
-<ul>
-<li><p>Hash Based Shuffle的ShuffleBlockManager是org.apache.spark.shuffle.FileShuffleBlockManager：</p>
-<p>consolidateFile：需要根据Map ID和Reduce ID首先获得FileGroup的一个文件，然后根据在文件中的offset和size来获取需要的数据；</p>
-<p>不是consolidateFile：那么根据Shuffle Block ID直接读取整个文件就可以。</p>
-</li>
-<li><p>Sort Based Shuffle的ShuffleBlockManager是org.apache.spark.shuffle.IndexShuffleBlockManager，需要通过索引文件来获得数据块在数据文件中的具体位置信息，从而读取这个数据。</p>
-</li>
+<li>通过MapOutputTracker.getMapSizesByExecutorId方法来获取shuffleMapTask输出数据的元数据，会先尝试在本地的mapStatuses里根据shuffleId来获取，如果获取不到，则通过rpc发送请求给MapOutputTrackerMaster，请求获取shuffleMapTask输出数据的元数据</li>
+<li>MapOutputTrackerMaster返回数据所在的executor、blockId、数据的大小。MapOutputTracker对数据的位置进行筛选：<ul>
+<li>数据在本地，则直接通过BlockManager读取本地数据：<ul>
+<li>Hash Based Shuffle的ShuffleBlockManager是org.apache.spark.shuffle.FileShuffleBlockManager：<br>consolidateFile：需要根据Map ID和Reduce ID首先获得FileGroup的一个文件，然后根据在文件中的offset和size来获取需要的数据；<br>不是consolidateFile：那么根据Shuffle Block ID直接读取整个文件就可以。</li>
+<li>Sort Based Shuffle的ShuffleBlockManager是org.apache.spark.shuffle.IndexShuffleBlockManager，需要通过索引文件来获得数据块在数据文件中的具体位置信息，从而读取这个数据。</li>
 </ul>
 </li>
-<li><p>数据在远程节点，则通过netty网络方式读取数据，由于Shuffle的数据量可能会很大，因此这里的网络读取分为以下几种策略：</p>
-<ul>
+<li>数据在远程节点，则通过netty网络方式读取数据，由于Shuffle的数据量可能会很大，因此这里的网络读取分为以下几种策略：<ul>
 <li>每次最多启动5个线程到最多5个节点上读取数据。</li>
 <li>每次请求的数据大小不会超过spark.reducer.maxMbInFlight（默认值为48MB）的五分之一。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>读取数据后，判断shuffleDependency是否定义了Aggregator，若有，则根据键值进行聚合，处理完后，使用externalSorter 对数据进行排序并放入存储中</p>
-</li>
+<li>读取数据后，判断shuffleDependency是否定义了Aggregator，若有，则根据键值进行聚合，处理完后，使用externalSorter 对数据进行排序并放入存储中</li>
 </ol>
 <h2 id="容错及HA"><a href="#容错及HA" class="headerlink" title="容错及HA"></a>容错及HA</h2><h3 id="Executor-异常"><a href="#Executor-异常" class="headerlink" title="Executor 异常"></a>Executor 异常</h3><p>Worker接收到来自Master的LaunchExecutor的消息后，会创建ExecutorRunner。ExecutorRunner会负责启动CoarseGrainedExecutorBackend。CoarseGrainedExecutorBackend会和Driver通信，启动后，会首先向Driver注册Executor（RegisterExecutor）。</p>
 <ol>
@@ -494,34 +498,21 @@
 </li>
 </ol>
 <h3 id="Master-异常"><a href="#Master-异常" class="headerlink" title="Master 异常"></a>Master 异常</h3><p>Master 保存了整个集群的元数据，包含Worker、Application和Driver Client。支持以下几种方式的元数据持久化方式和选举机制：</p>
-<ol>
-<li>ZooKeeper</li>
-</ol>
-<p>实现了基于ZooKeeper的选举机制，元数据信息会持久化到ZooKeeper中。因此在Master故障后，ZooKeeper会在备份的Master中选举出新的Master，新的Master在启动后会从ZooKeeper中获取元数据信息并且恢复这些数据。</p>
-<ol start="2">
-<li>FILESYSTEM</li>
-</ol>
-<p>集群的元数据信息会保存在本地文件系统。而Master启动后则会立即成为Active的Master。如果不考虑机器本身的故障和在设置了Master进程退出后能自动重启的前提下，这种方式也是可以接受的。</p>
-<ol start="3">
-<li>CUSTOM</li>
-</ol>
-<p>用户自定义，需要实现两个接口：持久化元数据和恢复元数据、选举机制，即从几个Standby的Master中选举出一个Master作为集群的管理者</p>
-<ol start="4">
-<li>NONE</li>
-</ol>
-<p>不会持久化集群的元数据，Master在启动后会立即接管集群的管理工作。</p>
+<ul>
+<li>ZooKeeper：实现了基于ZooKeeper的选举机制，元数据信息会持久化到ZooKeeper中。因此在Master故障后，ZooKeeper会在备份的Master中选举出新的Master，新的Master在启动后会从ZooKeeper中获取元数据信息并且恢复这些数据。</li>
+<li>FILESYSTEM：集群的元数据信息会保存在本地文件系统。而Master启动后则会立即成为Active的Master。如果不考虑机器本身的故障和在设置了Master进程退出后能自动重启的前提下，这种方式也是可以接受的。</li>
+<li>CUSTOM：用户自定义，需要实现两个接口：持久化元数据和恢复元数据、选举机制，即从几个Standby的Master中选举出一个Master作为集群的管理者</li>
+<li>NONE：不会持久化集群的元数据，Master在启动后会立即接管集群的管理工作。</li>
+</ul>
 <p>可以通过 spark.deploy.recoveryMode进行设 置。如果不设置，那么就默认是 NONE，即没有备份的Master，集群所有历史的元数据信息在Master重启后都会丢失。</p>
-<p>在Master的进程启动后，ZooKeeper方式的选举机制会根据自身策略来选举出Leader；对于FILESYSTEM和NONE方式，进程启动后会立即成为Leader。</p>
-<p>被选举为Leader的Master，会首先读取集群的元数据信息，如果有读到的数据，那么Master的状态就会变为RecoveryState.RECOVERING，然后开始恢复数据和通知Worker、AppClient和Driver Client，Master已经更改，恢复结束后Master的状态会变成RecoveryState.ALIVE。对于没有读取任何数据的Master，状态会立即变成RecoveryState.ALIVE。</p>
-<p>Master只有在状态是RecoveryState.ALIVE时才可以对外服务，包括接受Worker、Application和Driver Client的注册和状态更新等</p>
+<p>在Master的进程启动后，ZooKeeper方式的选举机制会根据自身策略来选举出Leader；对于FILESYSTEM和NONE方式，进程启动后会立即成为Leader。<br>被选举为Leader的Master，会首先读取集群的元数据信息，如果有读到的数据，那么Master的状态就会变为RecoveryState.RECOVERING，然后开始恢复数据和通知Worker、AppClient和Driver Client，Master已经更改，恢复结束后Master的状态会变成RecoveryState.ALIVE。对于没有读取任何数据的Master，状态会立即变成RecoveryState.ALIVE。<br>Master只有在状态是RecoveryState.ALIVE时才可以对外服务，包括接受Worker、Application和Driver Client的注册和状态更新等</p>
 <p>对于已经有Application运行的集群来说，Master故障恢复的时候，是需要将Application、Worker和Driver Client的元数据恢复的：</p>
 <ul>
 <li>Application，Master会将它的状态设置为UNKNOWN后通知AppClient</li>
 <li>Worker，Master会将它的状态设置为UNKNOWN后通知Worker</li>
 <li>Driver Client，只有在分配给的Worker出现问题时才会重新调度这个Driver Client。因此这里的恢复只是将它加到Master在内存中维护的Driver Client列表中</li>
 </ul>
-<p>Master在接到AppClient和Worker的响应后，会将它们的状态从UNKNOWN设置为正常的状态</p>
-<p>Master在接到AppClient的响应（消息MasterChangeAcknowledged）和Worker的响应（消息WorkerSchedulerStateResponse）后，会查看是不是所有的Application和Worker的状态都不是UNKNOWN了。如果确认都不是，则代表恢复已经完成。若有部分AppClient或者Worker确实出了问题，长时间没有响应，Master会设置一个超时时间，如果超时之后仍有AppClient或者Worker未响应，那么Master还是会认为恢复已经结束。默认超时时间为60秒，超时后：</p>
+<p>Master在接到AppClient和Worker的响应后，会将它们的状态从UNKNOWN设置为正常的状态<br>Master在接到AppClient的响应（消息MasterChangeAcknowledged）和Worker的响应（消息WorkerSchedulerStateResponse）后，会查看是不是所有的Application和Worker的状态都不是UNKNOWN了。如果确认都不是，则代表恢复已经完成。若有部分AppClient或者Worker确实出了问题，长时间没有响应，Master会设置一个超时时间，如果超时之后仍有AppClient或者Worker未响应，那么Master还是会认为恢复已经结束。默认超时时间为60秒，超时后：</p>
 <ul>
 <li>将所有未响应的Worker和Application删除</li>
 <li>对于未分配Worker的Driver Client（有可能Worker已经死掉），如果 Driver Client 需要重新启动，则重启Driver Client（relaunchDriver）否则，直接删除Driver Client</li>
@@ -661,6 +652,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RDD"><span class="toc-number">1.</span> <span class="toc-text">RDD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD-的属性"><span class="toc-number">1.1.</span> <span class="toc-text">RDD 的属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD-的操作"><span class="toc-number">1.2.</span> <span class="toc-text">RDD 的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD之间的关系"><span class="toc-number">1.3.</span> <span class="toc-text">RDD之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD-的存储级别"><span class="toc-number">1.4.</span> <span class="toc-text">RDD 的存储级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD-的缓存"><span class="toc-number">1.5.</span> <span class="toc-text">RDD 的缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDD-的检查点"><span class="toc-number">1.6.</span> <span class="toc-text">RDD 的检查点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构"><span class="toc-number">2.</span> <span class="toc-text">架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#物理架构"><span class="toc-number">2.1.</span> <span class="toc-text">物理架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#名词解释"><span class="toc-number">2.2.</span> <span class="toc-text">名词解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群启动"><span class="toc-number">2.3.</span> <span class="toc-text">集群启动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RPC"><span class="toc-number">2.3.1.</span> <span class="toc-text">RPC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#流程"><span class="toc-number">2.3.2.</span> <span class="toc-text">流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用执行"><span class="toc-number">2.4.</span> <span class="toc-text">应用执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#总览"><span class="toc-number">2.4.1.</span> <span class="toc-text">总览</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模块调用"><span class="toc-number">2.4.2.</span> <span class="toc-text">模块调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RPC-角度"><span class="toc-number">2.4.3.</span> <span class="toc-text">RPC 角度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAG-Scheduler-driver"><span class="toc-number">3.</span> <span class="toc-text">DAG Scheduler [driver]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建"><span class="toc-number">3.1.</span> <span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Job-提交"><span class="toc-number">3.2.</span> <span class="toc-text">Job 提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stage-划分"><span class="toc-number">3.3.</span> <span class="toc-text">Stage 划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stage-提交"><span class="toc-number">3.4.</span> <span class="toc-text">Stage 提交</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TaskScheduler-driver"><span class="toc-number">4.</span> <span class="toc-text">TaskScheduler [driver]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Task-提交"><span class="toc-number">4.1.</span> <span class="toc-text">Task 提交</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Executor"><span class="toc-number">5.</span> <span class="toc-text">Executor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Task-执行"><span class="toc-number">5.1.</span> <span class="toc-text">Task 执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用调度"><span class="toc-number">6.</span> <span class="toc-text">应用调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-number">7.</span> <span class="toc-text">Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#存储交互"><span class="toc-number">7.1.</span> <span class="toc-text">存储交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写数据"><span class="toc-number">7.2.</span> <span class="toc-text">写数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#写入内存"><span class="toc-number">7.2.1.</span> <span class="toc-text">写入内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写入磁盘"><span class="toc-number">7.2.2.</span> <span class="toc-text">写入磁盘</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读数据"><span class="toc-number">7.3.</span> <span class="toc-text">读数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本地读取"><span class="toc-number">7.3.1.</span> <span class="toc-text">本地读取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程节点读取"><span class="toc-number">7.3.2.</span> <span class="toc-text">远程节点读取</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shuffle"><span class="toc-number">8.</span> <span class="toc-text">Shuffle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WRITE"><span class="toc-number">8.1.</span> <span class="toc-text">WRITE</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashShuffleManager（基于Hash的Shuffle机制）"><span class="toc-number">8.1.1.</span> <span class="toc-text">HashShuffleManager（基于Hash的Shuffle机制）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SortShuffleManager（基于排序的Shuffle机制）"><span class="toc-number">8.1.2.</span> <span class="toc-text">SortShuffleManager（基于排序的Shuffle机制）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#READ"><span class="toc-number">8.2.</span> <span class="toc-text">READ</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容错及HA"><span class="toc-number">9.</span> <span class="toc-text">容错及HA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Executor-异常"><span class="toc-number">9.1.</span> <span class="toc-text">Executor 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Worker-异常"><span class="toc-number">9.2.</span> <span class="toc-text">Worker 异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Master-异常"><span class="toc-number">9.3.</span> <span class="toc-text">Master 异常</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#书"><span class="toc-number"></span> <span class="toc-text">书</span></a>
+                    </li></div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
