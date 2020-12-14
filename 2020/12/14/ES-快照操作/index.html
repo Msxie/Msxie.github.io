@@ -6,15 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://msxie.github.io">
-  <title>Tag: 移动测试 | Msxie&#39;s Blog</title>
+  <title>ES 快照操作 | Msxie&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Msxie&#39;s Blog">
-<meta property="og:url" content="https://msxie.github.io/tags/移动测试/index.html">
+  <meta name="description" content="建立快照仓库  此处需要先在 elasticsearch.yml 中配置 path.repo 参数 为 [“/mnt/disk2/search/search1”]，并且该目录权限要可读写，否则会建立快照仓库失败 12345678curl -X PUT &quot;localhost:9200/_snapshot/my_backup?pretty&quot; -H &apos;Content-Type: application">
+<meta name="keywords" content="分布式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES 快照操作">
+<meta property="og:url" content="https://msxie.github.io/2020/12/14/ES-快照操作/index.html">
 <meta property="og:site_name" content="Msxie&#39;s Blog">
+<meta property="og:description" content="建立快照仓库  此处需要先在 elasticsearch.yml 中配置 path.repo 参数 为 [“/mnt/disk2/search/search1”]，并且该目录权限要可读写，否则会建立快照仓库失败 12345678curl -X PUT &quot;localhost:9200/_snapshot/my_backup?pretty&quot; -H &apos;Content-Type: application">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214224622197.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214225710114.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214225013769.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214225827957.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214230906718.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214230950737.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214231518737.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214232313356.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214232357610.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214232446930.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214232559132.png">
+<meta property="og:updated_time" content="2020-12-14T15:40:54.119Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Msxie&#39;s Blog">
+<meta name="twitter:title" content="ES 快照操作">
+<meta name="twitter:description" content="建立快照仓库  此处需要先在 elasticsearch.yml 中配置 path.repo 参数 为 [“/mnt/disk2/search/search1”]，并且该目录权限要可读写，否则会建立快照仓库失败 12345678curl -X PUT &quot;localhost:9200/_snapshot/my_backup?pretty&quot; -H &apos;Content-Type: application">
+<meta name="twitter:image" content="https://msxie.github.io/2020/12/14/ES-快照操作/image-20201214224622197.png">
   
     <link rel="alternative" href="/atom.xml" title="Msxie&#39;s Blog" type="application/atom+xml">
   
@@ -142,60 +159,299 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-ES-快照操作" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/09/移动测试专项检查/" class="archive-article-date">
-  	<time datetime="2019-01-09T14:09:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-09</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/09/移动测试专项检查/">移动测试专项检查</a>
+    <h1 class="article-title" itemprop="name">
+      ES 快照操作
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/12/14/ES-快照操作/" class="archive-article-date">
+  	<time datetime="2020-12-14T15:30:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-14</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>建立快照仓库</li>
+</ol>
+<p>此处需要先在 elasticsearch.yml 中配置 path.repo 参数 为 [“/mnt/disk2/search/search1”]，并且该目录权限要可读写，否则会建立快照仓库失败</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT <span class="string">"localhost:9200/_snapshot/my_backup?pretty"</span> -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  "type": "fs",</span></span><br><span class="line"><span class="string">  "settings": &#123;</span></span><br><span class="line"><span class="string">    "location": "/mnt/disk2/search/search1"</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>建表</li>
+</ol>
+<p>建立一个有 2 个 shard 的 index，并插入一条数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">curl -XDELETE <span class="string">'localhost:9200/document_index/?pretty'</span></span><br><span class="line">curl -XPUT <span class="string">'localhost:9200/document_index/?pretty'</span> -H <span class="string">'Content-Type: application/json'</span> -d <span class="string">'&#123;</span></span><br><span class="line"><span class="string">  "settings": &#123;</span></span><br><span class="line"><span class="string">    "index.number_of_shards": 2,</span></span><br><span class="line"><span class="string">    "index.number_of_replicas": 0</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br><span class="line">curl -XPOST <span class="string">"localhost:9200/document_index/default_type_/?pretty"</span> -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'&#123;</span></span><br><span class="line"><span class="string">  "name": "Smith Cook",</span></span><br><span class="line"><span class="string">  "age": 23,</span></span><br><span class="line"><span class="string">  "hobby":"Sing songs in KTV"</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>对 document 索引做快照 snapshot_1</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT <span class="string">"localhost:9200/_snapshot/my_backup/snapshot_1?wait_for_completion=true&amp;pretty"</span> -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  "indices": "document_index",</span></span><br><span class="line"><span class="string">  "ignore_unavailable": true,</span></span><br><span class="line"><span class="string">  "include_global_state": true,</span></span><br><span class="line"><span class="string">  "metadata": &#123;</span></span><br><span class="line"><span class="string">    "taken_by": "kimchy",</span></span><br><span class="line"><span class="string">    "taken_because": "backup before upgrading"</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>查看  document 索引 shard 数据目录：</p>
+<p>分片 0:</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214224622197.png" title="s1">
+<p>分片 1:</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214225710114.png" title="s2">
+<p>文件格式代表含义可以参考：</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Extension</th>
+<th>Segments File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Segments File</td>
+<td>segments_N</td>
+<td>保存提交点的信息</td>
+</tr>
+<tr>
+<td>Lock File</td>
+<td>write.lock</td>
+<td>写文件锁，用于防止多个IndexWriters同时写一个文件</td>
+</tr>
+<tr>
+<td>Segment Info</td>
+<td>.si</td>
+<td>保存段的元数据信息</td>
+</tr>
+<tr>
+<td>Compound File</td>
+<td>.cfs, .cfe</td>
+<td>采用混合格式下该文件包括其他所有格式的文件</td>
+</tr>
+</tbody>
+</table>
+<p>查看做完快照 snapshot_1 后，仓库里的文件目录：</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214225013769.png">
+<ul>
+<li>以 __ 为前缀的是数据文件，是 lucece segment 文件被重命名后的文件，通过文件大小可以看出 0 目录下的 __0,__1,__2,__3 分别是 shard 0 数据目录中的 _0.cfe,_0.si,_0.cfs,segments_2 文件</li>
+<li>snap-*.dat 快照文件，描述快照名称及快照使用的文件列表信息</li>
+<li>index-*.dat 快照列表的索引文件，描述当前分片所有的快照信息</li>
+<li>meta-*.dat 索引的元数据信息</li>
+</ul>
+<ol start="4">
+<li>对 document 索引做快照 snapshot_2</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT <span class="string">"localhost:9200/_snapshot/my_backup/snapshot_2?wait_for_completion=true&amp;pretty"</span> -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  "indices": "document_index",</span></span><br><span class="line"><span class="string">  "ignore_unavailable": true,</span></span><br><span class="line"><span class="string">  "include_global_state": true,</span></span><br><span class="line"><span class="string">  "metadata": &#123;</span></span><br><span class="line"><span class="string">    "taken_by": "kimchy",</span></span><br><span class="line"><span class="string">    "taken_because": "backup before upgrading"</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>查看  document 索引 shard 0 数据目录：</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214225827957.png">
+<p>可以发现，segments_2 被 segments_3 取代了，查看快照仓库文件：</p>
+
+<p>通过大小可以看出 __4 为 segments_3 文件。所有包含 cQjK 的文件为此次新增的元数据文件。</p>
+<ol start="5">
+<li>向 document 插入一条数据，做快照 snapshot_3</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT <span class="string">"localhost:9200/document_index/default_type_/s1?pretty"</span> -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'&#123;</span></span><br><span class="line"><span class="string">  "name": "Jones Job",</span></span><br><span class="line"><span class="string">  "age": 43,</span></span><br><span class="line"><span class="string">  "hobby":"Eat apples where from linyi,Shandong"</span></span><br><span class="line"><span class="string">&#125;'</span></span><br><span class="line">curl -X PUT <span class="string">"localhost:9200/_snapshot/my_backup/snapshot_3?wait_for_completion=true&amp;pretty"</span> -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  "indices": "document_index",</span></span><br><span class="line"><span class="string">  "ignore_unavailable": true,</span></span><br><span class="line"><span class="string">  "include_global_state": true,</span></span><br><span class="line"><span class="string">  "metadata": &#123;</span></span><br><span class="line"><span class="string">    "taken_by": "kimchy",</span></span><br><span class="line"><span class="string">    "taken_because": "backup before upgrading"</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>查看  document 索引 shard 0 数据目录：</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214230906718.png">
+<p>查看快照仓库文件：</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214230950737.png">
+<p>__5 ~__8 分别是 shard 0 数据目录中的 _1..和 segment 文件，包含 xW2L 的文件为此次新增的元数据文件。</p>
+<ol start="6">
+<li>建立 一个有 1 个 shard 的 index，插入一条数据并对该表做快照 snapshot_4</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">curl -XDELETE <span class="string">'localhost:9200/document_index2/?pretty'</span></span><br><span class="line">curl -XPUT <span class="string">'localhost:9200/document_index2/?pretty'</span> -H <span class="string">'Content-Type: application/json'</span> -d <span class="string">'&#123;</span></span><br><span class="line"><span class="string">  "settings": &#123;</span></span><br><span class="line"><span class="string">    "index.number_of_shards": 1,</span></span><br><span class="line"><span class="string">    "index.number_of_replicas": 0</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br><span class="line">curl -XPOST <span class="string">"localhost:9200/document_index2/default_type_/?pretty"</span> -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'&#123;</span></span><br><span class="line"><span class="string">  "name": "Smith Cook",</span></span><br><span class="line"><span class="string">  "age": 23,</span></span><br><span class="line"><span class="string">  "hobby":"Sing songs in KTV"</span></span><br><span class="line"><span class="string">&#125;'</span></span><br><span class="line"></span><br><span class="line">curl -X PUT <span class="string">"localhost:9200/_snapshot/my_backup/snapshot_4?wait_for_completion=true&amp;pretty"</span> -H <span class="string">'Content-Type: application/json'</span> -d<span class="string">'</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">  "indices": "document_index",</span></span><br><span class="line"><span class="string">  "ignore_unavailable": true,</span></span><br><span class="line"><span class="string">  "include_global_state": true,</span></span><br><span class="line"><span class="string">  "metadata": &#123;</span></span><br><span class="line"><span class="string">    "taken_by": "kimchy",</span></span><br><span class="line"><span class="string">    "taken_because": "backup before upgrading"</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>查看仓库文件目录：</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214231518737.png">
+<p>可以看到 indices 目录下多了一个 QFSQ 目录，此为 document_index2 的备份目录。</p>
+<ol start="7">
+<li>将 document_index 恢复到 snapshot_2 快照</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 恢复前进行一次查询，可以看到能查到两条数据</span></span><br><span class="line">curl -XGET <span class="string">'localhost:9200/document_index/_search?pretty'</span></span><br><span class="line"><span class="comment"># 对索引进行关闭，因为 restore snapshot 无法对 非关闭索引进行恢复</span></span><br><span class="line">curl -X POST <span class="string">"localhost:9200/document_index/_close?pretty"</span></span><br><span class="line"><span class="comment"># 恢复 snapshot_2 快照</span></span><br><span class="line">curl -X POST <span class="string">"localhost:9200/_snapshot/my_backup/snapshot_2/_restore?pretty"</span></span><br><span class="line"><span class="comment"># 恢复后进行一次查询，可以看到只能查到一条数据</span></span><br><span class="line">curl -XGET <span class="string">'localhost:9200/document_index/_search?pretty'</span></span><br></pre></td></tr></table></figure>
+<p>恢复前查询：</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214232313356.png">
+<p>恢复后查询：</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214232357610.png">
+<p>查看恢复后的 document shard 0 数据目录：</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214232446930.png">
+<ol start="8">
+<li>删除 snapshot_3 快照</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X DELETE <span class="string">"localhost:9200/_snapshot/my_backup/snapshot_3?pretty"</span></span><br></pre></td></tr></table></figure>
+<p>删除后，查看仓库目录，snapshot_3 的新增 数据文件和 元信息文件（包含 xW2L 的文件）被删除。删 snapshot_3 快照后剩下的文件，由于还被其他快照引用，所以不能删除。</p>
+<img src="/2020/12/14/ES-快照操作/image-20201214232559132.png">
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/dashang.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">移动测试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://msxie.github.io/2020/12/14/ES-快照操作/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/09/13/spark读书笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spark读书笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  <section id="comments" class="comments">
+    <style>
+      .comments{margin:30px;padding:10px;background:#fff}
+      @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+    </style>
+    <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "5KrGWaUAHxhyR3uoML7mxwsL-gzGzoHsz",
+            app_key: "YCezedbgfu5VpND6jYSnzOU7",
+            placeholder: "what do you think",
+            avatar:"mm"
+        });
+    }
+</script>
+    </section>
+  
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -218,9 +474,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
