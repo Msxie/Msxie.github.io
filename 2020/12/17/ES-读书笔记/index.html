@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://msxie.github.io">
-  <title>Archives: 2020 | Msxie&#39;s Blog</title>
+  <title>ES 读书笔记 | Msxie&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Msxie&#39;s Blog">
-<meta property="og:url" content="https://msxie.github.io/archives/2020/index.html">
+  <meta name="description" content="先验知识主要角色 主节点（master）：负责集群层面的相关操作，管理集群变更，维护集群状态（内容路由信息[哪个分片位于哪个节点]、配置信息等） 数据节点：负责读、写、搜索 数据操作，保存数据 协调节点：处理客户端请求的节点，将客户端请求转发给数据节点进行处理，收集并合并数据最终返回给客户端 预处理节点（Ingest node）：在索引文档之前，通过事先定义好的 processors 和 pipl">
+<meta name="keywords" content="分布式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES 读书笔记">
+<meta property="og:url" content="https://msxie.github.io/2020/12/17/ES-读书笔记/index.html">
 <meta property="og:site_name" content="Msxie&#39;s Blog">
+<meta property="og:description" content="先验知识主要角色 主节点（master）：负责集群层面的相关操作，管理集群变更，维护集群状态（内容路由信息[哪个分片位于哪个节点]、配置信息等） 数据节点：负责读、写、搜索 数据操作，保存数据 协调节点：处理客户端请求的节点，将客户端请求转发给数据节点进行处理，收集并合并数据最终返回给客户端 预处理节点（Ingest node）：在索引文档之前，通过事先定义好的 processors 和 pipl">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://msxie.github.io/2020/12/17/ES-读书笔记/image-20201205110230649.png">
+<meta property="og:image" content="https://msxie.github.io/2020/12/17/ES-读书笔记/image-20201205110250448.png">
+<meta property="og:updated_time" content="2020-12-17T15:25:24.032Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Msxie&#39;s Blog">
+<meta name="twitter:title" content="ES 读书笔记">
+<meta name="twitter:description" content="先验知识主要角色 主节点（master）：负责集群层面的相关操作，管理集群变更，维护集群状态（内容路由信息[哪个分片位于哪个节点]、配置信息等） 数据节点：负责读、写、搜索 数据操作，保存数据 协调节点：处理客户端请求的节点，将客户端请求转发给数据节点进行处理，收集并合并数据最终返回给客户端 预处理节点（Ingest node）：在索引文档之前，通过事先定义好的 processors 和 pipl">
+<meta name="twitter:image" content="https://msxie.github.io/2020/12/17/ES-读书笔记/image-20201205110230649.png">
   
     <link rel="alternative" href="/atom.xml" title="Msxie&#39;s Blog" type="application/atom+xml">
   
@@ -142,36 +150,563 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-ES-读书笔记" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      ES 读书笔记
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/17/ES-读书笔记/" class="archive-article-date">
+
+        
+        <a href="/2020/12/17/ES-读书笔记/" class="archive-article-date">
   	<time datetime="2020-12-17T15:04:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/17/ES-读书笔记/">ES 读书笔记</a>
-    </h1>
-  
+        
+      </header>
+    
+    <!-- 目录内容 -->
 
-        <div class="article-info info-on-right">
-          
+    <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+          <span class="btn-bg"></span>
+          <span class="btn-text">文章导航</span>
+          </p>
+    <div id="toc-article" class="toc-article">
+        <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+        <strong class="toc-title">文章目录</strong>
+           <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#先验知识"><span class="toc-number">1.</span> <span class="toc-text">先验知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要角色"><span class="toc-number">1.1.</span> <span class="toc-text">主要角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群状态"><span class="toc-number">1.2.</span> <span class="toc-text">集群状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本写入"><span class="toc-number">2.</span> <span class="toc-text">基本写入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单机-Lucene-Index-的存储及写入过程"><span class="toc-number">2.1.</span> <span class="toc-text">单机 Lucene Index 的存储及写入过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES-写入过程"><span class="toc-number">2.2.</span> <span class="toc-text">ES 写入过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#协调节点"><span class="toc-number">2.2.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主分片节点"><span class="toc-number">2.2.2.</span> <span class="toc-text">主分片节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#副分片节点"><span class="toc-number">2.2.3.</span> <span class="toc-text">副分片节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写入异常"><span class="toc-number">2.2.4.</span> <span class="toc-text">写入异常</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#主分片写入异常"><span class="toc-number">2.2.4.1.</span> <span class="toc-text">主分片写入异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#副分片写入异常"><span class="toc-number">2.2.4.2.</span> <span class="toc-text">副分片写入异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#异常处理"><span class="toc-number">2.2.4.3.</span> <span class="toc-text">异常处理</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本读取"><span class="toc-number">3.</span> <span class="toc-text">基本读取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET"><span class="toc-number">3.1.</span> <span class="toc-text">GET</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#协调节点-1"><span class="toc-number">3.1.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据节点"><span class="toc-number">3.1.2.</span> <span class="toc-text">数据节点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MGET"><span class="toc-number">3.2.</span> <span class="toc-text">MGET</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取异常"><span class="toc-number">3.3.</span> <span class="toc-text">读取异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本搜索"><span class="toc-number">4.</span> <span class="toc-text">基本搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#建立索引"><span class="toc-number">4.1.</span> <span class="toc-text">建立索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全文搜索步骤"><span class="toc-number">4.2.</span> <span class="toc-text">全文搜索步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QUERY-THEN-FETCH"><span class="toc-number">4.3.</span> <span class="toc-text">QUERY_THEN_FETCH</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Query：获得符合search请求的文档ID"><span class="toc-number">4.3.1.</span> <span class="toc-text">Query：获得符合search请求的文档ID</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#协调节点-2"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据节点-1"><span class="toc-number">4.3.1.2.</span> <span class="toc-text">数据节点</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Fetch：根据文档ID获取完整文档内容"><span class="toc-number">4.3.2.</span> <span class="toc-text">Fetch：根据文档ID获取完整文档内容</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#协调节点-3"><span class="toc-number">4.3.2.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据节点-2"><span class="toc-number">4.3.2.2.</span> <span class="toc-text">数据节点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据模型"><span class="toc-number">5.</span> <span class="toc-text">数据模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PacificA-算法"><span class="toc-number">5.1.</span> <span class="toc-text">PacificA 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本定义"><span class="toc-number">5.1.1.</span> <span class="toc-text">基本定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设计前提与假设"><span class="toc-number">5.1.2.</span> <span class="toc-text">设计前提与假设</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询-query"><span class="toc-number">5.1.3.</span> <span class="toc-text">查询(query)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新-update"><span class="toc-number">5.1.4.</span> <span class="toc-text">更新(update)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#故障检测"><span class="toc-number">5.1.5.</span> <span class="toc-text">故障检测</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES-副本模型"><span class="toc-number">5.2.</span> <span class="toc-text">ES 副本模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#好分片检测"><span class="toc-number">5.2.1.</span> <span class="toc-text">好分片检测</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#allocation"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">allocation</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#recovery"><span class="toc-number">5.2.1.2.</span> <span class="toc-text">recovery</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#fault-detect"><span class="toc-number">5.2.1.3.</span> <span class="toc-text">fault detect</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sequence-IDs"><span class="toc-number">5.2.2.</span> <span class="toc-text">Sequence IDs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地及全局检查点"><span class="toc-number">5.2.3.</span> <span class="toc-text">本地及全局检查点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#version"><span class="toc-number">5.2.4.</span> <span class="toc-text">_version</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分片分配（allocation）"><span class="toc-number">6.</span> <span class="toc-text">分片分配（allocation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建索引的分片分配"><span class="toc-number">6.1.</span> <span class="toc-text">新建索引的分片分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群重启的分片分配"><span class="toc-number">6.2.</span> <span class="toc-text">集群重启的分片分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主分片的-makeAllocationDecision"><span class="toc-number">6.2.1.</span> <span class="toc-text">主分片的 makeAllocationDecision</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#副分片的-makeAllocationDecision"><span class="toc-number">6.2.2.</span> <span class="toc-text">副分片的 makeAllocationDecision</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快照"><span class="toc-number">7.</span> <span class="toc-text">快照</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建快照"><span class="toc-number">7.1.</span> <span class="toc-text">创建快照</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#协调节点-4"><span class="toc-number">7.1.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主节点"><span class="toc-number">7.1.2.</span> <span class="toc-text">主节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据节点-3"><span class="toc-number">7.1.3.</span> <span class="toc-text">数据节点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#分片快照流程"><span class="toc-number">7.1.3.1.</span> <span class="toc-text">分片快照流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除快照"><span class="toc-number">7.2.</span> <span class="toc-text">删除快照</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#协调节点-5"><span class="toc-number">7.2.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主节点-1"><span class="toc-number">7.2.2.</span> <span class="toc-text">主节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据节点-4"><span class="toc-number">7.2.3.</span> <span class="toc-text">数据节点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#恢复快照"><span class="toc-number">7.3.</span> <span class="toc-text">恢复快照</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引恢复"><span class="toc-number">8.</span> <span class="toc-text">索引恢复</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主分片恢复"><span class="toc-number">8.1.</span> <span class="toc-text">主分片恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#副分片恢复"><span class="toc-number">8.2.</span> <span class="toc-text">副分片恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主副分片数据一致"><span class="toc-number">8.3.</span> <span class="toc-text">主副分片数据一致</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集群启动"><span class="toc-number">9.</span> <span class="toc-text">集群启动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选主节点"><span class="toc-number">9.1.</span> <span class="toc-text">选主节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bully-算法"><span class="toc-number">9.1.1.</span> <span class="toc-text">bully 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#es-选主"><span class="toc-number">9.1.2.</span> <span class="toc-text">es 选主</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#节点失效检测"><span class="toc-number">9.1.3.</span> <span class="toc-text">节点失效检测</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选举集群元信息"><span class="toc-number">9.2.</span> <span class="toc-text">选举集群元信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#allocation-1"><span class="toc-number">9.3.</span> <span class="toc-text">allocation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-recovery"><span class="toc-number">9.4.</span> <span class="toc-text">index recovery</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节点关闭"><span class="toc-number">10.</span> <span class="toc-text">节点关闭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cluster-State"><span class="toc-number">11.</span> <span class="toc-text">Cluster State</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#提交集群任务"><span class="toc-number">11.1.</span> <span class="toc-text">提交集群任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群任务的执行"><span class="toc-number">11.2.</span> <span class="toc-text">集群任务的执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群状态的发布"><span class="toc-number">11.3.</span> <span class="toc-text">集群状态的发布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用集群状态"><span class="toc-number">11.4.</span> <span class="toc-text">应用集群状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">12.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无处安放的-Tip"><span class="toc-number">13.</span> <span class="toc-text">无处安放的 Tip</span></a></li></ol>
+         </div>
+   <script type="text/javascript">
+    function showToc(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:block");
+        show_toc_btn.setAttribute("style","display:none");
+        };
+    function showBtn(){
+        var toc_article = document.getElementById("toc-article");
+        var show_toc_btn = document.getElementById("show-toc-btn");
+        toc_article.setAttribute("style","display:none");
+        show_toc_btn.setAttribute("style","display:block");
+        };
+   </script>
+      
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="先验知识"><a href="#先验知识" class="headerlink" title="先验知识"></a>先验知识</h2><h3 id="主要角色"><a href="#主要角色" class="headerlink" title="主要角色"></a>主要角色</h3><ul>
+<li>主节点（master）：负责集群层面的相关操作，管理集群变更，维护集群状态（内容路由信息[哪个分片位于哪个节点]、配置信息等）</li>
+<li>数据节点：负责读、写、搜索 数据操作，保存数据</li>
+<li>协调节点：处理客户端请求的节点，将客户端请求转发给数据节点进行处理，收集并合并数据最终返回给客户端</li>
+<li>预处理节点（Ingest node）：在索引文档之前，通过事先定义好的 processors 和 pipline，第数据进行某种转化</li>
+</ul>
+<h3 id="集群状态"><a href="#集群状态" class="headerlink" title="集群状态"></a>集群状态</h3><p>集群状态（cluster state）是一个全局信息，每个节点都会在内存中有一份集群状态。集群状态由主节点负责维护，可以通过 <code>/_cluster/state</code> 查看，主要包含的内容有：</p>
+<ul>
+<li>当前集群状态的版本号</li>
+<li>当前集群所有节点名称、监听地址、端口</li>
+<li>索引列表，一个索引的 mappings 和 settings</li>
+<li>内容路由表，记录索引的每个分片信息：状态、所在节点、分片号</li>
+<li>节点路由表，记录每个节点上存储了哪些分片</li>
+</ul>
+<h2 id="基本写入"><a href="#基本写入" class="headerlink" title="基本写入"></a>基本写入</h2><p>一个ES索引（Index）包含一个或多个分片（Shard），一个分片是一个 Lucene 索引(Lucene Index)，一个 Lucene 索引由多个分段（Segment）组成，每个segment都是一个倒排索引，倒排索引一旦写入文件就具有不变性</p>
+<p>每次 refresh 都会产生一个新的 segment（在文件系统缓存中，后续通过 flush 来真正落盘），一个 segment 包含若干文档，文档不同字段（Field）被单独建立索引，每个字段由若干词（term）组成</p>
+<h3 id="单机-Lucene-Index-的存储及写入过程"><a href="#单机-Lucene-Index-的存储及写入过程" class="headerlink" title="单机 Lucene Index 的存储及写入过程"></a>单机 Lucene Index 的存储及写入过程</h3><p><a href="https://www.infoq.cn/article/database-timestamp-02" target="_blank" rel="noopener">时间序列数据库的秘密(2)——索引</a><br><a href="https://www.ctolib.com/docs/sfile/ELKstack-guide-cn/elasticsearch/principle/realtime.html" target="_blank" rel="noopener">segment、buffer和translog对实时性的影响</a><br><a href="https://www.ctolib.com/docs/sfile/ELKstack-guide-cn/elasticsearch/principle/indexing-performance.html" target="_blank" rel="noopener">segment merge对写入性能的影响</a></p>
+<h3 id="ES-写入过程"><a href="#ES-写入过程" class="headerlink" title="ES 写入过程"></a>ES 写入过程</h3><h4 id="协调节点"><a href="#协调节点" class="headerlink" title="协调节点"></a>协调节点</h4><ol>
+<li>参数检查，比如 index 不可为空、id 非空时长度不能大于512、文档版本号（version）是否合法</li>
+<li>处理 pipeline 请求，若该协调节点没有预处理资格，则转发请求到有资格的节点</li>
+<li>自动创建索引，若配置为允许自动创建索引（默认），则创建请求里中不存在的索引。若有索引创建失败，则该索引相关请求被标记为失败，其他索引正常执行写<br>创建索引请求被发送到 master 节点，收到所有创建请求的 response（成功或失败）后才进行下一步。master 完成创建索引流程，并将新的 clusterState 发布完毕才会返回 response。</li>
+<li>对请求的预处理，自动生成id，处理routing</li>
+<li>检测集群状态，若集群异常则取消写入。比如：Master 不存在，会阻塞等待Master节点直至超时（只要Master存在，即使索引是red[至少有一个主分片没有被正常分配]，数据也可以写到该索引其他正常的分片上）</li>
+<li>内容路由，构建基于 shard 的请求，将用户的 bulkrequest 重新组织为基于 shard 的请求列表，根据路由算法来计算某文档应该属于某分片。一般情况下，路由算法是 文档id 的hash值 来和主分片数取模，还可以通过设置 index.routing_partition_size 来减少倾斜的风险。<br><em>若路由失败，会等待集群状态更新，拿到更新后重试，若重试失败，则依旧等待集群状态更新，直至超时 1min 为止。超时后仍失败则进行整体请求失败处理。</em></li>
+<li><p>转发请求并等待响应。根据 clusterState 来确定主分片所在节点，转发请求给这些 <strong>主分片</strong>。若某个 shard 的响应中部分doc写失败了，则将异常信息填充到response中，整体请求为成功。</p>
+<p>部分失败：</p>
+<img src="/2020/12/17/ES-读书笔记/image-20201205110230649.png" title="part-fail">
+<p>全部失败：</p>
+<img src="/2020/12/17/ES-读书笔记/image-20201205110250448.png" title="all-fail">
+<p>协调节点收到所有响应后（成功或失败），回复给客户端</p>
+</li>
+</ol>
+<h4 id="主分片节点"><a href="#主分片节点" class="headerlink" title="主分片节点"></a>主分片节点</h4><ol>
+<li>检测写的是否是主分片，allocationId（每个 shard 的唯一编号） 是否符合预期，索引是否处于关闭状态等</li>
+<li>是否延迟执行，若不延迟执行，继续下面流程</li>
+<li>判断主分片是否发生了迁移，若是，则转发请求到迁移到节点</li>
+<li>检测本次写操作涉及的 shard，活跃的 shard 数量（wait_for_active_shards）是否足够，不够则不执行写入，默认是1，只要主分片可用就执行写入</li>
+<li>写 Lucene 和 translog。对每条doc，先生成 Sequence Number（每次递增1） 和 Version（根据当前doc的最大版本+1），<strong>先写Lucene，后写 translog</strong>（lucece写入对数据有检查，可能会写入失败，此种方式避免 lucene 写入失败后对 translog 的回滚）</li>
+<li>flush translog，根据配置的策略对 translog 进行刷盘，定时或立即刷盘</li>
+<li>写副分片。主分片写入成功后，循环处理 所有要写的副本分片，跳过 unassigned 状态的分片，向目标分片转发写入请求，等待响应<ol>
+<li>向副分片转发请求时会带上 SequenceId,PrimaryTerm,GlobalCheckpoint,version 等参数</li>
+<li>等待副分片返回的 response，无论 response 是成功、失败、超时，收集到全部的 response 后，给协调节点返回消息，告知其成功、失败的结果</li>
+</ol>
+</li>
+</ol>
+<h4 id="副分片节点"><a href="#副分片节点" class="headerlink" title="副分片节点"></a>副分片节点</h4><p>执行和主分片基本相同的写 doc 过程，写完毕后回复主分片节点</p>
+<h4 id="写入异常"><a href="#写入异常" class="headerlink" title="写入异常"></a>写入异常</h4><h5 id="主分片写入异常"><a href="#主分片写入异常" class="headerlink" title="主分片写入异常"></a>主分片写入异常</h5><p>若主分片写入错误（磁盘损坏、节点离线、配置错误等），它所在节点会发送一个消息给 Master 节点，index 操作会等待（默认最多一分钟）Master 提升一个副分片为主分片，index 操作被转发给新主分片。Master 会根据监控的节点健康自动降级主分片，比如主分片所在节点离线。若主分片写入失败，则整个请求被认为处理失败；若主分片写入成功，部分副分片写入失败，则整个请求被认为是处理成功的。</p>
+<h5 id="副分片写入异常"><a href="#副分片写入异常" class="headerlink" title="副分片写入异常"></a>副分片写入异常</h5><p>主分片上操作成功后，主分片需要处理在副分片上潜在发生的错误（执行操作失败、网络阻塞等）。若副分片写入失败、超时，主分片会向 master 发送 shard failed 通知，然后 Master 会更新集群状态：</p>
+<ul>
+<li>将该副分片从 in_sync_allocation 列表中移除</li>
+<li>在 routing_table 的 shard 列表中将该副分片的 state 由 STARTED 改为 UNASSIGNED</li>
+<li>将该副分片添加到 routingNodes 的 unassignedShard 列表</li>
+</ul>
+<p>Master会尝试在另一个节点建立一个新的分片副本，以恢复系统的健康状态。</p>
+<h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><p>在对shard进行数据操作时，若发生异常，es 在部分场景下会关闭Engine（Engine 封装了在一个shard 上进行 crud 操作），上报Master。比如在Index过程中，发生了IOException，这可能是由于磁盘损坏导致的。</p>
+<p>es 处理异常的步骤为：</p>
+<ul>
+<li>将 Lucene 标为异常，关闭 shard，汇报给 Master</li>
+<li>Master 收到消息后，通过 reroute 将失败的 shard 迁移到新到节点，并更新集群状态</li>
+</ul>
+<p>无论主分片还是副分片，当写一个 doc 失败时，集群不会重试，会直接走上面处理异常的步骤。读失败不会触发上面步骤。</p>
+<blockquote>
+<p>只要主分片可用，就可执行写入操作，若指定了 wait_for_active_shards，则会等待指定数量的shard活跃时才开始写入</p>
+<p>主分片写成功，不代表副分片就写成功了。只要主分片写成功，数据就可能被读取，数据在主分片和副分片上可能有不同的结果（此时副分片还没有写成功，当客户端收到写成功的请求，就代表文档在主分片和副分片都是可用的）。</p>
+</blockquote>
+<p>副分片接收到一个陈旧主分片的操作（请求里的 Primary Term 小于已处理请求的 Primary Term），会拒绝该操作。由于网络分区等原因，主分片已发生了改变，但陈旧主分片不知情，依旧会处理传入的索引操作。陈旧主分片在转发请求给副分片时，会使用副分片验证它是否还是一个活跃的主分片，当它收到副分片的拒绝请求响应时，陈旧主分片会访问下Master，知道自己已被替换，将操作路由到新的主分片。</p>
+<h2 id="基本读取"><a href="#基本读取" class="headerlink" title="基本读取"></a>基本读取</h2><p>读取和搜索，可以从主分片或副分片中读取数据。</p>
+<h3 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h3><h4 id="协调节点-1"><a href="#协调节点-1" class="headerlink" title="协调节点"></a>协调节点</h4><ol>
+<li>内容路由。收到读请求后，根据内容路由算法算出 shardId，即文档在哪个分片上，得到主分片和副分片的地址列表</li>
+<li>转发请求。将读请求转发给目标节点，等待 Response<ul>
+<li>若目标节点超时仍未回复，或数据节点处理失败（比如磁盘 io error 了），则协调节点选择地址列表里的下一个地址进行重试</li>
+<li>若目标节点处理成功并回复了协调节点，则协调节点将 Response 返回给客户端</li>
+</ul>
+</li>
+</ol>
+<h4 id="数据节点"><a href="#数据节点" class="headerlink" title="数据节点"></a>数据节点</h4><ol>
+<li>先检查是否要进行 refresh 操作，若读请求里设置了refresh=true，则会先进行一次 refresh</li>
+<li>读取并过滤数据。给数据加读锁，如果读请求中 realtime=true（默认为true），则会判断是否有数据可刷盘，若有，则先 refresh，然后从 lucene 中读取数据</li>
+</ol>
+<h3 id="MGET"><a href="#MGET" class="headerlink" title="MGET"></a>MGET</h3><ol>
+<li>基于分片合并读请求。遍历请求，计算每个doc的路由信息，得到由 shardId 为 key 组成的 request map</li>
+<li>循环处理每个shard级的请求，使用上面 GET 的流程完成每个 doc 的处理</li>
+<li>收集Response，全部 Response返回后，给客户端返回结果。若部分文档读取失败，则不会影响其他结果</li>
+</ol>
+<h3 id="读取异常"><a href="#读取异常" class="headerlink" title="读取异常"></a>读取异常</h3><p>当分片不能响应一个读请求时，协调节点会从副本组里选择另一个副本，将请求转发给它，若只有部分结果，es也会返回，而不会等待所有结果。</p>
+<h2 id="基本搜索"><a href="#基本搜索" class="headerlink" title="基本搜索"></a>基本搜索</h2><h3 id="建立索引"><a href="#建立索引" class="headerlink" title="建立索引"></a>建立索引</h3><p>对于全文数据，用分析器对其建立索引，依次经过 字符过滤器（char_filter，字符串预处理，比如去除html）、分词器（tokenizer，将字符串分割为单个词条，token）、token 过滤器（filter，根据stop word 删除token，比如删除一些 and，the）、语言处理（filter，对token进行一些处理，比如转为小写、转为词根，输出 term）</p>
+<h3 id="全文搜索步骤"><a href="#全文搜索步骤" class="headerlink" title="全文搜索步骤"></a>全文搜索步骤</h3><ol>
+<li>对检索字段使用建立索引时相同的分析器进行处理，产生 token 列表</li>
+<li>解析查询语句为一棵语法树</li>
+<li>查找符合语法树的文档</li>
+<li>使用 TF/IDF 算法对文档进行相关性评分</li>
+<li>根据评分结果进行排序</li>
+</ol>
+<h3 id="QUERY-THEN-FETCH"><a href="#QUERY-THEN-FETCH" class="headerlink" title="QUERY_THEN_FETCH"></a>QUERY_THEN_FETCH</h3><h4 id="Query：获得符合search请求的文档ID"><a href="#Query：获得符合search请求的文档ID" class="headerlink" title="Query：获得符合search请求的文档ID"></a>Query：获得符合search请求的文档ID</h4><h5 id="协调节点-2"><a href="#协调节点-2" class="headerlink" title="协调节点"></a>协调节点</h5><ol>
+<li>客户端发送 search 请求给协调节点</li>
+<li>协调节点将查询请求转发到索引中每一个分片副本（主分片或副分片）<ol>
+<li>通过查询 clusterState，构造目的 shard 列表（被查询索引的所有shard）</li>
+<li>遍历所有的 shard，从该 shard 的所有副本中选择一个，向其发送请求。如果列表中 N 个 shard 位于同一个节点，会往该节点发送 N 次请求。</li>
+</ol>
+</li>
+<li>每个分片在本地执行查询并进行打分，添加结果到大小为 from+size 的本地优先队列（一个存有 topN 匹配文档的有序列表）中</li>
+<li>每个分片返回各自优先队列中所有的<strong>文档ID</strong>和排序值给协调节点，协调节点在自己的优先队列中合并这些值，产生一个全局排序后的列表<ul>
+<li>协调节点检查是否所有请求都已收到回复，是则进入 Fetch 阶段，否则抛出异常</li>
+</ul>
+</li>
+</ol>
+<h5 id="数据节点-1"><a href="#数据节点-1" class="headerlink" title="数据节点"></a>数据节点</h5><ol>
+<li>收到 query 请求后，先查看是否允许 cache，若为 true，则会把查询结果放到 cache 中，查询时优先从 cache 中取。cache 是节点所有分片共享，基于LRU算法实现。</li>
+<li>调用 Lucene 实现搜索、打分、自动补全并纠错、聚合</li>
+</ol>
+<h4 id="Fetch：根据文档ID获取完整文档内容"><a href="#Fetch：根据文档ID获取完整文档内容" class="headerlink" title="Fetch：根据文档ID获取完整文档内容"></a>Fetch：根据文档ID获取完整文档内容</h4><h5 id="协调节点-3"><a href="#协调节点-3" class="headerlink" title="协调节点"></a>协调节点</h5><ol>
+<li>向相关节点发送GET请求<ol>
+<li>先确定哪些文档需要被取回，比如 from:90，size:10，则只有从第 91 开始的 10 个结果需要被取回</li>
+<li>从 query 阶段获得的 shard 列表进行遍历，跳过查询为空的 shard，查询特定目标 shard（会轮询该shard所有副本来分摊负载）来获取数据</li>
+</ol>
+</li>
+<li>分片所在节点向协调节点返回数据</li>
+<li>协调节点等待所有文档被取得，返回给客户端<ul>
+<li>当所有shard数据搜集完毕后，判断是否启用字段折叠（简单的聚合），根据需要实现字段折叠，若没有直接发回给客户端</li>
+</ul>
+</li>
+</ol>
+<h5 id="数据节点-2"><a href="#数据节点-2" class="headerlink" title="数据节点"></a>数据节点</h5><ol>
+<li>收到 Fetch 请求，执行Fetch，取得命中doc的相关数据，返回给协调节点</li>
+</ol>
+<blockquote>
+<p>聚合操作在 es 中实现，而非Lucene<br>query 和 fetch 请求之间是无状态的<br>每次分页的请求都是一次重新搜索的过程<br>搜索需要便利分片所有的 Lucene segment，因此合并 segment 对搜索性能友好</p>
+</blockquote>
+<h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><h3 id="PacificA-算法"><a href="#PacificA-算法" class="headerlink" title="PacificA 算法"></a>PacificA 算法</h3><h4 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h4><ul>
+<li>Replica Group（对应 es 的 replication group）：副本组，一个互为副本的数据集合。其中只有一个副本是主数据（primary），其他为从数据（Secondary）</li>
+<li>Configuration（对应 es 的 clusterState）：配置信息，描述一个副本组里有哪些副本及副本所在的节点</li>
+<li>Configuration Version（对应 es 的 clusterState）：配置信息的版本号，当配置信息发生变更时递增</li>
+<li>Serial Number（对应 es 的 SequenceNumber）：代表每个写操作的顺序的编号，每次写操作时递增，简称 SN，每个主副本维护自己的递增 SN</li>
+<li>preparedList：写操作的准备序列，存储来自外部请求的列表，将请求按照SN排序。每个副本上有自己的 preparedList</li>
+<li>CommitedList（对应 es 的 Checkpoint）：写操作的提交序列</li>
+</ul>
+<h4 id="设计前提与假设"><a href="#设计前提与假设" class="headerlink" title="设计前提与假设"></a>设计前提与假设</h4><ul>
+<li>节点可以失效，对消息延迟的上限不做假设</li>
+<li>消息可以丢失、乱序，但不能被篡改</li>
+<li>网络分区可以发生，系统时钟可以不同步，但漂移是有限度的</li>
+</ul>
+<h4 id="查询-query"><a href="#查询-query" class="headerlink" title="查询(query)"></a>查询(query)</h4><p>查询只能在 primary 上进行，primary 获取自身的数据，直接返回即可</p>
+<h4 id="更新-update"><a href="#更新-update" class="headerlink" title="更新(update)"></a>更新(update)</h4><p>更新要在 primary 上发起，流程如下</p>
+<ol>
+<li>primary 为 updateRequest 分配一个 SN，将 updateRequest 插入自己的 prepared List</li>
+<li>primary 发送 prepare 请求到各 secondary,请求中包含 updateRequest 和 SN</li>
+<li>各 secondary 接收到请求，并将 updateRequest 和 SN 加入到自己的 PreparedList 中，返回 ACK 给 primary</li>
+<li>当 primary 收到所有secondary的ack后，则执行该 update，并将 committed point 移动到该 commit（将 updateRequest 放入 Commited List，Commited List 向前移动）。</li>
+<li>primary 返回客户端执行成功</li>
+</ol>
+<p>对于每一个 prepare 消息，primary 会向 secondary 发送一个 commit 通知，告诉他们自己的 committed point 位置，secondary 收到通知后根据指示移动 committed point 到相同位置。</p>
+<p>令P为主副本，R为从副本，有不等式:<br>$$<br>committed_R \subseteq committed_P \subseteq prepared_R<br>$$<br>可以看到当一个 update 执行成功后，primary 上对应的数据已经 commit，secondary 上数据也被加入到了更新队列中。在这种情况下</p>
+<ul>
+<li>读操作读取的是 primary 上的 commitList,可以拿到更新的数据。</li>
+<li>secondary 中虽然数据没有被 commit，但是也被加入到了prepared List中，当主节点挂掉时仍能保证数据不丢失。</li>
+<li>secondary 上的数据不能自己 commit，而必须由于 primary 来触发。这是为了应对由于异常情况导致 update 没有执行成功，secondary 自主commit导致未更新成功数据被 commit，且数据领先于 primary。</li>
+</ul>
+<h4 id="故障检测"><a href="#故障检测" class="headerlink" title="故障检测"></a>故障检测</h4><p>通过契约(lease)的方式来进行 primary 和 secondary 间的互相检测。</p>
+<ul>
+<li>若主副本节点在一定时间内（lease period）未收到从副本节点的租约回复，则主副本节点认为从副本节点异常，向配置管理器报告，将该异常从副本从副本组中移除，同时自己也降级，不再做为主副本节点</li>
+<li><p>若从副本节点在一定时间内（grace period）未收到主副本节点的租约请求，则从副本认为主副本异常，向配置管理器报告，将主副本从副本组中移除，同时提升自己为新主。若有多个从副本，则哪个从副本先执行成功，哪个就是新主</p>
+<p>当一个 secondary 被选为 primary 后 ,它会向所有的 secondary 发送 prepare 请求，要求所有的 sencodary 均以其 pareparedList为准进行对齐，当收到所有 secondary 的 ack 后，primary 将自己的 commit point 移动到最后，这个时候 primary 才能对外提供服务。<br>当时钟漂移在一定范围内，只要 grace period &gt;= lease period，就能保证主副本会比任意从副本感受到租约失效。任意从副本只有在租约失效时才会去争取当主副本，保证了同一时刻主副本最多只有一个。</p>
+</li>
+</ul>
+<h3 id="ES-副本模型"><a href="#ES-副本模型" class="headerlink" title="ES 副本模型"></a>ES 副本模型</h3><p>ES 中每个索引会被拆分成多个分片，每个分片有多个副本，这些副本即为副本组。在删除、添加文档时，各个副本必须同步。对于每个副本组，主分片会负责接收索引操作，验证并转发操作到其他副分片，ES Master 节点会为该 shard 维护一个可以接受该操作的分片副本列表（同步副本列表，in-sync copies），在同步副本列表中的分片，都会保证已成功处理所有索引、删除操作。</p>
+<h4 id="好分片检测"><a href="#好分片检测" class="headerlink" title="好分片检测"></a>好分片检测</h4><p>每个分片都有自己唯一的 Allocation ID，用于主分片选举。cluster state 中有一个列表，记录哪些分片有最新数据（in-sync allocation IDs）。</p>
+<h5 id="allocation"><a href="#allocation" class="headerlink" title="allocation"></a>allocation</h5><p>分片分配过程在主节点完成，并记录在 cluster state 中。当创建新索引时，master 会将集群均衡和其他约束考虑（分配感知及过滤器）在内，分配主分片及副分片，并给每个分片指定 Allocation ID。数据节点会将 Allocation ID 存储在磁盘中，紧邻实际的数据分片</p>
+<p>当集群重启后，master 会询问所有节点，找到磁盘中存在的分片副本，根据找到的分片副本，决定是否将其中一个做为主分片。若该分片在 in-sync allocation IDs 集合中出现了，则该分片才有可能被选为主分片。</p>
+<h5 id="recovery"><a href="#recovery" class="headerlink" title="recovery"></a>recovery</h5><p>每个节点通过检查 cluster state 来判断某个分片是否可用（是否是好分片）。若一个分片被指定为主分片，则该节点只需要加载本地分片副本即可；若被指定为副本片，则该节点需要从主分片所在节点复制差异数据。当集群中可用副分片不足时，master 会将副分片分配到不含任何此分片副本的节点上，在节点上创建主分片的完整副本。</p>
+<h5 id="fault-detect"><a href="#fault-detect" class="headerlink" title="fault detect"></a>fault detect</h5><p>如果当前主分片临时或永久的变为不可用，另一个在 in-sync 集合里的分片副本将被提升为主分片。若此后没有写入请求，则不会产生副本差异，in-sync 集合不会发生变动。</p>
+<p>当主分片转发写请求给副分片时，若副分片长时间没有回应，则主分片节点会让 Master 将不可用副本分片的 Allocation IDs 从 in-sync set 中删除，主分片所在节点等待 Master 删除成功的确认消息，确认消息意味着集群共识层已成功更新，之后再向客户端确认写请求。这样确保只有包含了所有已确认写入的分片副本才会被 Master 选为主分片。</p>
+<h4 id="Sequence-IDs"><a href="#Sequence-IDs" class="headerlink" title="Sequence IDs"></a>Sequence IDs</h4><p>Sequence IDs 意在用唯一 ID 来标记每个写操作，通过此 ID 有了索引操作的总排序。Sequence IDs 通过 Primary Terms 和 Sequence Numbers 来实现。</p>
+<p>Primary Terms：由 Master 分配，每次主分片发生变化时（replica shard 被提升为 primary shard），Primary Terms 递增（每个shard 的Primary Terms不是统一的），然后持久化到 cluster state 中。这样来自旧主分片的迟到请求，由于 Primary Terms 小于当前值，请求会被拒绝。和 raft 中的term 概念相似<br>Sequence Numbers：标记发生在某个分片上的写操作，由主分片分配，只对写操作分配，序列号递增。假设 A shard的主分片Sequence Number 增加到 5，发生了主分片变更，下一个 Sequence Number 将从6开始</p>
+<p><strong>主分片每次向副分片转发写请求时，都会带上这两个值。</strong></p>
+<h4 id="本地及全局检查点"><a href="#本地及全局检查点" class="headerlink" title="本地及全局检查点"></a>本地及全局检查点</h4><p>有了 Primary Terms 和 Sequence Numbers 后，就有了理论上检测分片差异及将旧分片恢复为新分片的方法：从旧分片中删除新分片操作历史中不存在的操作，并将缺少的操作索引到旧分片。<br>当索引操作变多，直接比较数百万个操作工作量太大。</p>
+<p>ES 维护了一个 全局检查点（global checkpoint）标记：所有活跃分片历史都已对齐的序列号。所有低于全局检查点的操作都已经被所有活跃分片处理完毕。当主分片失效后，新主分片在向其他分片复制差异数据时，只需要比较新主分片和其他副分片之间最后一个全局检查点之后的操作。当旧主分片恢复时，用它的最后一个全局检查点和新主分片进行比较。</p>
+<p>本地检查点（local checkpoint）：也是一个序列号，所有低于该序列号的操作都已在该分片上处理完成（lucene 和 translog 写成功，不一定 flush）。</p>
+<p>全局检查点和本地检查点在每个分片的内存中维护，也会保存在每个 Lucene 提交的元数据中。<br>主分片负责推进全局检查点，当副分片确认（ACK）一个写操作到主分片节点时，副分片会更新本地检查点。当主分片检测到所有副分片都已超出给定序列号，则更新全局检查点，在下一次索引（写）操作时将全局检查点发送到所有分片副本。</p>
+<p>演示：索引有1主分片，2副分片，全局和本地检查点均在0位置</p>
+<ul>
+<li>主分片收到index请求，写入数据成功后，本地检查点推进到1，转发请求给副分片</li>
+<li>副分片处理写请求成功，本地检查点推进到1，回复主分片</li>
+<li>主分片收到所有分片处理成功的消息，根据各副本汇报的本地检查点位置，将全局检查点推进到1</li>
+<li>主分片收到index请求，将全局检查点1的消息发给副分片，副分片设置自己的全局检查点为1</li>
+</ul>
+<h4 id="version"><a href="#version" class="headerlink" title="_version"></a>_version</h4><p>每个文档都有一个版本号，文档被修改时版本号递增。若旧版本文档在新版本之后到达，则旧版本文档可被简单忽略。通过版本号可实现乐观锁。</p>
+<h2 id="分片分配（allocation）"><a href="#分片分配（allocation）" class="headerlink" title="分片分配（allocation）"></a>分片分配（allocation）</h2><p>分片分配是把一个分片指派到集群中某个节点的过程。分配决策由Master完成，包含：</p>
+<ul>
+<li>哪些分片分配给哪些节点</li>
+<li>哪个分片做为主分片</li>
+</ul>
+<p>主要通过两个组件完成：</p>
+<ul>
+<li>allocators：分配器，尝试寻找最优的节点来分配分片，为每个分片得到一个可分配的节点列表，调用deciders决策，根据决策结果选择一个目的节点。allocators 主要有三类：<ul>
+<li>primaryShardAllocator：找到拥有某分片最新数据的节点</li>
+<li>replicaShardAllocator：找到磁盘上有该分片数据的节点</li>
+<li>BalancedShardsAllocator：找到拥有最少分片个数的节点，此 allocator主要是根据权重策略在集群的各节点间均衡shard分布</li>
+</ul>
+</li>
+<li>deciders：决策器，大致可以分为以下几类：<ul>
+<li>负载均衡：SameShardAllocationDecider（避免主副分片分配到同一个节点）、AwarenessAllocationDecider（感知服务器、机架，尽量分散存储shard）、ShardLimitAllocationDecider（同一个节点上允许存在的同一个index的shard的数目）</li>
+<li>并发控制：ThrottlingAllocationDecider（recovery阶段的限速配置，如当前Node在进行主分片恢复的数量、副分片恢复的数量）、ConcurrentRebalanceAllocationDecider（rebalance并发控制，如整个集群最大允许同时进行分片分布的个数）、DiskThresholdDecider（根据磁盘空间进行决策）</li>
+<li>条件限制：RebalanceOnlyWhenActiveAllocationDecider（所有shard都处在active状态下，才可执行rebalance操作）、ClusterRebalanceAllocationDecider（通过集群中shard状态来决定是否可以执行rebalance）、FilterAllocationDecider（确指定是否允许分片分配到指定Node上，分为index级别和cluster级别）、ReplicaAfterPrimaryActiveAllocationDecider（只有在主分片分配完毕后才开始分配分片副本）</li>
+</ul>
+</li>
+</ul>
+<h3 id="新建索引的分片分配"><a href="#新建索引的分片分配" class="headerlink" title="新建索引的分片分配"></a>新建索引的分片分配</h3><p>主要为了用更均衡的方式把新索引的分片分配到集群的节点中。<br>shardsAllocator（BalancedShardsAllocator）负责找出拥有分片数量最少的节点列表，并按分片数量升序排序。分片较少的节点会被优先选择。<br>deciders 依次遍历 allocators 给出的节点，并判断是否把分片分配到该节点。比如分配过滤规则禁止索引 idx 的分片分配到节点 A 上，则 FilterAllocationDecider 会阻止 idx 分片在节点 A 上的分配，即使 A 是集群中分片数量最少的节点。</p>
+<ol>
+<li>根据权重算法和 decider 决定把 shard 分配到哪个节点，将分配信息更新到 cluster status，由 master 广播下去</li>
+<li>对状态为 started 的分片根据 decider 来判断是否要移动到其他节点</li>
+<li>根据权重函数平衡集群模型上的节点</li>
+</ol>
+<h3 id="集群重启的分片分配"><a href="#集群重启的分片分配" class="headerlink" title="集群重启的分片分配"></a>集群重启的分片分配</h3><p>集群重启后，所有索引的分片都是未分配状态，需要找到这些分片在哪些节点上。对索引中某个特定分片来说，先分配主分片，后分配副分片</p>
+<ol>
+<li>遍历所有未分配的分片，依次调用 makeAllocationDecision 方法返回指定的分片是否可被分配，若决策结果为 YES，则将该分片初始化：分片状态从 unassigned 状态 改为 initialize 状态</li>
+<li>更新路由表：某个shard被分配到某个节点，这个shard是主还是副</li>
+<li>构建新的 clusterStatus，Master 把新的 clusterStatus 广播给各节点</li>
+<li>数据节点收到新的 clusterStatus，发现某个分片分配给自己，开始执行分片的 recovery</li>
+</ol>
+<h4 id="主分片的-makeAllocationDecision"><a href="#主分片的-makeAllocationDecision" class="headerlink" title="主分片的 makeAllocationDecision"></a>主分片的 makeAllocationDecision</h4><ol>
+<li>Master 节点首次进入 makeAllocationDecision 方法时，还没有任何分片的元信息，由于不知道shard在哪个节点上，向集群里各数据节点发送获取某个 shard 元信息的 fetchData 异步请求，没有超时设置。若集群有100个节点，1000个shard，则总共需要请求100*1000次</li>
+<li>数据节点收到 fetchData 请求后，读取本地 shard 元数据并返回</li>
+<li>对于一个 shard，当 response 达到期望数量（发出fetchData请求时的数据节点数）后，将 shard 元数据放入cache中，进入主分片分配过程</li>
+<li>根据分片的 Allocation ID 从 in-sync allocation IDs 列表中选择一个作为主分片：<ol>
+<li>获取 in-sync allocation IDs 列表里该分片的所有活跃shard Allocation ID</li>
+<li>根据 Allocation ID 来找到对应的节点，组成目标节点列表</li>
+<li>对目标节点列表里的每个节点依次执行 decider，遍历所有的 decider，只要有一个 decider 拒绝，则拒绝本次本配。决策后若还有多个节点，则取第一个节点，该节点上的  shard 被选为主分片</li>
+</ol>
+</li>
+</ol>
+<h4 id="副分片的-makeAllocationDecision"><a href="#副分片的-makeAllocationDecision" class="headerlink" title="副分片的 makeAllocationDecision"></a>副分片的 makeAllocationDecision</h4><ol>
+<li>执行一遍 allocation.deciders().canAllocate，判断是否至少可以在一个node上分配，若分配不了则副分片继续保持 unassigned 状态（比如主分片尚未就绪），不执行后续逻辑</li>
+<li>执行 fetchData过程，由于主分片已执行过fetchData 且将分片元数据放入cache中，此处可直接从cache中获取元数据</li>
+<li>根据元数据，将 shard 分配到已经拥有这个 shard 副本的节点。若没有相关节点，则根据配置项 index.unassigned.node_left.delayed_timeout 来判断是否要 delay</li>
+</ol>
+<h2 id="快照"><a href="#快照" class="headerlink" title="快照"></a>快照</h2><p>快照操作可以参考 <a href="https://msxie.github.io/2020/12/14/ES-%E5%BF%AB%E7%85%A7%E6%93%8D%E4%BD%9C/">ES 快照操作</a></p>
+<h3 id="创建快照"><a href="#创建快照" class="headerlink" title="创建快照"></a>创建快照</h3><p>快照在主分片上执行，快照开始前会flush一次，因此快照可以获取从成功执行快照的时间点开始，磁盘中存储的lucene数据，不包括后续的新增内容。每次快照时增量的，下一次快照只会包含新增内容。</p>
+<p>在任何时候都可以为集群创建一个快照，无论集群健康是 green、yellow 还是 red。执行快照期间，被快照的分片不能移动到另一个节点，分片的迁移只能在快照完成时进行。</p>
+<p>es的快照实现是基于lucene快照实现的。</p>
+<p>lucene 快照是对最后一个提交点的快照，一次快照包含最后一次提交点的信息以及全部分段文件。是对整个刷盘数据的完整的快照，lucene 中没有增量快照的概念，每一次都是对整个 lucene 索引的完整快照。从 lucene 创建一个快照开始，与此快照相关的物理文件都保证不被删除，这个文件列表就是 es 要执行复制的文件。</p>
+<p>es 的快照在lucene快照的基础上，负责数据复制、仓库管理、增量备份及快照删除。</p>
+<h4 id="协调节点-4"><a href="#协调节点-4" class="headerlink" title="协调节点"></a>协调节点</h4><p>收到客户端创建快照的请求后，判断本地是否为主节点，若是主节点，则转移到snapshot线程处理；若不是，则发送创建快照的 rpc 请求给主节点</p>
+<h4 id="主节点"><a href="#主节点" class="headerlink" title="主节点"></a>主节点</h4><p>主节点收到快照请求后，则提交一个集群任务：</p>
+<ul>
+<li>快照任务不能并行，快照任务 b 只能等快照任务 a 执行结束才能正常执行。检查当前的快照任务是否是唯一的，若不是则抛出异常</li>
+<li>获取要快照的索引列表</li>
+</ul>
+<p>主节点通过把执行快照的命令放在 cluster state 中来控制数据节点来执行快照。在执行快照过程中，主节点下发两次cluster state：</p>
+<ol>
+<li>根据快照信息 生成 state 为 <strong>INIT</strong> 的 cluster state，数据节点进行一些初始化操作</li>
+<li>数据节点处理完初始化操作后，主节点将全局元信息和每个索引的元信息写入仓库</li>
+<li>主节点下发 state 为 <strong>STARTED</strong> 的 cluster state，cluster state还包含了将要快照的索引的<strong>主分片</strong>列表</li>
+</ol>
+<h4 id="数据节点-3"><a href="#数据节点-3" class="headerlink" title="数据节点"></a>数据节点</h4><p>state=INIT [没有做啥有意义的操作]<br>state=STARTED</p>
+<ul>
+<li>数据节点收到 cluster state，过滤一下本地有哪些分片，构建一个新的快照分片列表</li>
+<li>遍历要处理的分片，对分片并行执行快照处理</li>
+<li>处理完毕后，向主节点发送rpc请求更新快照状态</li>
+</ul>
+<h5 id="分片快照流程"><a href="#分片快照流程" class="headerlink" title="分片快照流程"></a>分片快照流程</h5><p>lucene 执行完快照方法后，会返回一个提交点，通过提交点可以获取分片最新的状态，包括全部 lucene 分段文件的列表，在释放提交点之前，列表中文件都不会被删除</p>
+<p>es 调用 lucene 接口创建快照，根据 lucene 提交点创建 es 快照：</p>
+<ol>
+<li>由于es的快照是增量备份，计算两个文件列表：<ol>
+<li>新增文件列表（filesToSnapshot）：用 lucene 提交点的分段文件列表 过滤掉 仓库文件列表，得到新增文件列表，此列表中文件将要被复制到仓库中</li>
+<li>当前快照使用的全部文件列表（indexCommitPointFiles），未来将通过此列表找到该快照的全部相关文件：就是lucene提交点的分段文件列表<br>在计算文件列表时，会检查是否要 <strong>终止</strong> 快照。由于 lucene 文件的不变性，若文件名是相同的，则文件就是相同的，不需要通过校验和来确认文件内容是否一致。</li>
+</ol>
+</li>
+<li>复制 Lucene 物理文件<br>快照任务 state=STARTED 后，开始遍历新增文件列表，将这些文件限速复制到仓库，每一个文件复制完毕后对比文件校验和和文件元信息里的校验和是否一致，以验证复制结果是否正确。复制到仓库这一方法对于不同仓库文件系统有不同实现。</li>
+<li>生成快照文件<br>生成一个 描述快照相关信息的 文件，文件里还记录了本次快照使用的所有相关 lucene 分段文件，类似 indexCommitPointFiles</li>
+<li>删除快照无关文件<ul>
+<li>删除旧的 index-* 索引文件，这是快照列表的索引文件</li>
+<li>遍历仓库中全部快照，删除仓库中不被任何快照关联的文件，由finalize 方法完成，第一个参数是未被删除快照的列表。</li>
+<li>若仓库中还有快照，创建新的 index-* 索引文件</li>
+</ul>
+</li>
+</ol>
+<p>执行完快照后，仓库里主要有四类文件：</p>
+<ul>
+<li>以__为前缀的是数据文件，是 lucece segment 文件被重命名后的文件</li>
+<li>snap-*.dat 快照文件，描述快照名称及快照使用的文件列表信息</li>
+<li>index-*.dat 快照列表的索引文件，描述当前分片所有的快照信息</li>
+<li>meta-*.dat 索引的元数据信息</li>
+</ul>
+<p>若数据节点在执行快照过程中异常终止，比如：io错误，进程被kill等，当该节点重新启动后，不会继续之前的数据复制流程。对于整个快照过程来说，最终结果是部分失败，快照信息里会记录失败的节点和分片，以及与错误相关的原因。</p>
+<h3 id="删除快照"><a href="#删除快照" class="headerlink" title="删除快照"></a>删除快照</h3><p>理论上在同一个时间点，只允许运行一个快照或一个恢复操作。如果想终止正在进行的快照操作，可以通过删除快照命令来终止。删除快照会先检查当前快照是否在运行，若是在运行，则先停止快照，然后从仓库中删除数据。</p>
+<p>es 删除快照主要是 删除 那些只被 要删除快照所引用的物理文件。</p>
+<h4 id="协调节点-5"><a href="#协调节点-5" class="headerlink" title="协调节点"></a>协调节点</h4><p>负责解析请求，将请求转发给主节点，和创建快照类似。</p>
+<h4 id="主节点-1"><a href="#主节点-1" class="headerlink" title="主节点"></a>主节点</h4><ol>
+<li>提交集群任务<br>收到删除快照请求后提交集群任务，将删除快照请求信息放入新的cluster state中：<ol>
+<li>若快照正在运行，将删除快照请求相关信息放入 Custom 字段的 SnapshotsInprogress 结构中，并将 state 设置为 ABORTED，此状态和创建快照时的 INIT、STARTED 等状态用的是同一个键值</li>
+<li>若快照没有运行，将删除快照请求相关信息放入Custom 字段的 SnapshotsDeletionsInprogress 结构中</li>
+<li>发布新的cluster state，发布成功后，开始删除快照文件</li>
+</ol>
+</li>
+<li>快照删除<ul>
+<li>更新快照列表索引文件 index-*.dat，将要删除的快照信息从快照列表中删除</li>
+<li>删除全局快照文件（仓库根目录下的）snap-<em> 和全局元信息文件 meta-</em>.dat</li>
+<li>对于所有索引删除索引的元数据信息 meta-*.dat，对于索引的每个分片，删除分片快照，即备份下来的 lucene 文件<ul>
+<li>获取仓库现有的快照列表，构建需要保留的快照列表</li>
+<li>将保留快照列表做为参数传入 finalize 方法中，删除仓库中不被任何快照关联的文件</li>
+</ul>
+</li>
+<li>删除仓库中已经已经不存在的索引目录</li>
+</ul>
+</li>
+</ol>
+<h4 id="数据节点-4"><a href="#数据节点-4" class="headerlink" title="数据节点"></a>数据节点</h4><p>若没有运行中的快照任务需要取消，不做其他操作；<br>若有正在运行的快照任务需要取消，收到 State 为 ABORTED 的 cluster state 后，会设置终止标志，快照运行过程中有多处会检查终止标志：</p>
+<ul>
+<li>计算需要复制的lucene文件列表时</li>
+<li>开始执行复制之前</li>
+<li>在开始复制数据之后的读取过程中</li>
+</ul>
+<p>由于运行中的快照大部分是在执行数据复制，因此取消操作大部分是中断读取数据。<br>对于快照取消产生的复制到一半的数据文件，由主节点负责处理。在上面主节点第二步进行删除。</p>
+<h3 id="恢复快照"><a href="#恢复快照" class="headerlink" title="恢复快照"></a>恢复快照</h3><p>恢复操作使用标准分片恢复机制。若要取消正在运行的恢复，可以通过删除正在恢复的索引来实现。要恢复一个快照，目标索引必须处于关闭状态。恢复完成后，当前集群与快照同名的索引、模版会被覆盖。在集群中存在，但快照中不存在的索引、索引别名不会被删除。默认情况下，若参与恢复的一个或多个索引在快照中没有可用分片（可能创建快照时一些分片备份失败导致的），则整个恢复操作失败。</p>
+<p>恢复操作从索引的主分片开始，再次期间主分片状态变为不可用，集群状态变为red，一旦主分片恢复完成，整个集群状态将被转为yellow，开始创建所需数量的副分片，当副分片创建完成时，集群转换到green状态。</p>
+<h2 id="索引恢复"><a href="#索引恢复" class="headerlink" title="索引恢复"></a>索引恢复</h2><p>索引恢复，即es数据恢复过程。当恢复快照、节点加入和离开、索引的 _open 操作等都会触发索引恢复，主要体现在两个层面：</p>
+<ul>
+<li>数据完整性：有客户端写入成功但未刷盘的 lucene segment，此时分片故障</li>
+<li>主副分片数据一致性：副分片所在节点重启，副分片需要同步和主分片数据一致等场景</li>
+</ul>
+<p>恢复阶段的状态枚举值如下：</p>
+<ul>
+<li>INIT：恢复尚未启动</li>
+<li>INDEX：恢复 Lucene 文件，以及在节点间复制索引数据</li>
+<li>VERIFY_INDX：验证索引</li>
+<li>TRANSLOG：启动engine，重放 translog，建立 lucene 索引</li>
+<li>FINALIZE：执行清理工作</li>
+<li>DONE：完毕</li>
+</ul>
+<p>恢复类型有四种：</p>
+<ul>
+<li>从本地恢复的主分片</li>
+<li>从远程主分片恢复的副分片</li>
+<li>从快照恢复</li>
+<li>从本节点的其他分片恢复（比如，shrink，被 shrink 索引的所有副本会被迁移到同一个节点，将整个索引的的全部 shard 数据硬连接到新索引主分片的数据目录）</li>
+</ul>
+<h3 id="主分片恢复"><a href="#主分片恢复" class="headerlink" title="主分片恢复"></a>主分片恢复</h3><p><strong>INIT 阶段</strong>：从开始执行恢复的那一刻起，被标记为 INIT 阶段 ，在判断分片属于哪种恢复类型之前就被标记了。在此阶段，会进行一些校验，比如当前分片是否是主分片，分片状态是否异常等。</p>
+<p><strong>INDEX 阶段</strong>：一个 lucene 索引由多个分段（segment）组成，每次搜索时会遍历所有segment。内部维护了一个称为“提交点”（commit point）的信息，其描述了当前 lucene 包含哪些 segment，这些 segment 都是已经被 fsync 系统调用，从 cache 落在磁盘上了。 从Lucene 中读取最后一次提交的分段信息，获得其版本号，更新当前索引版本</p>
+<p><strong>VERIFY_INDX 阶段</strong>：验证 lucene index。通过验证元信息中记录的 checksum 与 lucene 文件实际值 来判断当前分片是否损坏</p>
+<p><strong>TRANSLOG 阶段</strong>：重放 translog 中尚未被刷入磁盘的数据。根据最后一次提交的信息做 translog 快照，来确定 translog 中哪些数据需要重放。重放完毕后，将新生成的 lucene 数据刷入磁盘（flush）。translog 重放，执行具体的写入操作，同基本写入过程一样，重放完毕，进入 FINALIZE 阶段</p>
+<p><strong>FINALIZE 阶段</strong>：执行 refresh 操作，将缓冲数据写入操作系统 cache中【此处不能理解为什么会有缓冲数据需要refresh，毕竟上一步已经进行过flush】</p>
+<p><strong>DONE 阶段</strong>：进入done 阶段前再次执行 refresh，然后更新分片状态为 POST_RECOVERY</p>
+<p>至此，主分片恢复完毕，对恢复结果进行处理：</p>
+<ul>
+<li>恢复成功，向 Master 发送 cluster/shard/started 的 rpc 请求</li>
+<li>恢复失败，关闭engine，向 Master 发送 cluster/shard/failure 的 rpc 请求</li>
+</ul>
+<h3 id="副分片恢复"><a href="#副分片恢复" class="headerlink" title="副分片恢复"></a>副分片恢复</h3><p><strong>副分片的 recovery 需要等待主分片恢复完毕后才能开始。</strong></p>
+<p>从主分片拉取 Lucene 分段和 translog 进行恢复。在副分片恢复期间允许新的写操作，拉取 Lucene 分段用来恢复之前的数据，拉取 translog 用来恢复拉取lucene分段后新增的内容。这需要主节点的 translog 不被清理，从 6.0 开始，通过 translog 保留锁来保持translog 不被清理。</p>
+<p>恢复核心过程由两个 phase 组成：</p>
+<p><strong><em>phase1</em></strong>: 在主分片所在节点，获取 translog 保留锁，会保留 translog 不受 flush 的影响。调用 lucene 接口给 shard 做快照，快照包含shard 中已经刷到磁盘的文件引用，把这些文件复制到副本节点。在 phase1结束前，向副分片节点发送请求，让副分片启动 engine，在phase2 开始前，副分片可以正常处理写请求</p>
+<p><strong><em>phase2</em></strong>: 对 translog 做快照，该快照包含从 phase1 开始，到执行 translog 快照期间新增的索引，将这些 tranlog 发送到副分片进行重放</p>
+<p>phase1 需要复制大量数据，过程非常漫长，在6.x中，可以通过两个方法跳过phase1:</p>
+<ul>
+<li><p>基于 sequenceNumber 进行恢复 。判断恢复请求的里的 sequenceNumber（副分片恢复开始的 sequenceNumber，startingseqno）是否小于主分片节点的 localCheckPoint、translog 中的数据是否足以恢复：以请求的序列号做为最小值对 translog 做一个快照，验证 translog 快照中的操作是否完整（遍历 startingseqno到 translog snapshot 中最新数据之间的操作，检查操作序列号是否有效，translog可能因为数据太大或过期删除而存在缺失）。</p>
+</li>
+<li><p>基于 syncid 和 doc数 恢复。如果主副分片拥有相同的 syncId 且 doc 数相同：默认 5 分钟没有写入操作的索引标记为 inactive，执行synced flush，生成一个唯一的 syncid，写入分片所有副本中。syncid 是 shard级，拥有相同 syncid 的 shard 具有相同的 lucene 索引内容。</p>
+<p>synced flush 本质上是一次普通 flush 操作，只是在lucene的commit 过程中多写了一个 syncid，只适用于冷索引。synced flush 执行期间若收到写请求，则写请求会成功，synced flush 会失败。在某个分片上执行普通 flush 会删除已有的 syncid。</p>
+</li>
+</ul>
+<p><strong>INIT 阶段</strong>：恢复任务开始时被置为 INIT 阶段，构建准备发往主分片的 StartRecoverRequest，请求中包括本次要恢复的 shard 相关信息，如 shardid、syncid等，然后进入 INDEX 阶段</p>
+<p><strong>INDEX 阶段</strong>：将主分片的 Lucene 数据复制到副分片节点。向主分片所在节点发送 StartRecoverRequest，阻塞等待主分片所在节点响应，然后设置为 <strong>DONE</strong> 阶段。期间主分片节点会给副分片发送几次 rpc 调用，通知副分片进入 VERIFY_INDX 和 TRANSLOG 阶段。</p>
+<p>主分片收到 StartRecoverRequest 请求后，先获取一个 translog 保留锁，使得 translog 不被清理。</p>
+<p>如果可以基于 sequenceNumber 进行恢复，则可跳过 phase1，进入 VERIFY_INDX 阶段；否则，调用lucene 接口对分片做快照，执行 <strong><em>phase1</em></strong>: </p>
+<ul>
+<li>检查主副分片是否都有 syncid，若 syncid 相同，且 doc 数相同，则跳过 phase1</li>
+<li>对比主副分片 段文件的差异，对副分片上缺失的部分进行复制（主分片发送段文件给副分片）。只有相同大小和校验和的段文件才能被重用。由于分片副本执行各自的合并策略，所有合并出来的段文件相同的概率很低</li>
+</ul>
+<p><strong>VERIFY_INDX 阶段</strong>：和主分片 VERIFY_INDX 阶段 作用相同。主分片节点执行完 phase1 后，会向副分片节点发送 prepare_translog 的 rpc 请求。副分片收到请求后会启动 Engine，此后可正常接收写请求。VERIFY_INDX 和 TRANSLOG 也在该 rpc 请求的处理函数中被触发。</p>
+<p><strong>TRANSLOG 阶段</strong>：负责将主分片的 tranlog 数据复制到副分片节点进行重放。先创建新的 Engine 并跳过 Engine 自身的 translog 恢复。</p>
+<p>主分片在此阶段操作：如果是基于 SequenceNumber 进行恢复，则 startingseqno 取值为恢复请求中的序列号，主分片从请求的序列号开始创建 translog snapshot；否则取值为0，获得完整的 tranlog snapshot。接下来开始执行 <strong><em>phase2</em></strong>：将 translog 批量发送到副分片节点，发送时将带发送的 translog 组合成一批来提高发送效率，默认批大小为 512k</p>
+<p>副分片收到 translog 后，对 translog 进行重放</p>
+<p><strong>FINALIZE 阶段</strong>：主分片节点执行完 phase2 后，向副分片节点发送action为index/shard/recovery/finalize 的rpc请求，副分片节点收到后，先更新全局检查点，然后执行清理工作（主要是refresh）</p>
+<p><strong>DONE 阶段</strong>：index阶段请求返回后，副分片进入done阶段，恢复成功或失败的处理和主分片相同</p>
+<h3 id="主副分片数据一致"><a href="#主副分片数据一致" class="headerlink" title="主副分片数据一致"></a>主副分片数据一致</h3><p>主要冲突点在于 phase1 结束后，在副分片上 translog 回放 和 新的写入操作并发执行，因为时序关系而造成的冲突。比如，在 phase1时，客户段要求将 docA 的内容写为1，此时副分片尚未就绪因此未执行，在 phase1 后，客户端要求将 docA 的内容写为2，副分片已就绪，执行了该操作，同时又收到主分片传来的 translog，里面有把 docA 写为1的请求。</p>
+<p>es 对此处理是，在写流程中做异常处理，通过版本号来过滤掉过期操作：</p>
+<ul>
+<li>索引新文档：不存在冲突问题，不需要处理</li>
+<li>更新：每个写操作都有一个版本号，这个版本号是预期的 doc 版本，它必须大于当前 lucene 中 doc 版本号。主节点写操作完成后（对应到查询层面就是看到的 _version 值），新数据的版本号会放入写副本的请求中，此版本号即为预期版本号。对于更新来说，就是主分片将原 doc 版本号+1 后转发到副分片。检查本次操作的版本号是否小于 lucene 中 doc 的版本号，若小于，则放弃本次操作。</li>
+<li>删除：判断此次操作中的版本号是否小于 lucene 中 doc 的版本号，若小于，则放弃本次操作。</li>
+</ul>
+<h2 id="集群启动"><a href="#集群启动" class="headerlink" title="集群启动"></a>集群启动</h2><h3 id="选主节点"><a href="#选主节点" class="headerlink" title="选主节点"></a>选主节点</h3><h4 id="bully-算法"><a href="#bully-算法" class="headerlink" title="bully 算法"></a>bully 算法</h4><p>选举原则：在所有活着的节点中，选取节点ID最大或者最小的节点为主节点。它的<strong>假设条件是，集群中每个节点均知道其他节点的 ID。</strong><br>消息类型：</p>
+<ul>
+<li>Election 消息，用于发起选举；</li>
+<li>Alive 消息，对 Election 消息的应答；</li>
+<li>Victory 消息，竞选成功的主节点向其他节点发送的宣誓主权的消息。</li>
+</ul>
+<p>选举流程：</p>
+<ol>
+<li>集群中每个节点判断自己的 ID 是否为当前活着的节点中 ID 最大的，如果是，则直接向其他节点发送 Victory 消息，宣誓自己的主权；</li>
+<li>如果自己不是当前活着的节点中 ID 最大的，则向比自己 ID 大的所有节点发送 Election 消息，并等待其他节点的回复；</li>
+<li>若在给定的时间范围内，本节点没有收到其他节点回复的 Alive 消息，则认为自己成为主节点，并向其他节点发送 Victory 消息，宣誓自己成为主节点；若接收到来自比自己 ID 大的节点的 Alive 消息，则等待其他节点发送 Victory 消息；</li>
+<li>若本节点收到比自己 ID 小的节点发送的 Election 消息，则回复一个 Alive 消息，告知其他节点，我比你大，重新选举。</li>
+</ol>
+<p>优缺点：</p>
+<p>Bully 算法的选择特别霸道和简单，谁活着且谁的 ID 最大谁就是主节点，其他节点必须无条件服从。这种算法的优点是，选举速度快、算法复杂度低、简单易实现。</p>
+<p>但这种算法的缺点在于，需要每个节点有全局的节点信息，因此额外信息存储较多；其次，任意一个比当前主节点 ID 大的新节点或节点故障后恢复加入集群的时候，都可能会触发重新选举，成为新的主节点，如果该节点频繁退出、加入集群，就会导致频繁切主。</p>
+<h4 id="es-选主"><a href="#es-选主" class="headerlink" title="es 选主"></a>es 选主</h4><ol>
+<li>每个节点 ping 所有节点，判断当前候选者（有资格成为master的节点，node.master）人数是否达到法定人数（一般为（master节点数量/2）+1，防止脑裂），否则选举失败</li>
+<li>每个节点计算最小的已知节点的 id，最小 id 的节点被被称为临时 Master</li>
+<li>投票（发送加入集群请求 JoinRequest）<ol>
+<li>节点不是临时 Master<ul>
+<li>不再接收其他节点的 join 请求</li>
+<li>向 Master 发送 join 请求，并等待回复，若出现了超时/异常 ，则会进行默认3次重试</li>
+<li>收到 join 请求的回复后，检查 clusterState 中的 Master 节点是否是选择的节点，若为空或不是之前选择的节点，则重新选举</li>
+</ul>
+</li>
+<li>节点是 临时Master<ul>
+<li>等待足够多的具备 Master 资格的节点加入本节点（收到的 JoinRequest 达到法定人数）</li>
+<li>超时（默认30s）后还没有收到满足数量的 Join 请求，则选举失败，重新发起新一轮选举</li>
+<li>获得足够多选票且该节点也为自己投票，选举成功，发布新的 clusterState，发布成功后，回复其他节点的 Join 请求</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p>有一个很重要的参数： discovery.zen.mininum_master_nodes，最小master节点数，在选主的流程中，该参数被用在：</p>
+<ul>
+<li>触发选主：进入选主流程前，参选节点数达到该值</li>
+<li>决定master：选出临时master后，临时master收到该值的join请求，才能选主成功</li>
+</ul>
+<h4 id="节点失效检测"><a href="#节点失效检测" class="headerlink" title="节点失效检测"></a>节点失效检测</h4><p>es使用的是改进的bully算法，如果有id优先级更大的节点加入集群，不会立即出发选主，而是等当前主节点挂掉后，再重新进行选主。<br>失效检测按角色划分为两块：</p>
+<ul>
+<li>主节点：定期检测加入集群的节点是否活跃，若当前集群总节点数未达到法定节点数（过半），则放弃master身份，重新加入集群。（为了预防脑裂）</li>
+<li>非主节点：定期检测主节点是否活跃，若主节点挂了，则触发选主</li>
+</ul>
+<h3 id="选举集群元信息"><a href="#选举集群元信息" class="headerlink" title="选举集群元信息"></a>选举集群元信息</h3><p>选举出主节点后，主节点让各节点把各自存储的元信息发过来，根据版本号确定最新的元信息。<br>元信息有如下几种：</p>
+<ul>
+<li>集群层面元信息：clusterUUID、settings、templates 等</li>
+<li>索引层面元信息：numberOfShards，mappings 等</li>
+<li>分片层面元信息：version、indexUUID，primary 等</li>
+</ul>
+<p>持久化的元信息不包括内容路由信息，即某个分片在哪个节点上这种信息，这些依赖后续recovery过程重建。集群元信息选举包括两个级别：集群级和索引级</p>
+<ol>
+<li>判断是否达到 recovery 条件。为了集群的一致性，需要等待加入集群的节点数达到某个指定数量</li>
+<li>达到 recovery 条件后，向有master 资格的节点发送请求，获取它们存储的元数据。<br>等待回复时，必须收到所有节点的回复，无论回复成功还是失败，此处没有超时，节点通信失败异常会被捕获，当作失败处理<br>在收到的这些回复中，有效元信息的总数必须到达指定数量，异常情况比如某个节点上元数据读取失败，则回复中的元数据为空</li>
+<li>选举集群级元数据。遍历请求的所有节点，根据元信息中记录的版本号选举，版本号大的当选</li>
+<li>选举索引级元数据。遍历集群全部索引，遍历请求的所有节点，根据元信息里记录的索引元信息版本号来选举，版本号大的当选</li>
+<li>触发 allocation。两个层次的元信息选举完毕后，开始构建集群状态（clusterState）其中内容路由表由 allocation 模块协助完成，进入分片级元数据选举和分片分配</li>
+</ol>
+<h3 id="allocation-1"><a href="#allocation-1" class="headerlink" title="allocation"></a>allocation</h3><p>选举分片级元信息，构建内容路由表，在初始阶段，所有shard 都处于 unassigned 状态，es 通过分配过程决定哪个分片位于哪个节点。具体详情可参考 <strong>集群重启的分片分配</strong> 一节</p>
+<h3 id="index-recovery"><a href="#index-recovery" class="headerlink" title="index recovery"></a>index recovery</h3><p>分片分配成功后进入 recovery 流程，主分片的 recovery 不会等待其副本分片分配成功才开始 recovery，它们是独立的流程。 具体详情可参考 <strong>索引恢复 </strong> 一节</p>
+<h2 id="节点关闭"><a href="#节点关闭" class="headerlink" title="节点关闭"></a>节点关闭</h2><p>当进程收到 SIGTERM（kill命令默认信号）时，会依次调用各模块的关闭函数，关闭顺序大致如下：</p>
+<ul>
+<li>关闭快照和 httpserver，不再响应用户 rest 请求</li>
+<li>关闭集群拓扑管理，不再响应 ping 请求</li>
+<li>关闭网络模块，让节点离线</li>
+<li>执行各插件的关闭流程</li>
+<li>关闭索引相关模块，IndicesService</li>
+</ul>
+<p>线程在写入数据，会对 Engine 加写锁，IndicesService 关闭也会对 Engine 加写锁。当数据在写入分片而节点被要求关闭时，IndicesService 会等待写操作执行完毕，但由于网络模块已被关闭，客户端连接会被断开。</p>
+<p>线程在读数据时，会对 Engine 加读锁，IndicesService 关闭 会等待数据读取执行完毕，但是由于连接被关闭，无法发送给客户端，导致客户端读失败。</p>
+<h2 id="Cluster-State"><a href="#Cluster-State" class="headerlink" title="Cluster State"></a>Cluster State</h2><h3 id="提交集群任务"><a href="#提交集群任务" class="headerlink" title="提交集群任务"></a>提交集群任务</h3><p>删除、关闭索引、分片分配、快照 等操作都会提交一个集群任务，每个任务会有一些回调函数，比如对任务处理失败、集群状态处理完毕时的处理。</p>
+<h3 id="集群任务的执行"><a href="#集群任务的执行" class="headerlink" title="集群任务的执行"></a>集群任务的执行</h3><ol>
+<li>构建任务列表</li>
+<li>执行任务。先确认本节点是否为主节点，将当前的集群状态传递给任务执行函数。若任务执行失败，则回调onfailure方法通知 Listener，执行成功并产生<strong>新的集群状态</strong>，进入发布集群状态流程</li>
+</ol>
+<h3 id="集群状态的发布"><a href="#集群状态的发布" class="headerlink" title="集群状态的发布"></a>集群状态的发布</h3><p>使用二阶段提交的分布式事务来进行 cluster state 的发布：</p>
+<ol>
+<li>发布阶段：<br>主节点发布集群状态，等待参与者（从节点）的响应。主节点收到的正常响应数量大于 minimum_master_node-1 数量（减去本节点，节点异常返回数量不计算在其中，若太多节点返回异常，则会导致没有足够数量的节点确认，不会执行提交过程），进入提交阶段。若超时后仍未收到足够数量的响应，则抛出异常，结束发布过程<br>参与者收到后不应用，回复主节点。</li>
+<li>提交阶段：<ul>
+<li>主节点向参与者发送 commit 请求，等待响应，直到收到全部响应（非minimum_master_node-1），或者达到publish_timeout 超时</li>
+<li>若参与者在 commit_timeout 超时时间里没有收到主节点发来的 commit 请求，则拒绝该集群状态。参与者收到 commit 请求后，应用集群状态，回复成功或失败</li>
+</ul>
+</li>
+</ol>
+<p>二阶段提交过程中，只有一次终止分布式事务的机会，就是在发布阶段，没有收到足够节点正常响应。一旦进入提交阶段，发布过程进入不可逆状态，如果有节点应用 cluster state 失败了，整个发布过程也不会被认为失败，即使只有少数节点正常应用 cluster state，也只能接受这种结果。</p>
+<h3 id="应用集群状态"><a href="#应用集群状态" class="headerlink" title="应用集群状态"></a>应用集群状态</h3><ul>
+<li>通知所有的 Applier（需要对集群任务进行处理的模块，将集群状态应用到组件内部，A component that is in charge of applying an incoming cluster state to the node internal data structures ）：遍历全部的 Applier，依次调用各模块对集群状态的处理，若某个模块应用集群状态时异常，会打印 warn 日志，继续下一个模块的应用。</li>
+<li>更新本地存储的 cluster state 为收到的新集群状态</li>
+<li>通知所有的 listener（感知新的 cluster state，A listener to be notified when a cluster state changes.）：遍历全部的listener，调用各模块的clusterChanged方法，若某个模块执行异常时则打印日志，继续下一个模块的方法调用。</li>
+</ul>
+<p>如果节点在应用集群状态时终止，当节点重启后，会主动从 Master节点获取最新的 cluster state 并应用</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://book.douban.com/subject/30386800/" target="_blank" rel="noopener">Elasticsearch源码解析与优化实战</a><br><a href="https://cloud.tencent.com/developer/article/1530515" target="_blank" rel="noopener">PacificA算法分析</a><br><a href="https://cloud.tencent.com/developer/article/1361266" target="_blank" rel="noopener">Elasticsearch底层系列之Shard Allocation机制</a><br><a href="https://www.cnblogs.com/wangnanhui/articles/13289270.html" target="_blank" rel="noopener">Es 恢复流程</a><br><a href="https://dzone.com/articles/elasticsearch-distributed-consistency-principles-a-1" target="_blank" rel="noopener">Elasticsearch Distributed Consistency Principles Analysis: Metadata</a></p>
+<h2 id="无处安放的-Tip"><a href="#无处安放的-Tip" class="headerlink" title="无处安放的 Tip"></a>无处安放的 Tip</h2><p>不建议使用巨大的索引</p>
+<p>segment合并会新建一个segment文件，合并小segment们内容写入新segment中，新segment在merge完成前不会对外可见。merge完毕，新的大segment已经被刷到磁盘上后，commit point（元信息文件，记录当前lucene index有哪些segment） 记录新的大segment，等检索请求都从小 segment 转到大 segment 上以后，删除没用的小 segment。<br>因此，当有segment大于磁盘可用空间的一半时，将会引起合并失败。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/dashang.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -183,133 +718,145 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://msxie.github.io/2020/12/17/ES-读书笔记/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/14/ES-快照操作/" class="archive-article-date">
-  	<time datetime="2020-12-14T15:30:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/12/14/ES-快照操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES 快照操作</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/14/ES-快照操作/">ES 快照操作</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分布式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#先验知识"><span class="toc-number">1.</span> <span class="toc-text">先验知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要角色"><span class="toc-number">1.1.</span> <span class="toc-text">主要角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群状态"><span class="toc-number">1.2.</span> <span class="toc-text">集群状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本写入"><span class="toc-number">2.</span> <span class="toc-text">基本写入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单机-Lucene-Index-的存储及写入过程"><span class="toc-number">2.1.</span> <span class="toc-text">单机 Lucene Index 的存储及写入过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES-写入过程"><span class="toc-number">2.2.</span> <span class="toc-text">ES 写入过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#协调节点"><span class="toc-number">2.2.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主分片节点"><span class="toc-number">2.2.2.</span> <span class="toc-text">主分片节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#副分片节点"><span class="toc-number">2.2.3.</span> <span class="toc-text">副分片节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写入异常"><span class="toc-number">2.2.4.</span> <span class="toc-text">写入异常</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#主分片写入异常"><span class="toc-number">2.2.4.1.</span> <span class="toc-text">主分片写入异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#副分片写入异常"><span class="toc-number">2.2.4.2.</span> <span class="toc-text">副分片写入异常</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#异常处理"><span class="toc-number">2.2.4.3.</span> <span class="toc-text">异常处理</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本读取"><span class="toc-number">3.</span> <span class="toc-text">基本读取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET"><span class="toc-number">3.1.</span> <span class="toc-text">GET</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#协调节点-1"><span class="toc-number">3.1.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据节点"><span class="toc-number">3.1.2.</span> <span class="toc-text">数据节点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MGET"><span class="toc-number">3.2.</span> <span class="toc-text">MGET</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取异常"><span class="toc-number">3.3.</span> <span class="toc-text">读取异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本搜索"><span class="toc-number">4.</span> <span class="toc-text">基本搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#建立索引"><span class="toc-number">4.1.</span> <span class="toc-text">建立索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全文搜索步骤"><span class="toc-number">4.2.</span> <span class="toc-text">全文搜索步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QUERY-THEN-FETCH"><span class="toc-number">4.3.</span> <span class="toc-text">QUERY_THEN_FETCH</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Query：获得符合search请求的文档ID"><span class="toc-number">4.3.1.</span> <span class="toc-text">Query：获得符合search请求的文档ID</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#协调节点-2"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据节点-1"><span class="toc-number">4.3.1.2.</span> <span class="toc-text">数据节点</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Fetch：根据文档ID获取完整文档内容"><span class="toc-number">4.3.2.</span> <span class="toc-text">Fetch：根据文档ID获取完整文档内容</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#协调节点-3"><span class="toc-number">4.3.2.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数据节点-2"><span class="toc-number">4.3.2.2.</span> <span class="toc-text">数据节点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据模型"><span class="toc-number">5.</span> <span class="toc-text">数据模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PacificA-算法"><span class="toc-number">5.1.</span> <span class="toc-text">PacificA 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本定义"><span class="toc-number">5.1.1.</span> <span class="toc-text">基本定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设计前提与假设"><span class="toc-number">5.1.2.</span> <span class="toc-text">设计前提与假设</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询-query"><span class="toc-number">5.1.3.</span> <span class="toc-text">查询(query)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新-update"><span class="toc-number">5.1.4.</span> <span class="toc-text">更新(update)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#故障检测"><span class="toc-number">5.1.5.</span> <span class="toc-text">故障检测</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES-副本模型"><span class="toc-number">5.2.</span> <span class="toc-text">ES 副本模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#好分片检测"><span class="toc-number">5.2.1.</span> <span class="toc-text">好分片检测</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#allocation"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">allocation</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#recovery"><span class="toc-number">5.2.1.2.</span> <span class="toc-text">recovery</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#fault-detect"><span class="toc-number">5.2.1.3.</span> <span class="toc-text">fault detect</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sequence-IDs"><span class="toc-number">5.2.2.</span> <span class="toc-text">Sequence IDs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地及全局检查点"><span class="toc-number">5.2.3.</span> <span class="toc-text">本地及全局检查点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#version"><span class="toc-number">5.2.4.</span> <span class="toc-text">_version</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分片分配（allocation）"><span class="toc-number">6.</span> <span class="toc-text">分片分配（allocation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建索引的分片分配"><span class="toc-number">6.1.</span> <span class="toc-text">新建索引的分片分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群重启的分片分配"><span class="toc-number">6.2.</span> <span class="toc-text">集群重启的分片分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主分片的-makeAllocationDecision"><span class="toc-number">6.2.1.</span> <span class="toc-text">主分片的 makeAllocationDecision</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#副分片的-makeAllocationDecision"><span class="toc-number">6.2.2.</span> <span class="toc-text">副分片的 makeAllocationDecision</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快照"><span class="toc-number">7.</span> <span class="toc-text">快照</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建快照"><span class="toc-number">7.1.</span> <span class="toc-text">创建快照</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#协调节点-4"><span class="toc-number">7.1.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主节点"><span class="toc-number">7.1.2.</span> <span class="toc-text">主节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据节点-3"><span class="toc-number">7.1.3.</span> <span class="toc-text">数据节点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#分片快照流程"><span class="toc-number">7.1.3.1.</span> <span class="toc-text">分片快照流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除快照"><span class="toc-number">7.2.</span> <span class="toc-text">删除快照</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#协调节点-5"><span class="toc-number">7.2.1.</span> <span class="toc-text">协调节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主节点-1"><span class="toc-number">7.2.2.</span> <span class="toc-text">主节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据节点-4"><span class="toc-number">7.2.3.</span> <span class="toc-text">数据节点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#恢复快照"><span class="toc-number">7.3.</span> <span class="toc-text">恢复快照</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引恢复"><span class="toc-number">8.</span> <span class="toc-text">索引恢复</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主分片恢复"><span class="toc-number">8.1.</span> <span class="toc-text">主分片恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#副分片恢复"><span class="toc-number">8.2.</span> <span class="toc-text">副分片恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主副分片数据一致"><span class="toc-number">8.3.</span> <span class="toc-text">主副分片数据一致</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集群启动"><span class="toc-number">9.</span> <span class="toc-text">集群启动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选主节点"><span class="toc-number">9.1.</span> <span class="toc-text">选主节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bully-算法"><span class="toc-number">9.1.1.</span> <span class="toc-text">bully 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#es-选主"><span class="toc-number">9.1.2.</span> <span class="toc-text">es 选主</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#节点失效检测"><span class="toc-number">9.1.3.</span> <span class="toc-text">节点失效检测</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选举集群元信息"><span class="toc-number">9.2.</span> <span class="toc-text">选举集群元信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#allocation-1"><span class="toc-number">9.3.</span> <span class="toc-text">allocation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-recovery"><span class="toc-number">9.4.</span> <span class="toc-text">index recovery</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#节点关闭"><span class="toc-number">10.</span> <span class="toc-text">节点关闭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cluster-State"><span class="toc-number">11.</span> <span class="toc-text">Cluster State</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#提交集群任务"><span class="toc-number">11.1.</span> <span class="toc-text">提交集群任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群任务的执行"><span class="toc-number">11.2.</span> <span class="toc-text">集群任务的执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群状态的发布"><span class="toc-number">11.3.</span> <span class="toc-text">集群状态的发布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用集群状态"><span class="toc-number">11.4.</span> <span class="toc-text">应用集群状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">12.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无处安放的-Tip"><span class="toc-number">13.</span> <span class="toc-text">无处安放的 Tip</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/13/spark读书笔记/" class="archive-article-date">
-  	<time datetime="2020-09-13T06:29:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-13</time>
-</a>
-        </div>
-    	 
+  <section id="comments" class="comments">
+    <style>
+      .comments{margin:30px;padding:10px;background:#fff}
+      @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+    </style>
+    <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "5KrGWaUAHxhyR3uoML7mxwsL-gzGzoHsz",
+            app_key: "YCezedbgfu5VpND6jYSnzOU7",
+            placeholder: "what do you think",
+            avatar:"mm"
+        });
+    }
+</script>
+    </section>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/13/spark读书笔记/">Spark读书笔记</a>
-    </h1>
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/17/读书笔记-Hadoop技术内幕/" class="archive-article-date">
-  	<time datetime="2020-05-17T13:11:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/17/读书笔记-Hadoop技术内幕/">读书笔记-Hadoop技术内幕</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -332,8 +879,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

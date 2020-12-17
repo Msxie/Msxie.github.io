@@ -144,6 +144,132 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-robotium-native的顺序遍历" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/18/robotium-native的顺序遍历/">robotium native的顺序遍历</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/18/robotium-native的顺序遍历/" class="archive-article-date">
+  	<time datetime="2019-03-18T14:08:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-18</time>
+</a>
+        
+      </header>
+    
+    <!-- 目录内容 -->
+
+<!-- 目录内容结束 -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>使用 robotium 按照一定的顺序自动点击完 Android app 所有的白名单 native 控件，可用于稳定性测试</p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>主要步骤为：</p>
+<ol>
+<li>每新到一个activity，找到当前 activity 所有的白名单控件，保存在一个 map 中(PageStore Map&lt;String, PageContent&gt;)</li>
+<li>点击 activity 的未点击的控件，点击</li>
+<li>重复1、2步，直到所有的页面都没有未点击的控件</li>
+</ol>
+<p>由于listview 和 recyclerview 中大部分元素点击是一样效果，此处进行了省略，按 Item 进行点击，即一个列表有三项，则点击三次</p>
+<h3 id="主要组件"><a href="#主要组件" class="headerlink" title="主要组件"></a>主要组件</h3><h4 id="PageContent"><a href="#PageContent" class="headerlink" title="PageContent"></a>PageContent</h4><p>存储 Activity 的相关控件信息</p>
+<ul>
+<li><p>String activityName - 页面的唯一标志</p>
+</li>
+<li><p>HashSet<view> selectSet - 未点击集合（过滤listview和recycleview中的view）</view></p>
+</li>
+<li><p>HashSet<view> noSelectSet - 已点击集合/黑名单集合</view></p>
+</li>
+<li><p>HashSet<string> optionSet - 当一些控件在页面上找不到时可以点击的元素（点了之后可能找到控件）</string></p>
+</li>
+<li><p>Map&lt;String,Integer&gt; listMap - 页面上 listview 的集合</p>
+<p>记录格式为：viewpageritem#pagepos#item : postion</p>
+<p>viewpageritem：一个 activity 里可能有多个viewpager，viewpageritem 代表getCurrentView获得的viewpager 的 index。viewpageritem=-1代表无viewpager</p>
+<p>pagepos：listview 在 viewpager 的第几页</p>
+<p>item：getCurrentView获得的 listview 的 index</p>
+<p>postion：listview已经点到了第几个。position=-1列表已点击完毕</p>
+<p>|     1     | n（对应关系） |<br>| activity  |   viewpager   |<br>| viewpager |     pager     |<br>|   pager   |   listview    |<br>| listview  |   listItem    |</p>
+</li>
+<li><p>Map&lt;String,Integer&gt; recylerViewMap - 页面上 recylerView 的集合</p>
+<p>记录格式为：viewpageritem#pagepos#item : postion</p>
+</li>
+<li><p>HashSet<view> failSet - 因找不到控件而忽略点击的控件集合</view></p>
+</li>
+<li><p>boolean retry，int failnum - 失败重试机制，failnum 超过一定次数刷新页面（认为当前页面结构已有变动）</p>
+</li>
+</ul>
+<h4 id="PageStore"><a href="#PageStore" class="headerlink" title="PageStore"></a>PageStore</h4><p>生成 pageContent 的类，定义一些设置</p>
+<ul>
+<li>Solo solo、Instrumentation instrumentation - 工具类</li>
+<li>Class[] whiteClass - 白名单类，只获取/点击白名单类的控件，比如{TextView.class, ImageView.class}</li>
+<li>String[] backBtns - 返回键的 resourceId，这些控件不会被点击（当一个页面只有一个入口可以进入，点击该页面返回后，该页面就不会再被进入到，影响页面遍历），可以当做黑名单控件来用</li>
+<li>int[] backBtnIds - 上面数组对应的resourceId</li>
+<li>String loadingBtns - loading 的 resourceId，用于确保页面加载完成</li>
+<li>Map&lt;String, PageContent&gt; activityMap - 用于存储遍历的每一个页面</li>
+<li>IniUtil iniUtil - 用来读取 ini 配置文件的工具类</li>
+</ul>
+<h3 id="功能流程"><a href="#功能流程" class="headerlink" title="功能流程"></a>功能流程</h3><h4 id="找控件-构造PageContent"><a href="#找控件-构造PageContent" class="headerlink" title="找控件 - 构造PageContent"></a>找控件 - 构造PageContent</h4><p>这一步骤是为了获取当前 activity 中所有的白名单控件，通常使用 solo.getCurrentViews() 来获取当前页面控件。</p>
+<p>在复杂的页面布局下，使用该方法无法获取该 Activity 所有的控件，因此，此处主要按照 ViewPager –&gt; ListView/RecyclerView –&gt; ScrollView 的处理顺序来获取当前页面所有的白名单控件。</p>
+<p>此处简单控件是指非 listView/recyclerView 的其他控件。</p>
+<img src="/2019/03/18/robotium-native的顺序遍历/构造pc.png" title="构造pc">
+<h4 id="找控件-处理scrollView"><a href="#找控件-处理scrollView" class="headerlink" title="找控件 - 处理scrollView"></a>找控件 - 处理scrollView</h4><p>solo 的 getCurrentViews 不能获取未展示在屏幕范围内的 view，一些过长的列表元素无法全部获取，对可滑动视图进行处理，将其滑动到底部，再使用 getCurrentViews 以获得所有控件</p>
+<img src="/2019/03/18/robotium-native的顺序遍历/scroll.png" title="scroll">
+<h4 id="点击控件-判断控件是否在屏幕上展示"><a href="#点击控件-判断控件是否在屏幕上展示" class="headerlink" title="点击控件 - 判断控件是否在屏幕上展示"></a>点击控件 - 判断控件是否在屏幕上展示</h4><p>此步骤主要是为了点击我们想要的控件，而不是点击覆盖在该控件上的其他控件。判断控件的实际x坐标是处于[0，屏幕x轴像素] 之间，y坐标处于[0，屏幕y轴像素]之间。</p>
+<img src="/2019/03/18/robotium-native的顺序遍历/isVisible.png" title="isVisible">
+<h4 id="点击控件-处理普通控件点击"><a href="#点击控件-处理普通控件点击" class="headerlink" title="点击控件 - 处理普通控件点击"></a>点击控件 - 处理普通控件点击</h4><img src="/2019/03/18/robotium-native的顺序遍历/clickNormal.png" title="clickNormal">
+<h4 id="点击控件-处理listview-recyclerview点击"><a href="#点击控件-处理listview-recyclerview点击" class="headerlink" title="点击控件 - 处理listview/recyclerview点击"></a>点击控件 - 处理listview/recyclerview点击</h4><p>为了保证点击的列表项是展示在屏幕上的，此处根据 viewpageritem#pagepos#item : postion，将viewPager设定为正确的page页（pagepos），再根据postion对列表项进行点击</p>
+<img src="/2019/03/18/robotium-native的顺序遍历/列表点击.png" title="列表点击">
+<h4 id="点击失败刷新机制"><a href="#点击失败刷新机制" class="headerlink" title="点击失败刷新机制"></a>点击失败刷新机制</h4><p>当多次找不到某个控件时，确认当前 activityname 等于我们寻找的控件所属 pageContent 的 activityname，即，我们是在正确的页面查找控件。</p>
+<p>否则，将失败次数重置，直接返回，不做处理</p>
+<p>activityname 相等时，则直接重构该 PageContent 的可点击控件</p>
+<img src="/2019/03/18/robotium-native的顺序遍历/fail.png" title="fail">
+<h4 id="总体遍历过程"><a href="#总体遍历过程" class="headerlink" title="总体遍历过程"></a>总体遍历过程</h4><p>设置遍历的超时时间，超过时间或者页面全部遍历完成后，停止自动遍历，并输出报告。</p>
+<img src="/2019/03/18/robotium-native的顺序遍历/遍历主体.png" title="遍历主体">
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/18/robotium-native的顺序遍历/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-移动测试专项检查" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
