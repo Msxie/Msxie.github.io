@@ -6,22 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://msxie.github.io">
-  <title>测试设计 | Msxie&#39;s Blog</title>
+  <title>Archives: 2021 | Msxie&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="好的测试设计基础为了对需求进行完备的测试设计，最重要的一点是深入理解被测试软件的架构。比如：  在 Java web 系统中，需要清楚 配置文件的配置、缓存策略、数据库的连接方式等 在 Android 系统中，需要清楚 缓存、数据库存储、权限设置、四大组件及其生命周期等 在 iOS 系统中，需要清楚  本地存储、数据库存储 等  除此之外，测试活动较早的介入项目流程 也是设计好的测试设计的基础：">
-<meta name="keywords" content="测试基础">
-<meta property="og:type" content="article">
-<meta property="og:title" content="测试设计">
-<meta property="og:url" content="https://msxie.github.io/2018/12/11/测试设计/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Msxie&#39;s Blog">
+<meta property="og:url" content="https://msxie.github.io/archives/2021/index.html">
 <meta property="og:site_name" content="Msxie&#39;s Blog">
-<meta property="og:description" content="好的测试设计基础为了对需求进行完备的测试设计，最重要的一点是深入理解被测试软件的架构。比如：  在 Java web 系统中，需要清楚 配置文件的配置、缓存策略、数据库的连接方式等 在 Android 系统中，需要清楚 缓存、数据库存储、权限设置、四大组件及其生命周期等 在 iOS 系统中，需要清楚  本地存储、数据库存储 等  除此之外，测试活动较早的介入项目流程 也是设计好的测试设计的基础：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://msxie.github.io/2018/12/11/测试设计/用户登录.png">
-<meta property="og:updated_time" content="2018-12-13T14:39:00.289Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试设计">
-<meta name="twitter:description" content="好的测试设计基础为了对需求进行完备的测试设计，最重要的一点是深入理解被测试软件的架构。比如：  在 Java web 系统中，需要清楚 配置文件的配置、缓存策略、数据库的连接方式等 在 Android 系统中，需要清楚 缓存、数据库存储、权限设置、四大组件及其生命周期等 在 iOS 系统中，需要清楚  本地存储、数据库存储 等  除此之外，测试活动较早的介入项目流程 也是设计好的测试设计的基础：">
-<meta name="twitter:image" content="https://msxie.github.io/2018/12/11/测试设计/用户登录.png">
+<meta name="twitter:title" content="Msxie&#39;s Blog">
   
     <link rel="alternative" href="/atom.xml" title="Msxie&#39;s Blog" type="application/atom+xml">
   
@@ -149,282 +142,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-测试设计" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      测试设计
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/02/02/CharybdeFS-Usage/" class="archive-article-date">
+  	<time datetime="2021-02-02T13:38:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-02</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/02/02/CharybdeFS-Usage/">CharybdeFS Usage</a>
     </h1>
   
 
-        
-        <a href="/2018/12/11/测试设计/" class="archive-article-date">
-  	<time datetime="2018-12-11T14:28:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-11</time>
-</a>
-        
-      </header>
-    
-    <!-- 目录内容 -->
+        <div class="article-info info-on-right">
+          
+          
 
-<!-- 目录内容结束 -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="好的测试设计基础"><a href="#好的测试设计基础" class="headerlink" title="好的测试设计基础"></a>好的测试设计基础</h3><p>为了对需求进行完备的测试设计，最重要的一点是<strong>深入理解被测试软件的架构</strong>。比如：</p>
-<ul>
-<li>在 Java web 系统中，需要清楚 配置文件的配置、缓存策略、数据库的连接方式等</li>
-<li>在 Android 系统中，需要清楚 缓存、数据库存储、权限设置、四大组件及其生命周期等</li>
-<li>在 iOS 系统中，需要清楚  本地存储、数据库存储 等</li>
-</ul>
-<p>除此之外，<strong>测试活动较早的介入项目流程</strong> 也是设计好的测试设计的基础：</p>
-<ul>
-<li>需求评审。从源头理解需求，了解需求的目的，影响范围；并能从中识别出测试需求。</li>
-<li>开发设计评审。通过流程图、接口文档等文档从设计层面了解开发功能实现的细节，了解重要功能的每一个分支的判断条件，评估这些判断条件的合理性。</li>
-</ul>
-<h4 id="如何进行测试设计"><a href="#如何进行测试设计" class="headerlink" title="如何进行测试设计"></a>如何进行测试设计</h4><p>测试设计的过程主要是将产品需求文档上的 开发功能需求 转换为 测试需求 的过程。在此过程中，需要发散思维，梳理出测试点，后期通过梳理这些测试点可得到测试用例。</p>
-<p>一般可从四个角度来进行测试设计：</p>
-<h5 id="功能性"><a href="#功能性" class="headerlink" title="功能性"></a>功能性</h5><p>前提/配置检查：需要完成什么前提条件/环境配置，才能测试此功能点。在不同的前提/配置的情况下，SUT的系统行为应有预期。</p>
-<ul>
-<li>操作需要用户登录。比如，为了测试添加商品到购物车的功能，假定用户必须登录才能添加。需要考虑用户在登录/未登录情况下来添加购物车的场景。</li>
-<li>网络延时/中断：在网络情况异常的情况下，SUT 应展示合理的行为。</li>
-</ul>
-<p>入口检查：有哪些途径可以使用此功能。比如 商品详情的入口检查，用户可以通过搜索列表进入商品详情，也可通过系统推荐直接进入商品详情。</p>
-<p>步骤检查：该功能是否被拆成多个步骤执行，若能，则需要考虑：</p>
-<ul>
-<li>每个步骤的成功/失败的校验及场景都应被考虑。比如，用户参与活动成功的条件是 V2 等级且不是黑名单用户，需要考虑参与成功和两种参与失败的场景。</li>
-<li>步骤之间的顺序校验。比如，用户需要先注册后激活，需要考虑正常流程以及先激活后注册的异常流程。</li>
-<li>步骤回退。正常情况下，回退会到上一个步骤，需要考虑是否有定制的回退路径。</li>
-<li>路径覆盖。对于有复杂逻辑分支，需要清楚逻辑点的实现，使用路径覆盖进行设计。</li>
-</ul>
-<p>数据检查：SUT 处理用户输入的功能。</p>
-<ul>
-<li>页面上检查用户输入是否符合预期</li>
-<li>若用户的输入会被存储，需要检查存储中的数据是否符合预期</li>
-</ul>
-<p>事件触发后一系列检查：用户触发的一个事件，可能会在系统中进行一系列的处理，在当前微服务架构下，需要考虑：</p>
-<ul>
-<li>SUT 调用其他系统失败处理机制。</li>
-<li>SUT 原子事务的包装。在一个事件的处理过程中，部分步骤失败应整个事务回滚。</li>
-</ul>
-<p>影响范围检查：该功能是否影响其他模块的功能，若影响，需要梳理出影响点。</p>
-<h5 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h5><p>权限检查：</p>
-<ul>
-<li>数据库连接权限检查。比如不同系统应使用不用的角色去访问数据库，而不能使用SYS用户。</li>
-<li>软件运行的用户名、用户组检查。比如tomcat程序应使用 tomcat 用户组运行，而不应使用 root 用户组。</li>
-<li>APP 权限检查。比如，一个通讯录APP 不应有设置系统时间的权限。</li>
-<li>用户权限检查。比如，用户 a 不能看到 用户 b 的用户数据。</li>
-</ul>
-<p>安全配置检查：</p>
-<ul>
-<li>数据库的连接密码应密文存储</li>
-<li>用来加密的key应密文存储</li>
-</ul>
-<p>安全工具检查：</p>
-<ul>
-<li>短信验证码。短信验证码的发送需要有流控；短信验证码不能出现在请求发送验证码的 resp 中；验证码要与手机号绑定；短信验证码的有效性。</li>
-<li>图形验证码。图形验证码的对错要在服务端进行校验；图形验证码的有效性。</li>
-</ul>
-<p>敏感信息保护：用户输入的姓名、身份证号等敏感信息不应明文传递、存储在数据库及日志中。</p>
-<h5 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h5><p>并发操作：一个功能在同时被执行多次时应能正常处理。比如一个用户同时添加1000件商品进入购物车；1000个用户同时添加200件商品进入购物车。</p>
-<p>数据库索引：当数据库中记录过多时，进行查询操作的 sql 需要进行优化，适当的建立索引。</p>
-<p>响应时间：用户跳转到一个新页面/完成一个操作，应得到及时的响应。</p>
-<h5 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h5><p>SUT 若为一个 网页应用，需要考虑：</p>
-<ul>
-<li>在不同 浏览器的不同版本上 的兼容性</li>
-<li>在 浏览器不同配置条件下 的兼容性（是否启用缓存/Javascript）</li>
-<li>在不同 屏幕尺寸/分辨率 的兼容性</li>
-</ul>
-<p>SUT 若为一个 C/S 架构的应用，比如 APP，需要考虑：</p>
-<ul>
-<li>在不同 手机厂商/Rom 上的兼容性</li>
-<li>在不同版本的 Android/iOS 上的兼容性</li>
-<li>新版本服务端 对 老版本 APP 的适配</li>
-</ul>
-<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>对于用户登录，进行测试设计</p>
-<p>登录页面有用户名输入框、密码输入框、验证码输入框和确认按钮</p>
-<img src="/2018/12/11/测试设计/用户登录.png" title="登录功能测试设计">
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/dashang.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://msxie.github.io/2018/12/11/测试设计/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/12/13/测试用例/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          测试用例
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/12/08/测试工程师定位/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">测试工程师定位</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  <section id="comments" class="comments">
-    <style>
-      .comments{margin:30px;padding:10px;background:#fff}
-      @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
-    </style>
-    <div id="vcomment" class="comment"></div> 
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script>
-   var notify = 'false' == true ? true : false;
-   var verify = 'false' == true ? true : false;
-    window.onload = function() {
-        new Valine({
-            el: '.comment',
-            notify: notify,
-            verify: verify,
-            app_id: "5KrGWaUAHxhyR3uoML7mxwsL-gzGzoHsz",
-            app_key: "YCezedbgfu5VpND6jYSnzOU7",
-            placeholder: "what do you think",
-            avatar:"mm"
-        });
-    }
-</script>
-    </section>
-  
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -447,8 +207,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

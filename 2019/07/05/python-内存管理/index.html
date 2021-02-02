@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
@@ -152,7 +152,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-python-内存管理" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-python-内存管理" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -199,7 +199,7 @@
 <p>因此，pymalloc 这种类似于内存池的机制被实现出来，用来管理小对象（小于或等于 512 字节）的内存分配。</p>
 <p>其缺点也很显然，对于长时间运行的 python 进程，pymalloc 可能会保持很多无用内存。</p>
 <h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><h3 id="引用和对象"><a href="#引用和对象" class="headerlink" title="引用和对象"></a>引用和对象</h3><p>python 中一切皆对象，还有一个重要概念是动态类型，即变量不需要申明，赋值时，变量可以被赋为任意值。其核心就是引用和对象分离。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="number">1024</span> <span class="comment">#1024是一个对象，a是一个引用，指向1024这个对象</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=a  <span class="comment">#b作为一个引用，也指向1024这个对象</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)  <span class="comment">#返回 a 指向的对象的内存地址</span></span><br><span class="line"><span class="number">34818280</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(b)  <span class="comment">#可以看出 a,b 指向同一个内存地址</span></span><br><span class="line"><span class="number">34818280</span></span><br><span class="line"><span class="comment"># 对于一些小整数和短字符串，python 会缓存这些对象以便重复使用</span></span><br><span class="line"><span class="comment"># 使用 is 可以判断两个引用是否指向同一个内存地址（对象）</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="number">123</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=<span class="number">123</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="number">1024</span> <span class="comment">#1024是一个对象，a是一个引用，指向1024这个对象</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=a  <span class="comment">#b作为一个引用，也指向1024这个对象</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)  <span class="comment">#返回 a 指向的对象的内存地址</span></span><br><span class="line"><span class="number">34818280</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(b)  <span class="comment">#可以看出 a,b 指向同一个内存地址</span></span><br><span class="line"><span class="number">34818280</span></span><br><span class="line"><span class="comment"># 对于一些小整数和短字符串，python 会缓存这些对象以便重复使用</span></span><br><span class="line"><span class="comment"># 使用 is 可以判断两个引用是否指向同一个内存地址（对象）</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=<span class="number">123</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b=<span class="number">123</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a <span class="keyword">is</span> b</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
 <h4 id="不可变对象的引用"><a href="#不可变对象的引用" class="headerlink" title="不可变对象的引用"></a>不可变对象的引用</h4><p>字符串、数字、元组是不可变对象。当我们定义了变量指向这些不可变对象时，对变量进行操作后，变量引用的值发生了变化，实际是我们变量指向了新的不可变对象：</p>
 <img src="/2019/07/05/python-内存管理/m4.png" title="不可变对象的引用">
 <h4 id="可变对象的引用"><a href="#可变对象的引用" class="headerlink" title="可变对象的引用"></a>可变对象的引用</h4><p>列表、字典这种容器类对象是可变对象，但他们包含的并不是对象本身，而是对象的引用。</p>
@@ -474,7 +474,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 谢九清
+    		&copy; 2021 谢九清
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -565,6 +565,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -575,17 +579,13 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">移动测试</a>
               </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
             
             <div class="clearfix"></div>
           </ul>
         </div>
         <ul class="search-ul">
           <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
-            缺失模块。<br>1、请确保node版本大于6.2<br>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br> npm i hexo-generator-json-content --save<br><br>
+            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
             3、在根目录_config.yml里添加配置：
 <pre style="font-size: 12px;" q-show="jsonFail">
   jsonContent:
